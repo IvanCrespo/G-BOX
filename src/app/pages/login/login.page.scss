@@ -1,0 +1,52 @@
+ion-content {
+    --background: url("/assets/img/login_movil.png") 60% 0/120% 115% no-repeat fixed;
+
+    ion-label#lb-titl {
+        margin-top: 50%;
+        font-size: 200%;
+        font-weight: bold;
+        color: var(--ion-color-primary);
+    }
+
+    form {
+        padding: 10%;
+
+        ion-item {
+            --background: transparent;
+            --border-color: var(--ion-color-primary);
+            margin-bottom: 10%;
+        }
+    }
+
+    ion-button {
+        --background: white !important;
+        color: rgb(98, 73, 122);
+        width: 65%;
+        height: 50px;
+        margin: auto;
+        font-weight: bold;
+    }
+}
+
+ion-button#btn-s {
+    margin-top: -5%;
+}
+
+ion-button#btn-u {
+    margin-top: 5%;
+    width: 40%;
+}
+
+ion-label#lb-fp {
+    margin-top: 5%;
+    font-size: 70%;
+}
+
+ion-label#lb-nu {
+    margin-top: 20%;
+    font-size: 70%;
+}
+
+#lb-fp:active:active {
+    color: white;
+}

@@ -1,0 +1,7 @@
+{
+  "name": "GBOX",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

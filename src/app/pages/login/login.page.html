@@ -1,0 +1,25 @@
+<ion-content>
+  <ion-label class="ion-text-capitalize center" id="lb-titl">¡bienvenido!</ion-label>
+
+  <form #formulario="ngForm">
+    <ion-item>
+      <ion-input name="usuario" type="text" placeholder="Usuario" color="primary" [(ngModel)]="usuario" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-input name="password" type="password" placeholder="Contraseña" color="primary" [(ngModel)]="password" required></ion-input>
+    </ion-item>
+  </form>
+
+  <ion-button class="ion-text-capitalize" id="btn-s" (click)="iniciarSesion()" expand="block" shape="round">
+    Iniciar Sesión
+  </ion-button>
+
+  <ion-label class="center" id="lb-fp" color="primary" (click)="olvidePassword()">¿Olvidaste tu contraseña?</ion-label>
+
+  <ion-label class="center" id="lb-nu" color="primary">¿Nuevo usuario?</ion-label>
+
+  <ion-button class="ion-text-capitalize" id="btn-u" (click)="nuevoUsuario()" expand="block" shape="round">
+    Crear
+  </ion-button>
+</ion-content>

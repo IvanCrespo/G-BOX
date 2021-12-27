@@ -1,0 +1,42 @@
+ion-content {
+    --background: url("/assets/img/login_movil.png") 60% 0/120% 115% no-repeat fixed;
+
+    ion-header {
+        display: inline;
+
+        ion-toolbar {
+            --background: transparent;
+            --border-width: 0px 0px 0px;
+
+            ion-icon {
+                color: rgb(98, 73, 122);
+            }
+
+            ion-title {
+                font-family: Bold;
+                color: rgb(98, 73, 122);
+            }
+        }
+    }
+
+    form {
+        margin-top: 5%;
+        padding: 10%;
+
+        ion-item {
+            --background: transparent;
+            --border-color: black;
+            margin-bottom: 5%;
+        }
+
+        ion-button {
+            --background: white !important;
+            color: rgb(98, 73, 122);
+            width: 65%;
+            height: 50px;
+            margin: auto;
+            font-weight: bold;
+            margin-top: 15%;
+        }
+    }
+}
