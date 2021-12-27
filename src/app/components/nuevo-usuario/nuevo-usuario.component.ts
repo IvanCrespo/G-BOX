@@ -8,9 +8,9 @@ import { ModalController, ToastController } from '@ionic/angular';
   styleUrls: ['./nuevo-usuario.component.scss'],
 })
 export class NuevoUsuarioComponent implements OnInit {
-  s_name: string;
-  s_apellidop: string;
-  s_apellidoa: string;
+  s_nombre: string;
+  s_paterno: string;
+  s_materno: string;
   s_usuario: string;
   email: string;
   password: string;
@@ -20,9 +20,9 @@ export class NuevoUsuarioComponent implements OnInit {
     private modalController: ModalController,
     private toastController: ToastController
   ) {
-    this.s_name = '';
-    this.s_apellidop = '';
-    this.s_apellidoa = '';
+    this.s_nombre = '';
+    this.s_paterno = '';
+    this.s_materno = '';
     this.s_usuario = '';
     this.email = '';
     this.password = '';
@@ -42,15 +42,15 @@ export class NuevoUsuarioComponent implements OnInit {
     toast.present();
   }
 
-  enviarDatos() {
+  signin() {
     this.showToast('Registro completo', 'primary', 3000).then(
       () => {
-        this.salirModal();
+        this.backModal();
       }
     );
   }
 
-  salirModal() {
+  backModal() {
     this.modalController.dismiss();
   }
 }

@@ -34,7 +34,7 @@ export class ForgotPasswordComponent implements OnInit {
     toast.present();
   }
 
-  enviarEmail() {
+  sendEmail() {
     this.showToast('Código enviado al correo', 'secondary', 3000).then(
       () => {
         this.bandCodigo = true;
@@ -42,15 +42,15 @@ export class ForgotPasswordComponent implements OnInit {
     );
   }
 
-  enviarCodigo() {
+  sendCodigo() {
     this.showToast('Código correcto', 'secondary', 3000).then(
       () => {
-        this.salirModal();
+        this.backModal();
       }
     );
   }
 
-  salirModal() {
+  backModal() {
     this.modalController.dismiss();
   }
 }

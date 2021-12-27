@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ModalController, ToastController } from '@ionic/angular';
 
 /**
@@ -33,7 +32,6 @@ export class LoginPage implements OnInit {
         component
       }
     );
-
     modal.present();
   }
 
@@ -45,19 +43,18 @@ export class LoginPage implements OnInit {
         duration
       }
     );
-
     toast.present();
   }
 
-  iniciarSesion() {
+  login() {
     this.showToast('Contraseña correcta', 'secondary', 3000);
   }
 
-  olvidePassword() {
+  resetPassword() {
     this.showModal(ForgotPasswordComponent);
   }
 
-  nuevoUsuario() {
+  newUser() {
     this.showModal(NuevoUsuarioComponent);
   }
 }
