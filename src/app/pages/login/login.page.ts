@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, NavController } from '@ionic/angular';
 
 /**
  * Components
@@ -18,13 +18,14 @@ export class LoginPage implements OnInit {
 
   constructor(
     private modalController: ModalController,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private navController: NavController
   ) {
     this.usuario = '';
     this.password = '';
   }
 
-  ngOnInit( ) { }
+  ngOnInit() { }
 
   async showModal(component) {
     const modal = await this.modalController.create(
@@ -46,8 +47,12 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
-  login() {
+  /* login() {
     this.showToast('Contraseña correcta', 'secondary', 3000);
+  } */
+
+  login() {
+    this.navController.navigateForward(['/home-pre-requisiciones']);
   }
 
   resetPassword() {
