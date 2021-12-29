@@ -1,0 +1,63 @@
+<ion-content [fullscreen]="true">
+  <div class="top-section ion-padding">
+    <div class="container_buttons">
+      <ion-buttons class="custom_btnmenu" slot="start">
+        <ion-button (click)="closeModal()">
+          <ion-icon class="custom_icon" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <div class="seccion_logo">
+        <img class="logo" src="/assets/img/logo_gbox.png" />
+      </div>
+    </div>
+    <div class="container_title">
+      <ion-title class="seccion_title">Nuevo Articulo</ion-title>
+    </div>
+  </div>
+  <div class="middle-section ion-padding">
+    <div class="container_add">
+      <ion-button class="btn_newArt" (click)="save()">
+        Guardar
+        <ion-icon name="bookmark"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="seccion_photo">
+      <ion-avatar (click)="takePhoto()">
+        <img src="assets/img/Icono_foto.png" width="50%">
+        <p class="text_photo">Añadir Imagen</p>
+      </ion-avatar>
+    </div>
+    <ion-card class="ion-no-margin">
+      <ion-card-content>
+        <form>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="stacked">Cantidad</ion-label>
+                  <ion-input type="number"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="stacked">Nombre del Articulo</ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <ion-item>
+                  <ion-label position="stacked">Orden de Mantenimiento</ion-label>
+                  <ion-input></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
