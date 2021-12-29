@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home-pre-requisiciones',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomePreRequisicionesPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private toastController: ToastController,
+    private navController: NavController
+  ) { }
 
   ngOnInit() {
+  }
+
+  add() {
+    this.navController.navigateForward(['/pre-requisicion']);
   }
 
 }

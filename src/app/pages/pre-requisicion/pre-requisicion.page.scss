@@ -1,0 +1,150 @@
+ion-content {
+    --background: rgb(255, 255, 255);
+    background: rgb(255, 255, 255);
+}
+
+.top-section {
+    min-height: 200px;
+    --background: url("/assets/img/splash_movil.png");
+    background: url("/assets/img/splash_movil.png");
+    background-size: cover;
+    padding-bottom: 30px;
+    position: relative;
+
+    .container_buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 15px;
+
+        .custom_btnmenu {
+            color: #684e7f;
+        }
+        .seccion_logo {
+            display: flex;
+            left: 0;
+            bottom: 0;
+
+            .logo {
+                width: 75px;
+                opacity: 0.6;
+            }
+        }
+    }
+
+    .container_title {
+        display: flex;
+        justify-content: center;
+        padding-top: 70px;
+
+        .seccion_title {
+            position: absolute;
+            font-size: 24px;
+        }
+    }
+}
+
+.middle-section {
+    display: flex;
+    flex-direction: column;
+
+    .seccion_title {
+        color: rgb(146, 146, 146);
+        font-size: 20px;
+        padding-inline: 2px;
+        margin: 6px 0px 10px 0px;
+    }
+
+    ion-card {
+        --background: #fff;
+        --color: rgb(0, 0, 0);
+        border-radius: 10px;
+        border: 1px solid #4b4b4b;
+
+        ion-item {
+            --background: rgb(255, 255, 255);
+            color: #4b4b4b;
+
+            .lbl_form {
+                font-style: oblique;
+                display: flex;
+                justify-content: center;
+            }
+
+            .bg_primary {
+                color: #206760 !important;
+                font-size: 15px;
+                font-weight: 600;
+            }
+
+            .bg_secondary {
+                color: #684e7f !important;
+                font-size: 15px;
+                font-weight: 600;
+            }
+
+            ion-input,
+            ion-datetime {
+                --placeholder-color: #4b4b4b;
+                --placeholder-opacity: 1;
+                --placeholder-font-size: 2px;
+                font-size: 15px;
+                font-style: oblique;
+            }
+        }
+
+        .card-content-md {
+            padding-inline-start: 5px;
+            padding-inline-end: 5px;
+        }
+
+        .container_icon {
+            display: flex;
+            justify-content: center;
+            align-items: end;
+            ion-icon {
+                color: #4b4b4b;
+                font-size: 29px;
+            }
+        }
+    }
+}
+
+.articulos-section {
+    display: flex;
+    flex-direction: column;
+
+    .seccion_title {
+        color: rgb(146, 146, 146);
+        font-size: 20px;
+        padding-inline: 2px;
+        margin: 6px 0px 10px 0px;
+    }
+
+    ion-card {
+        --background: rgb(221, 221, 221);
+        --color: rgb(0, 0, 0);
+        border-radius: 10px;
+        border: 1px solid #4b4b4b;
+
+        .container_add {
+            display: flex;
+            flex-direction: column;
+
+            .btn_newArt {
+                --background: #684e7f;
+                text-transform: none;
+                font-size: 12px;
+            }
+        }
+
+        ion-card {
+            --background: #fff;
+            margin-top: 1px;
+            margin-bottom: 4px;
+            margin-inline: -10px;
+            border: none;
+        }
+    }
+}
