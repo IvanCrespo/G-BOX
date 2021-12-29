@@ -130,12 +130,13 @@ ion-content {
 
         .container_add {
             display: flex;
-            flex-direction: column;
+            justify-content: end;
 
             .btn_newArt {
                 --background: #684e7f;
                 text-transform: none;
                 font-size: 12px;
+                margin-bottom: 12px;
             }
         }
 
