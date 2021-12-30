@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController, NavController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 import { NuevoArticuloPage } from '../modals-pre-requisiciones/nuevo-articulo/nuevo-articulo.page';
 
 @Component({
@@ -9,14 +9,20 @@ import { NuevoArticuloPage } from '../modals-pre-requisiciones/nuevo-articulo/nu
 })
 export class PreRequisicionPage implements OnInit {
 
+  fecha: string;
+  hora: string;
   imagen: string = "";
-  prueba: any;
+  datos: any = {};
+  productos: any = [];
 
   constructor(
     private modalController: ModalController,
-    private toastController: ToastController,
-    private navController: NavController
-  ) { }
+    public toastCtrl: ToastController
+  ) {
+    var d = new Date();
+    this.fecha = ("00" + d.getDate()).slice(-2) + "/" + ("00" + (d.getMonth() + 1)).slice(-2) + "/" + d.getFullYear();
+    this.hora = ("00" + d.getHours()).slice(-2) + ":" + ("00" + d.getMinutes()).slice(-2);
+  }
 
   ngOnInit() {
   }
@@ -27,9 +33,17 @@ export class PreRequisicionPage implements OnInit {
     let modal = await this.modalController.create({
       component: NuevoArticuloPage,
     });
-    modal.onDidDismiss().then((data:any) => {
-      this.imagen = data;
-      console.log(this.imagen);
+    modal.onDidDismiss().then((data: any) => {
+      this.datos = data;
+      if (this.datos.data == undefined) {
+        console.log("Exit");
+        this.datos = {};
+      }
+      else {
+        console.log("Exito", this.datos.data);
+        this.productos.push(this.datos.data);
+        console.log(this.productos);
+      }
     });
     return await modal.present();
   }

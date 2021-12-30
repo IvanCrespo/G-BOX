@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
-import { LoadingController } from '@ionic/angular';
+import { ModalController, ToastController } from '@ionic/angular';
 /* Plugins */
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 
@@ -16,20 +15,20 @@ export class NuevoArticuloPage implements OnInit {
   s_descripcion_producto: string;
   s_orden_mantenimiento: string;
   s_foto: string = null;
+  datos: any = {};
 
   constructor(
     private modalCtrl: ModalController,
     private camera: Camera,
-    public alertCtrl: AlertController,
-    private loadingCtrl: LoadingController
+    public toastCtrl: ToastController
   ) { }
 
   ngOnInit() {
   }
 
-  closeModal() {
-    const mensaje = this.s_foto;
-    this.modalCtrl.dismiss(mensaje);
+  closeModal(data: any) {
+    /* console.log(data); */
+    this.modalCtrl.dismiss(data);
   }
 
   async takePhoto() {
@@ -57,23 +56,22 @@ export class NuevoArticuloPage implements OnInit {
       s_foto: this.s_foto,
       s_orden_mantenimiento: this.s_orden_mantenimiento
     };
-    console.log(data);
-    const loading = await this.loadingCtrl.create({
-      message: 'Espere un momento...'
-    });
-
+    /* console.log(data); */
     if (data.n_cantidad == null || data.s_descripcion_producto == null || data.n_cantidad == undefined || data.s_descripcion_producto == undefined) {
-      this.presentAlert("Error", "Campos Cantidad y Descripción Productos no deben estar vacios");
+      this.presentToast("Campos Cantidad y Descripción Productos no deben estar vacios");
+    }
+    else {
+      this.datos = data;
+      this.closeModal(this.datos);
+      this.presentToast("Articulo Agregado");
     }
   }
 
-  async presentAlert(titulo, mensaje) {
-    const alert = await this.alertCtrl.create({
-      header: titulo,
+  async presentToast(mensaje) {
+    const toast = await this.toastCtrl.create({
       message: mensaje,
-      buttons: ['OK']
+      duration: 3500
     });
-    await alert.present();
+    await toast.present();
   }
-
 }

@@ -101,20 +101,23 @@ ion-content {
                 --background: rgb(255, 255, 255);
                 color: #4b4b4b;
                 --highlight-color-focused: none;
-    
+
                 ion-label {
-                    font-size: 18px;
+                    font-size: 17px;
                     font-style: oblique;
                     margin-bottom: 2px !important;
+                    display: flex;
+                    justify-content: flex-start;
+                    /* --padding-start: -2px; */
                 }
-    
+
                 ion-input {
                     font-size: 14px;
                     font-weight: 600;
                     text-align: center;
                 }
             }
-    
+
             .card-content-md {
                 padding-inline-start: 5px;
                 padding-inline-end: 5px;

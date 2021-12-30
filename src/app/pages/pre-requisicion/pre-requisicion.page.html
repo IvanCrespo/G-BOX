@@ -13,6 +13,12 @@
     </div>
   </div>
   <div class="middle-section ion-padding">
+    <div class="container_add" *ngIf="productos.length != 0">
+      <ion-button class="btn_newArt" (click)="save()">
+        Guardar
+        <ion-icon name="bookmark"></ion-icon>
+      </ion-button>
+    </div>
     <ion-title class="seccion_title">Datos Pre-requisición</ion-title>
     <ion-card class="ion-no-margin">
       <ion-card-content>
@@ -31,12 +37,6 @@
                   <ion-input class="bg_secondary" type="text"></ion-input>
                 </ion-item>
               </ion-col>
-              <!-- <ion-col size="4">
-                <ion-item lines="none">   
-                  <ion-label position="floating">Estatus</ion-label>
-                  <ion-input type="text"></ion-input>
-                </ion-item>
-              </ion-col> -->
             </ion-row>
             <ion-row>
               <ion-col size="6">
@@ -52,7 +52,8 @@
               </ion-col>
               <ion-col>
                 <ion-item>
-                  <ion-input placeholder="Persona que solicita" type="text" name="prueba" [(ngModel)]="prueba"></ion-input>
+                  <ion-input placeholder="Persona que solicita" type="text" name="prueba" [(ngModel)]="prueba">
+                  </ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -82,16 +83,47 @@
             <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
         </div>
-        <ion-card>
+        <ion-card *ngFor="let producto of productos; index as i">
           <ion-card-content>
             <ion-grid>
               <ion-row>
                 <ion-col size="3">
-                  <ion-card style="height: 100%; width: auto;">
+                  <ion-card style="width: 100%; flex-direction: column; display: flex;">
                     <ion-card-content>
-                      <ion-img src="/assets/img/logo_gbox.png"></ion-img>
+                      <ion-img style="width: 100%; height: 100%;" src="/assets/img/logo_gbox.png"></ion-img>
                     </ion-card-content>
                   </ion-card>
+                </ion-col>
+                <ion-col size="5">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col>
+                        <p class="text_articulo">{{ producto.s_descripcion_producto }}</p>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col size="10">
+                        <p class="text_description">0000003</p>
+                      </ion-col>
+                      <ion-col size="2">
+                        <p class="text_description">{{ producto.n_cantidad }}</p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-col>
+                <ion-col size="4">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col>
+                        <p class="text_description">2021-11-30</p>
+                      </ion-col>
+                    </ion-row>
+                    <ion-row>
+                      <ion-col>
+                        <p class="text_status">Pendiente</p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
                 </ion-col>
               </ion-row>
             </ion-grid>
