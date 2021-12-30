@@ -83,6 +83,8 @@ ion-content {
             .text_photo {
                 font-size: 15px;
                 font-style: oblique;
+                display: flex;
+                justify-content: center;
                 color: rgb(0, 0, 0);
             }
         }

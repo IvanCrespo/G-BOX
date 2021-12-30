@@ -80,15 +80,16 @@ ion-content {
         border-radius: 10px;
         border: 1px solid #4b4b4b;
 
+        .lbl_form {
+            font-style: oblique;
+            display: flex;
+            justify-content: center;
+            margin-bottom: -4px;
+        }
+
         ion-item {
             --background: rgb(255, 255, 255);
             color: #4b4b4b;
-
-            .lbl_form {
-                font-style: oblique;
-                display: flex;
-                justify-content: center;
-            }
 
             .bg_primary {
                 color: #206760 !important;
@@ -109,6 +110,8 @@ ion-content {
                 --placeholder-font-size: 2px;
                 font-size: 15px;
                 font-style: oblique;
+                text-align: center;
+                margin: auto;
             }
         }
 
@@ -184,12 +187,12 @@ ion-content {
     }
 
     .card-content-md {
-        padding-inline-start: 13px;
-        padding-inline-end: 13px;
+        padding-inline-start: 2px;
+        padding-inline-end: 2px;
     }
 
     .container_notas {
-        padding: 30px 0px 10px 0px;
+        padding: 30px 12px 10px 12px;
 
         ion-item {
             --background: rgb(255, 255, 255);

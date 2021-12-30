@@ -12,6 +12,10 @@ import { NuevoUsuarioComponent } from './components/nuevo-usuario/nuevo-usuario.
 
 //Plugins
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { HttpClientModule } from '@angular/common/http';
+
+
 
 @NgModule({
   declarations: [
@@ -24,10 +28,11 @@ import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
     BrowserModule, 
     IonicModule.forRoot(), 
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Camera],
+    Camera, Geolocation],
   bootstrap: [
     AppComponent
   ],

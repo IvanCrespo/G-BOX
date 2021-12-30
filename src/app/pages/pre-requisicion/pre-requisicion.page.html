@@ -25,24 +25,25 @@
         <form>
           <ion-grid>
             <ion-row>
-              <ion-col size="6">
+              <ion-col size="4">
+                <p class="lbl_form">Folio</p>
                 <ion-item lines="none">
-                  <ion-label class="lbl_form" position="floating">Folio</ion-label>
-                  <ion-input class="bg_primary" type="text"></ion-input>
+                  <ion-input class="bg_primary" [(ngModel)]="s_folio" name="s_folio" [readonly]="true">
+                  </ion-input>
                 </ion-item>
               </ion-col>
-              <ion-col size="6">
+              <ion-col size="4">
+                <p class="lbl_form">Empresa</p>
                 <ion-item lines="none">
-                  <ion-label class="lbl_form" position="floating">Empresa</ion-label>
-                  <ion-input class="bg_secondary" type="text"></ion-input>
+                  <ion-input class="bg_secondary" [(ngModel)]="s_empresa" name="s_empresa" [readonly]="true">
+                  </ion-input>
                 </ion-item>
               </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="6">
+              <ion-col size="4">
+                <p class="lbl_form">Estatus</p>
                 <ion-item lines="none">
-                  <ion-label class="lbl_form" position="floating">Estatus</ion-label>
-                  <ion-input class="bg_primary" type="text"></ion-input>
+                  <ion-input class="bg_primary" [(ngModel)]="estatus" name="estatus" [readonly]="true">
+                  </ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -52,7 +53,8 @@
               </ion-col>
               <ion-col>
                 <ion-item>
-                  <ion-input placeholder="Persona que solicita" type="text" name="prueba" [(ngModel)]="prueba">
+                  <ion-input placeholder="Persona que solicita" type="text" [(ngModel)]="usuario_solicitante"
+                    name="usuario_solicitante">
                   </ion-input>
                 </ion-item>
               </ion-col>
@@ -63,7 +65,8 @@
               </ion-col>
               <ion-col>
                 <ion-item>
-                  <ion-datetime placeholder="Fecha de entrega" displayFormat="DD MM YY"></ion-datetime>
+                  <ion-datetime placeholder="Fecha de entrega" displayFormat="DD MM YY" name="d_fecha_estimada_entrega"
+                    [(ngModel)]="d_fecha_estimada_entrega"></ion-datetime>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -102,10 +105,10 @@
                       </ion-col>
                     </ion-row>
                     <ion-row>
-                      <ion-col size="10">
+                      <ion-col size="9">
                         <p class="text_description">0000003</p>
                       </ion-col>
-                      <ion-col size="2">
+                      <ion-col size="3">
                         <p class="text_description">{{ producto.n_cantidad }}</p>
                       </ion-col>
                     </ion-row>
@@ -134,7 +137,8 @@
     <div class="container_notas">
       <ion-item>
         <ion-label position="stacked">Notas</ion-label>
-        <ion-input></ion-input>
+        <ion-input type="text" [(ngModel)]="s_nota_pre_requisicion" name="s_nota_pre_requisicion">
+        </ion-input>
       </ion-item>
     </div>
   </div>
