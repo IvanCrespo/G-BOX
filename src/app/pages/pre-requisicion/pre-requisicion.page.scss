@@ -192,13 +192,12 @@ ion-content {
     }
 
     .container_notas {
-        padding: 30px 12px 10px 12px;
+        padding: 30px 12px 18px 12px;
 
         ion-item {
             --background: rgb(255, 255, 255);
             color: #4b4b4b;
             --highlight-color-focused: none;
-            padding-bottom: 12px;
 
             ion-label {
                 font-size: 18px;

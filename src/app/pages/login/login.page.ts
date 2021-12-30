@@ -65,10 +65,10 @@ export class LoginPage implements OnInit {
         this.data = data;
         console.log(this.data);
         if (this.data.status == "success") {
-          localStorage.setItem("$id_usuario", this.data.data.id_usuario);
-          localStorage.setItem("$s_token", this.data.data.s_token);
-          localStorage.setItem("$usuario", this.data.data.s_nombre + " " + this.data.data.s_paterno + " " + this.data.data.s_materno);
-          localStorage.setItem("$empresa", this.data.data.empresa);
+          localStorage.setItem("id_usuario", this.data.data.id_usuario);
+          localStorage.setItem("s_token", this.data.data.s_token);
+          localStorage.setItem("usuario", this.data.data.s_nombre + " " + this.data.data.s_paterno + " " + this.data.data.s_materno);
+          localStorage.setItem("empresa", this.data.data.empresa.s_empresa);
           this.navCtrl.navigateRoot("/home-pre-requisiciones");
           loading.dismiss();
           this.presentToast(this.data.message, this.data.status, 3000);

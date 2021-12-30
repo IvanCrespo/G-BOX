@@ -53,7 +53,8 @@ export class NuevoArticuloPage implements OnInit {
     let data = {
       n_cantidad: this.n_cantidad,
       s_descripcion_producto: this.s_descripcion_producto,
-      s_foto: this.s_foto,
+      /* s_foto: this.s_foto, */
+      s_foto: "data:image/png;base64,",
       s_orden_mantenimiento: this.s_orden_mantenimiento
     };
     /* console.log(data); */
@@ -70,7 +71,7 @@ export class NuevoArticuloPage implements OnInit {
   async presentToast(mensaje) {
     const toast = await this.toastCtrl.create({
       message: mensaje,
-      duration: 3500
+      duration: 2500
     });
     await toast.present();
   }
