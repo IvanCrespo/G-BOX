@@ -52,7 +52,7 @@
               </ion-col>
               <ion-col>
                 <ion-item>
-                  <ion-input placeholder="Persona que solicita" type="text"></ion-input>
+                  <ion-input placeholder="Persona que solicita" type="text" name="prueba" [(ngModel)]="prueba"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -99,5 +99,11 @@
         </ion-card>
       </ion-card-content>
     </ion-card>
+    <div class="container_notas">
+      <ion-item>
+        <ion-label position="stacked">Notas</ion-label>
+        <ion-input></ion-input>
+      </ion-item>
+    </div>
   </div>
 </ion-content>

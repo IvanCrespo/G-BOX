@@ -9,6 +9,9 @@ import { NuevoArticuloPage } from '../modals-pre-requisiciones/nuevo-articulo/nu
 })
 export class PreRequisicionPage implements OnInit {
 
+  imagen: string = "";
+  prueba: any;
+
   constructor(
     private modalController: ModalController,
     private toastController: ToastController,
@@ -24,9 +27,9 @@ export class PreRequisicionPage implements OnInit {
     let modal = await this.modalController.create({
       component: NuevoArticuloPage,
     });
-    modal.onDidDismiss().then(data => {
-      const datos = data;
-      console.log(datos);
+    modal.onDidDismiss().then((data:any) => {
+      this.imagen = data;
+      console.log(this.imagen);
     });
     return await modal.present();
   }

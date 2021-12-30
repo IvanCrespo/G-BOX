@@ -35,7 +35,7 @@
               <ion-col size="12">
                 <ion-item>
                   <ion-label position="stacked">Cantidad</ion-label>
-                  <ion-input type="number"></ion-input>
+                  <ion-input type="number" name="s_cantidad" [(ngModel)]="n_cantidad"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -43,7 +43,7 @@
               <ion-col size="12">
                 <ion-item>
                   <ion-label position="stacked">Nombre del Articulo</ion-label>
-                  <ion-input></ion-input>
+                  <ion-input type="text" name="s_descripcion_producto" [(ngModel)]="s_descripcion_producto"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -51,7 +51,7 @@
               <ion-col size="12">
                 <ion-item>
                   <ion-label position="stacked">Orden de Mantenimiento</ion-label>
-                  <ion-input></ion-input>
+                  <ion-input type="text" name="s_orden_mantenimiento" [(ngModel)]="s_orden_mantenimiento"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>

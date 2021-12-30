@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'pre-requisicion',
     loadChildren: () => import('./pages/pre-requisicion/pre-requisicion.module').then( m => m.PreRequisicionPageModule)
   },
+  {
+    path: 'nuevo-articulo',
+    loadChildren: () => import('./pages/modals-pre-requisiciones/nuevo-articulo/nuevo-articulo.module').then( m => m.NuevoArticuloPageModule)
+  },
 
 ];
 

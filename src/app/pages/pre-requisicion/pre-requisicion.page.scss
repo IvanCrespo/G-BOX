@@ -4,11 +4,15 @@ ion-content {
 }
 
 .top-section {
-    min-height: 200px;
-    --background: url("/assets/img/splash_movil.png");
-    background: url("/assets/img/splash_movil.png");
+    max-height: 35% !important;
+    --max-height: 35% !important;
+    height: 32% !important;
+    --height: 32% !important;
+    --background-image: url("/assets/img/splash_movil.png");
+    background-image: url("/assets/img/splash_movil.png");
     background-size: cover;
     padding-bottom: 30px;
+    background-repeat: no-repeat;
     position: relative;
 
     .container_buttons {
@@ -27,7 +31,8 @@ ion-content {
             bottom: 0;
 
             .logo {
-                width: 75px;
+                height: 52px !important;
+                --height: 52px !important;
                 opacity: 0.6;
             }
         }
@@ -36,11 +41,12 @@ ion-content {
     .container_title {
         display: flex;
         justify-content: center;
-        padding-top: 70px;
+        padding-top: 100px;
 
         .seccion_title {
             position: absolute;
             font-size: 24px;
+            color: #fff;
         }
     }
 }
@@ -102,7 +108,7 @@ ion-content {
         .container_icon {
             display: flex;
             justify-content: center;
-            align-items: end;
+            align-items: flex-end;
             ion-icon {
                 color: #4b4b4b;
                 font-size: 29px;
@@ -130,7 +136,7 @@ ion-content {
 
         .container_add {
             display: flex;
-            justify-content: end;
+            justify-content: flex-end;
 
             .btn_newArt {
                 --background: #684e7f;
@@ -146,6 +152,28 @@ ion-content {
             margin-bottom: 4px;
             margin-inline: -10px;
             border: none;
+        }
+    }
+
+    .container_notas {
+        padding: 30px 0px 10px 0px;
+
+        ion-item {
+            --background: rgb(255, 255, 255);
+            color: #4b4b4b;
+            --highlight-color-focused: none;
+            padding-bottom: 12px;
+
+            ion-label {
+                font-size: 18px;
+                font-style: oblique;
+                margin-bottom: 2px !important;
+            }
+
+            ion-input {
+                font-size: 14px;
+                font-weight: 600;
+            }
         }
     }
 }
