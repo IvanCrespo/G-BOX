@@ -22,8 +22,11 @@
       </ion-button>
     </div>
     <div class="seccion_photo">
-      <ion-avatar (click)="takePhoto()">
-        <img src="assets/img/Icono_foto.png" width="50%">
+      <ion-avatar (click)="selectImage()">
+        <img src="assets/img/Icono_foto.png" width="50%" *ngIf="!previewPhoto; else photo">
+        <ng-template #photo>
+            <img [src]="previewPhoto" />
+        </ng-template>
         <p class="text_photo">Añadir Imagen</p>
       </ion-avatar>
     </div>

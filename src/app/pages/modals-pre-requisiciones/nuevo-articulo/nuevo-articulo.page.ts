@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, ActionSheetController } from '@ionic/angular';
 /* Plugins */
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 
@@ -16,11 +16,13 @@ export class NuevoArticuloPage implements OnInit {
   s_orden_mantenimiento: string;
   s_foto: string = null;
   datos: any = {};
+  previewPhoto: string;
 
   constructor(
     private modalCtrl: ModalController,
     private camera: Camera,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public actionSheetCtrl: ActionSheetController
   ) { }
 
   ngOnInit() {
@@ -31,21 +33,22 @@ export class NuevoArticuloPage implements OnInit {
     this.modalCtrl.dismiss(data);
   }
 
-  async takePhoto() {
+  takePhoto(sourceType) {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: sourceType
     }
 
     this.camera.getPicture(options).then((imageData) => {
       let base64Image = 'data:image/png;base64,' + imageData;
       this.s_foto = base64Image;
       console.log(this.s_foto);
+      this.previewPhoto = base64Image;
     }, (err) => {
-      console.error("Error", JSON.stringify(err));
-      this.s_foto = "";
+      console.error("Error: no tiene imagen", JSON.stringify(err));
     });
   }
 
@@ -53,8 +56,8 @@ export class NuevoArticuloPage implements OnInit {
     let data = {
       n_cantidad: this.n_cantidad,
       s_descripcion_producto: this.s_descripcion_producto,
-      /* s_foto: this.s_foto, */
-      s_foto: "data:image/png;base64,",
+      s_foto: this.s_foto,
+      /* s_foto: "data:image/png;base64,", */
       s_orden_mantenimiento: this.s_orden_mantenimiento
     };
     /* console.log(data); */
@@ -74,5 +77,29 @@ export class NuevoArticuloPage implements OnInit {
       duration: 2500
     });
     await toast.present();
+  }
+
+  async selectImage() {
+    const actionSheet = await this.actionSheetCtrl.create({
+      header: "Seleccionar Imagen",
+      buttons: [{
+        text: 'Cargar desde biblioteca',
+        handler: () => {
+          this.takePhoto(this.camera.PictureSourceType.PHOTOLIBRARY);
+        }
+      },
+      {
+        text: 'Usar Camara',
+        handler: () => {
+          this.takePhoto(this.camera.PictureSourceType.CAMERA);
+        }
+      },
+      {
+        text: 'Cancelar',
+        role: 'cancel'
+      }
+      ]
+    });
+    await actionSheet.present();
   }
 }
