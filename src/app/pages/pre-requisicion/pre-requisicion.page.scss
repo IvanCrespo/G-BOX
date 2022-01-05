@@ -160,6 +160,18 @@ ion-content {
                 margin-bottom: 12px;
             }
         }
+        /* Antes Btn */
+        .container_add_center {
+            display: flex;
+            justify-content: center;
+
+            .btn_newArt {
+                --background: #684e7f;
+                text-transform: none;
+                font-size: 20px;
+                margin-bottom: 12px;
+            }
+        }
 
         ion-card {
             --background: #fff;

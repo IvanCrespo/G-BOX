@@ -15,12 +15,8 @@ import { importType } from '@angular/compiler/src/output/output_ast';
 })
 export class PreRequisicionPage implements OnInit {
 
-  lat: number;
-  lon: number;
-  d_fecha: string;
-  t_hora: string;
-  datos: any = {};
-  productos: any = [];
+  /* Actived Btn Articulos */
+  btnAddArticulos: boolean = false;
 
   /* Data LocalStorage */
   token: any;
@@ -28,13 +24,19 @@ export class PreRequisicionPage implements OnInit {
 
   /* Datos de Formulario */
   id_usuario: any;
-  s_folio: string = "00001";
+  s_folio: string = "------";
   s_empresa: string;
   estatus: any;
   usuario_solicitante: any;
   d_fecha_estimada_entrega: any;
   s_nota_pre_requisicion: any;
+  lat: number;
+  lon: number;
+  d_fecha: string;
+  t_hora: string;
   post: any = {};
+  datos: any = {};
+  productos: any = [];
 
   constructor(
     private modalController: ModalController,
@@ -50,6 +52,7 @@ export class PreRequisicionPage implements OnInit {
     this.s_empresa = localStorage.getItem('empresa');
     this.id_usuario = localStorage.getItem('id_usuario');
     this.token = localStorage.getItem('s_token');
+    this.usuario_solicitante = localStorage.getItem('usuario');
     this.getAddData();
   }
 
@@ -63,6 +66,11 @@ export class PreRequisicionPage implements OnInit {
     }
   }
 
+/*   addPrincipal() {
+    this.btnAddArticulos = true;
+    this.add();
+  }
+ */
   /* Modal para abrir Add Articulos Pre-requisicion */
   async add() {
     /* this.showModal(NuevoArticuloComponent); */
@@ -72,10 +80,17 @@ export class PreRequisicionPage implements OnInit {
     modal.onDidDismiss().then((data: any) => {
       this.datos = data;
       if (this.datos.data == undefined) {
+        if(this.productos.length == 0) {
+          this.btnAddArticulos = false;
+        }
+        else {
+          this.btnAddArticulos = true;
+        }
         console.log("Exit");
         this.datos = {};
       }
       else {
+        this.btnAddArticulos = true;
         console.log("Exito", this.datos.data);
         this.productos.push(this.datos.data);
         console.log(this.productos);
@@ -96,7 +111,6 @@ export class PreRequisicionPage implements OnInit {
     this.datos = {
       "d_fecha": this.d_fecha,
       "t_hora": this.t_hora,
-      /* "id_usuario_solicitante": this.usuario_solicitante, */
       "id_usuario_solicitante": this.id_usuario,
       "id_usuario_elaboro": this.id_usuario,
       "s_nota_pre_requisicion": this.s_nota_pre_requisicion,
@@ -127,9 +141,6 @@ export class PreRequisicionPage implements OnInit {
         }
       )
     }
-    /* if (this.datos.productos.length == 0) {
-      this.presentToast("No hay productos en la pre-requisición");
-    } */
   }
 
   async presentToast(mensaje) {
