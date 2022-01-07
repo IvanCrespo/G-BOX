@@ -66,11 +66,6 @@ export class PreRequisicionPage implements OnInit {
     }
   }
 
-/*   addPrincipal() {
-    this.btnAddArticulos = true;
-    this.add();
-  }
- */
   /* Modal para abrir Add Articulos Pre-requisicion */
   async add() {
     /* this.showModal(NuevoArticuloComponent); */

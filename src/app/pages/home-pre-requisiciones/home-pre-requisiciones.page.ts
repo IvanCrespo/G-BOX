@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController, NavController } from '@ionic/angular';
+import { InventariosService } from 'src/app/services/inventarios.service';
 
 @Component({
   selector: 'app-home-pre-requisiciones',
@@ -10,7 +11,8 @@ export class HomePreRequisicionesPage implements OnInit {
 
   constructor(
     private toastController: ToastController,
-    private navController: NavController
+    private navController: NavController,
+    private inventarioServ: InventariosService,
   ) { }
 
   ngOnInit() {
