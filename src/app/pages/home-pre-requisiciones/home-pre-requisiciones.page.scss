@@ -83,20 +83,25 @@ ion-content {
         }
     }
 
+    .card-content-md {
+      padding-inline-start: 4px;
+      padding-inline-end: 4px;
+    }
+
     ion-card {
         --background: #fff;
         --color: rgb(0, 0, 0);
         border-radius: 10px;
 
+        ion-card-header {
+          padding-bottom: 6px;
+        }
+
         ion-card-title {
             font-size: 16px;
             color: #000000;
             font-weight: 600;
-        }
-
-        .card-content-md {
-            padding-inline-start: 5px;
-            padding-inline-end: 5px;
+            padding-top: 10px;
         }
 
         ion-col .status {

@@ -18,9 +18,11 @@ export class PreRequisicionPage implements OnInit {
   /* Actived Btn Articulos */
   btnAddArticulos: boolean = false;
 
+  /* URL Services */
+  private url = "pre_requisicion";
+
   /* Data LocalStorage */
   token: any;
-  private url = "pre_requisicion";
 
   /* Datos de Formulario */
   id_usuario: any;
