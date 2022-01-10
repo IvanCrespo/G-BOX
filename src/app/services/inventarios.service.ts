@@ -21,7 +21,7 @@ export class InventariosService {
     return this.http.post(conexion.url + url, data, options);
   }
 
-  Get(s_token: string, url: string) {
+  GetAll(s_token: string, url: string) {
     let headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Licencia': conexion.licencia,

@@ -24,7 +24,9 @@
     </div>
     <div class="container_card" *ngFor="let pre_requisicion of pre_requisiciones; index as i">
       <div class="seccion_icon">
-        <ion-icon name="timer-outline"></ion-icon>
+        <ion-icon style="background-color: #ffc40c;" name="timer-outline" *ngIf="pre_requisicion.id_estatus_pre_requisicion == 1"></ion-icon>
+        <ion-icon style="background-color: #152a7e;" name="checkmark-outline" *ngIf="pre_requisicion.id_estatus_pre_requisicion == 2"></ion-icon>
+        <ion-icon style="background-color: #700b0b;" name="close-outline" *ngIf="pre_requisicion.id_estatus_pre_requisicion == 3"></ion-icon>
       </div>
       <ion-card class="ion-text-center">
         <ion-card-header>
@@ -44,8 +46,15 @@
                 {{ pre_requisicion.d_fecha_creacion }}
               </ion-col>
               <ion-col size="6">
-                <div class="status">
+                <div style="background-color: #ffc40c;" class="status" *ngIf="pre_requisicion.id_estatus_pre_requisicion == 1">
                   Pendiente
+                </div>
+                <!-- #419b39; -->
+                <div style="background-color: #152a7e;" class="status" *ngIf="pre_requisicion.id_estatus_pre_requisicion == 2">
+                  Autorizado
+                </div>
+                <div style="background-color: #b31414;" class="status" *ngIf="pre_requisicion.id_estatus_pre_requisicion == 3">
+                  Cancelado
                 </div>
               </ion-col>
             </ion-row>
