@@ -66,6 +66,23 @@ export class HomePreRequisicionesPage implements OnInit {
     this.navCtrl.navigateForward(['/pre-requisicion']);
   }
 
+  async logout(){
+    /* localStorage.setItem("id_usuario", "0");
+    localStorage.setItem("s_token", "0");
+    localStorage.setItem("usuario", "-");
+    localStorage.setItem("empresa", "-");
+    localStorage.setItem("$sesion","0"); */
+    localStorage.clear();
+    this.navCtrl.navigateRoot("/login");
+    const loading = await this.loadingCtrl.create({
+      spinner: "bubbles",
+      duration: 2000,
+      message: 'Cerrando sesión...',
+      translucent: true,
+    });
+    return await loading.present();
+  }
+
   async presentAlert(titulo, mensaje) {
     const alert = await this.alertCtrl.create({
       header: titulo,
@@ -74,4 +91,5 @@ export class HomePreRequisicionesPage implements OnInit {
     });
     await alert.present();
   }
+
 }
