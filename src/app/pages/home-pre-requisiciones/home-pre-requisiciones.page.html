@@ -34,7 +34,7 @@
         <ion-icon style="background-color: #700b0b;" name="close-outline"
           *ngIf="pre_requisicion.id_estatus_pre_requisicion == 3"></ion-icon>
       </div>
-      <ion-card class="ion-text-center">
+      <ion-card class="ion-text-center" (click)="view(pre_requisicion)">
         <ion-card-header>
           <ion-card-title>
             {{ pre_requisicion.usuario_solicitante.s_nombre }}
