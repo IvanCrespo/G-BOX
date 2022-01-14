@@ -53,12 +53,7 @@ export class PreRequisicionPage implements OnInit {
     private navCtrl: NavController
   ) {
     var d = new Date();
-    this.d_fecha =
-      ('00' + d.getDate()).slice(-2) +
-      '-' +
-      ('00' + (d.getMonth() + 1)).slice(-2) +
-      '-' +
-      d.getFullYear();
+    this.d_fecha = d.getFullYear() + '-' + ('00' + (d.getMonth() + 1)).slice(-2) + '-' + ('00' + d.getDate()).slice(-2);
     this.t_hora =
       ('00' + d.getHours()).slice(-2) +
       ':' +
@@ -133,7 +128,7 @@ export class PreRequisicionPage implements OnInit {
       productos: this.productos,
     };
     console.log(this.datos);
-    if (
+    /* if (
       this.datos.s_nota_pre_requisicion == '' ||
       this.datos.s_nota_pre_requisicion == undefined
     ) {
@@ -150,7 +145,7 @@ export class PreRequisicionPage implements OnInit {
             this.navCtrl.navigateRoot('/home-pre-requisiciones');
           }
         });
-    }
+    } */
   }
 
   async presentToast(mensaje) {
