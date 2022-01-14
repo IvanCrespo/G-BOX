@@ -6,7 +6,6 @@ import {
 } from '@ionic/angular';
 import { NuevoArticuloPage } from '../modals-pre-requisiciones/nuevo-articulo/nuevo-articulo.page';
 import { InventariosService } from 'src/app/services/inventarios.service';
-import { Router, ActivatedRoute } from '@angular/router';
 
 /* Plugins */
 import {
@@ -46,17 +45,12 @@ export class PreRequisicionPage implements OnInit {
   datos: any = {};
   productos: any = [];
 
-  /* Datos de Click View */
-  view: any;
-
   constructor(
     private modalController: ModalController,
     public toastCtrl: ToastController,
     private geolocation: Geolocation,
     private inventarioServ: InventariosService,
-    private navCtrl: NavController,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private navCtrl: NavController
   ) {
     var d = new Date();
     this.d_fecha =
@@ -77,14 +71,6 @@ export class PreRequisicionPage implements OnInit {
     this.token = localStorage.getItem('s_token');
     this.usuario_solicitante = localStorage.getItem('usuario');
     this.getAddData();
-
-    /* Data de click View */
-    this.activatedRoute.queryParams.subscribe((params) => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.view = this.router.getCurrentNavigation().extras.state;
-        console.log(this.view);
-      }
-    });
   }
 
   ngOnInit() {}

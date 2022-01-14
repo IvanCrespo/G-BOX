@@ -85,8 +85,7 @@ export class HomePreRequisicionesPage implements OnInit {
 
   view(registro){
     let selected = { state: { registro: registro } };
-    console.log(selected);
-    this.navCtrl.navigateForward(["/pre-requisicion"], selected);
+    this.navCtrl.navigateForward(["/view-pre-requisicion"], selected);
   }
 
   async presentAlert(titulo, mensaje) {

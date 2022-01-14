@@ -22,7 +22,11 @@ const routes: Routes = [
   {
     path: 'nuevo-articulo',
     loadChildren: () => import('./pages/modals-pre-requisiciones/nuevo-articulo/nuevo-articulo.module').then( m => m.NuevoArticuloPageModule)
+  },  {
+    path: 'view-pre-requisicion',
+    loadChildren: () => import('./pages/view-pre-requisicion/view-pre-requisicion.module').then( m => m.ViewPreRequisicionPageModule)
   },
+
 
 ];
 
