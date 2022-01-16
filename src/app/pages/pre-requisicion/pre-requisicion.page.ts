@@ -128,7 +128,7 @@ export class PreRequisicionPage implements OnInit {
       productos: this.productos,
     };
     console.log(this.datos);
-    /* if (
+    if (
       this.datos.s_nota_pre_requisicion == '' ||
       this.datos.s_nota_pre_requisicion == undefined
     ) {
@@ -145,7 +145,7 @@ export class PreRequisicionPage implements OnInit {
             this.navCtrl.navigateRoot('/home-pre-requisiciones');
           }
         });
-    } */
+    }
   }
 
   async presentToast(mensaje) {
