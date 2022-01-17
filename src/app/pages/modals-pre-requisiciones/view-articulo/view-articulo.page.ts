@@ -12,6 +12,7 @@ export class ViewArticuloPage implements OnInit {
 
   // Data de articulo Page --> Pre-requisicion
   public value = this.navParams.get('producto');
+  public idSelected = this.navParams.get('index');
 
   // Data
   s_foto: string = null;
@@ -30,6 +31,7 @@ export class ViewArticuloPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.idSelected);
     this.n_cantidad = this.value.n_cantidad;
     this.s_descripcion_producto = this.value.s_descripcion_producto;
     this.previewPhoto = this.value.s_foto;

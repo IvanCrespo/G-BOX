@@ -87,7 +87,6 @@ export class PreRequisicionPage implements OnInit {
     });
     modal.onDidDismiss().then((data: any) => {
       this.datos = data;
-      console.log(this.datos);
       if (this.datos.data == undefined) {
         if (this.productos.length == 0) {
           this.btnAddArticulos = false;
@@ -153,7 +152,7 @@ export class PreRequisicionPage implements OnInit {
     this.producto = this.productos[index];
     const modal = await this.modalController.create({
       component: ViewArticuloPage,
-      componentProps: { producto: this.producto }
+      componentProps: { producto: this.producto, index: 1 }
     });
     modal.onDidDismiss().then((data: any) => {
       this.datos = data;
