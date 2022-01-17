@@ -93,7 +93,6 @@ export class PreRequisicionPage implements OnInit {
         } else {
           this.btnAddArticulos = true;
         }
-        console.log('Exit');
         this.datos = {};
       } else {
         this.btnAddArticulos = true;
@@ -154,6 +153,29 @@ export class PreRequisicionPage implements OnInit {
     const modal = await this.modalController.create({
       component: ViewArticuloPage,
       componentProps: { producto: this.producto }
+    });
+    modal.onDidDismiss().then((data: any) => {
+      this.datos = data;
+      if (this.datos.data == undefined) {
+        if (this.productos.length == 0) {
+          this.btnAddArticulos = false;
+        } else {
+          this.btnAddArticulos = true;
+        }
+        this.datos = {};
+      } else {
+        let update_producto = {
+          n_cantidad: 0,
+          s_descripcion_producto: "",
+          s_orden_mantenimiento: "",
+          s_foto: ""
+        };
+        update_producto.n_cantidad = this.datos.data.n_cantidad;
+        update_producto.s_descripcion_producto = this.datos.data.s_descripcion_producto;
+        update_producto.s_orden_mantenimiento = this.datos.data.s_orden_mantenimiento;
+        update_producto.s_foto = this.datos.data.s_foto;
+        this.productos.splice(index, 1, update_producto);
+      }
     });
     return await modal.present();
   }

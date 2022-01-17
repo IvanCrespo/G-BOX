@@ -16,16 +16,25 @@ export class ViewArticuloPage implements OnInit {
   // Data
   s_foto: string = null;
   previewPhoto: string;
+  n_cantidad: number;
+  s_descripcion_producto: string;
+  s_orden_mantenimiento: string;
+  datos: any = {};
 
   constructor(
     private navParams: NavParams,
     private modalCtrl: ModalController,
     public actionSheetCtrl: ActionSheetController,
-    private camera: Camera
+    private camera: Camera,
+    public toastCtrl: ToastController
   ) { }
 
   ngOnInit() {
-    console.log(this.value);
+    this.n_cantidad = this.value.n_cantidad;
+    this.s_descripcion_producto = this.value.s_descripcion_producto;
+    this.previewPhoto = this.value.s_foto;
+    this.s_foto = this.value.s_foto;
+    this.s_orden_mantenimiento = this.value.s_orden_mantenimiento;
   }
 
   closeModal(data: any) {
@@ -73,6 +82,31 @@ export class ViewArticuloPage implements OnInit {
     }, (err) => {
       console.error("Error: no tiene imagen", JSON.stringify(err));
     });
+  }
+
+  async save() {
+    let data = {
+      n_cantidad: this.n_cantidad,
+      s_descripcion_producto: this.s_descripcion_producto,
+      s_foto: this.s_foto,
+      s_orden_mantenimiento: this.s_orden_mantenimiento
+    };
+    if (data.n_cantidad == null || data.s_descripcion_producto == null || data.n_cantidad == undefined || data.s_descripcion_producto == undefined) {
+      this.presentToast("Campos Cantidad y Descripción Productos no deben estar vacios");
+    }
+    else {
+      this.datos = data;
+      this.closeModal(this.datos);
+      this.presentToast("Articulo Agregado");
+    }
+  }
+
+  async presentToast(mensaje) {
+    const toast = await this.toastCtrl.create({
+      message: mensaje,
+      duration: 2500
+    });
+    await toast.present();
   }
 
 }

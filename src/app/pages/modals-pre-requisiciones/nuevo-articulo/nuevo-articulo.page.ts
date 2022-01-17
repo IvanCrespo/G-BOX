@@ -60,7 +60,6 @@ export class NuevoArticuloPage implements OnInit {
       /* s_foto: "data:image/png;base64,", */
       s_orden_mantenimiento: this.s_orden_mantenimiento
     };
-    /* console.log(data); */
     if (data.n_cantidad == null || data.s_descripcion_producto == null || data.n_cantidad == undefined || data.s_descripcion_producto == undefined) {
       this.presentToast("Campos Cantidad y Descripción Productos no deben estar vacios");
     }
