@@ -95,6 +95,9 @@ export class ViewArticuloPage implements OnInit {
       this.presentToast("Campos Cantidad y Descripción Productos no deben estar vacios");
     }
     else {
+      if (data.s_orden_mantenimiento == "" || data.s_orden_mantenimiento == undefined || data.s_orden_mantenimiento == null) {
+        data.s_orden_mantenimiento = "N/A";
+      }
       this.datos = data;
       this.closeModal(this.datos);
       this.presentToast("Articulo Editado");
