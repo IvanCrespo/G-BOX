@@ -6,6 +6,7 @@ import {
 } from '@ionic/angular';
 import { NuevoArticuloPage } from '../modals-pre-requisiciones/nuevo-articulo/nuevo-articulo.page';
 import { InventariosService } from 'src/app/services/inventarios.service';
+import { ViewArticuloPage } from '../modals-pre-requisiciones/view-articulo/view-articulo.page';
 
 /* Plugins */
 import {
@@ -44,6 +45,7 @@ export class PreRequisicionPage implements OnInit {
   post: any = {};
   datos: any = {};
   productos: any = [];
+  producto: any = [];
 
   constructor(
     private modalController: ModalController,
@@ -68,7 +70,7 @@ export class PreRequisicionPage implements OnInit {
     this.getAddData();
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   getAddData() {
     let estatus_actual: any = 1;
@@ -95,7 +97,6 @@ export class PreRequisicionPage implements OnInit {
         this.datos = {};
       } else {
         this.btnAddArticulos = true;
-        console.log('Exito', this.datos.data);
         this.productos.push(this.datos.data);
         console.log(this.productos);
       }
@@ -146,6 +147,15 @@ export class PreRequisicionPage implements OnInit {
           }
         });
     }
+  }
+
+  async modalProducto(index: number) {
+    this.producto = this.productos[index];
+    const modal = await this.modalController.create({
+      component: ViewArticuloPage,
+      componentProps: { producto: this.producto }
+    });
+    return await modal.present();
   }
 
   async presentToast(mensaje) {

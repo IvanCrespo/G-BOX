@@ -16,7 +16,7 @@ export class NuevoArticuloPage implements OnInit {
   s_orden_mantenimiento: string;
   s_foto: string = null;
   datos: any = {};
-  previewPhoto: string;
+  previewPhoto: string; 
 
   constructor(
     private modalCtrl: ModalController,
