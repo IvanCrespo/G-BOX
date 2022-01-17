@@ -97,7 +97,7 @@ export class ViewArticuloPage implements OnInit {
     else {
       this.datos = data;
       this.closeModal(this.datos);
-      this.presentToast("Articulo Agregado");
+      this.presentToast("Articulo Editado");
     }
   }
 

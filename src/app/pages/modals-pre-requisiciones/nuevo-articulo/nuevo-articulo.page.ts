@@ -16,7 +16,7 @@ export class NuevoArticuloPage implements OnInit {
   s_orden_mantenimiento: string;
   s_foto: string = null;
   datos: any = {};
-  previewPhoto: string; 
+  previewPhoto: string;
 
   constructor(
     private modalCtrl: ModalController,
@@ -64,6 +64,9 @@ export class NuevoArticuloPage implements OnInit {
       this.presentToast("Campos Cantidad y Descripción Productos no deben estar vacios");
     }
     else {
+      if (data.s_orden_mantenimiento == "") {
+        data.s_orden_mantenimiento = "N/A";
+      }
       this.datos = data;
       this.closeModal(this.datos);
       this.presentToast("Articulo Agregado");
