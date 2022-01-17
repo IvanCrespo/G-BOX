@@ -31,6 +31,7 @@ export class ViewPreRequisicionPage implements OnInit {
   s_nota_pre_requisicion: any;
   productos: any = [];
   producto: any = [];
+  datos: any = {};
 
   /* Datos de Click View */
   view: any;
@@ -82,6 +83,18 @@ export class ViewPreRequisicionPage implements OnInit {
     const modal = await this.modalController.create({
       component: ViewArticuloPage,
       componentProps: { producto: product, index: 2 }
+    });
+    modal.onDidDismiss().then((data: any) => {
+      this.datos = data;
+      if (this.datos.data == undefined) {
+        this.datos = {};
+      } else {
+        producto_index.n_cantidad = this.datos.data.n_cantidad;
+        producto_index.s_descripcion_producto = this.datos.data.s_descripcion_producto;
+        producto_index.s_foto = this.datos.data.s_foto;
+        producto_index.s_orden_mantenimiento = this.datos.data.s_orden_mantenimiento;
+        console.log(producto_index);
+      }
     });
     return await modal.present();
   }

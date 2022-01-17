@@ -23,7 +23,7 @@
     </div>
     <div class="seccion_photo">
       <ion-avatar (click)="selectImage()">
-        <img src="assets/img/Icono_foto.png" width="50%" *ngIf="!previewPhoto; else photo">
+        <img src="assets/img/Icono_foto.png" width="50%" *ngIf="!previewPhoto || previewPhoto == '' || previewPhoto == undefined || previewPhoto == 'http://hostaria.sytes.net:1318/api_gbox/'; else photo">
         <ng-template #photo>
             <img [src]="previewPhoto" />
         </ng-template>
