@@ -69,7 +69,7 @@ export class NuevoArticuloPage implements OnInit {
       }
       this.datos = data;
       this.closeModal(this.datos);
-      this.presentToast("Articulo Editado");
+      this.presentToast("Articulo Agregado");
     }
   }
 

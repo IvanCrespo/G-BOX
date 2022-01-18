@@ -39,6 +39,10 @@ export class ViewArticuloPage implements OnInit {
       this.isDisabled = true;
       this.isButton = 0;
     }
+    else if(this.idSelected == 1) {
+      this.isDisabled = false;
+      this.isButton = 1;
+    }
     this.n_cantidad = this.value.n_cantidad;
     this.s_descripcion_producto = this.value.s_descripcion_producto;
     this.previewPhoto = this.value.s_foto;
