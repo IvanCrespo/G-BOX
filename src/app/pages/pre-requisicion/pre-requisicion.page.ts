@@ -111,29 +111,30 @@ export class PreRequisicionPage implements OnInit {
   }
 
   save() {
-    var dateFormat = this.d_fecha_estimada_entrega.split('T')[0];
-    this.datos = {
-      d_fecha: this.d_fecha,
-      t_hora: this.t_hora,
-      id_usuario_solicitante: this.id_usuario,
-      id_usuario_elaboro: this.id_usuario,
-      s_nota_pre_requisicion: this.s_nota_pre_requisicion,
-      b_transferido: '0',
-      d_fecha_estimada_entrega: dateFormat,
-      latitud: this.lat,
-      longitud: this.lon,
-      n_prioridad: '1',
-      b_es_movil: '1',
-      b_activo: '1',
-      productos: this.productos,
-    };
-    console.log(this.datos);
-    if (
-      this.datos.s_nota_pre_requisicion == '' ||
-      this.datos.s_nota_pre_requisicion == undefined
-    ) {
-      this.presentToast('Campo Nota vacio');
-    } else {
+    if (this.d_fecha_estimada_entrega == '' || this.d_fecha_estimada_entrega == undefined) {
+      this.presentToast('Campo Fecha de Entrega vacio');
+    }
+    else if (this.s_nota_pre_requisicion == '' || this.s_nota_pre_requisicion == undefined) {
+      this.presentToast('Campo Notas vacio');
+    }
+    else {
+      var dateFormat = this.d_fecha_estimada_entrega.split('T')[0];
+      this.datos = {
+        d_fecha: this.d_fecha,
+        t_hora: this.t_hora,
+        id_usuario_solicitante: this.id_usuario,
+        id_usuario_elaboro: this.id_usuario,
+        s_nota_pre_requisicion: this.s_nota_pre_requisicion,
+        b_transferido: '0',
+        d_fecha_estimada_entrega: dateFormat,
+        latitud: this.lat,
+        longitud: this.lon,
+        n_prioridad: '1',
+        b_es_movil: '1',
+        b_activo: '1',
+        productos: this.productos,
+      };
+      console.log(this.datos);
       this.inventarioServ
         .Post(this.token, this.url, this.datos)
         .subscribe((data: any) => {

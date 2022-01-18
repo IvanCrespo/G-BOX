@@ -53,20 +53,23 @@ export class NuevoArticuloPage implements OnInit {
   }
 
   async save() {
-    let data = {
-      n_cantidad: this.n_cantidad,
-      s_descripcion_producto: this.s_descripcion_producto,
-      s_foto: this.s_foto,
-      /* s_foto: "data:image/png;base64,", */
-      s_orden_mantenimiento: this.s_orden_mantenimiento
-    };
-    if (data.n_cantidad == null || data.s_descripcion_producto == null || data.n_cantidad == undefined || data.s_descripcion_producto == undefined) {
-      this.presentToast("Campos Cantidad y Descripción Productos no deben estar vacios");
+    if (this.n_cantidad == null || this.n_cantidad == undefined) {
+      this.presentToast("Campo Cantidad no debe estar vacio");
+    }
+    else if (this.s_descripcion_producto == null || this.s_descripcion_producto == undefined) {
+      this.presentToast("Campo Nombre del Articulo no debe estar vacio");
     }
     else {
-      if (data.s_orden_mantenimiento == "" || data.s_orden_mantenimiento == undefined || data.s_orden_mantenimiento == null) {
-        data.s_orden_mantenimiento = "N/A";
+      if (this.s_orden_mantenimiento == "" || this.s_orden_mantenimiento == undefined || this.s_orden_mantenimiento == null) {
+        this.s_orden_mantenimiento = "N/A";
       }
+      let data = {
+        n_cantidad: this.n_cantidad,
+        s_descripcion_producto: this.s_descripcion_producto,
+        s_foto: this.s_foto,
+        /* s_foto: "data:image/png;base64,", */
+        s_orden_mantenimiento: this.s_orden_mantenimiento
+      };
       this.datos = data;
       this.closeModal(this.datos);
       this.presentToast("Articulo Agregado");
