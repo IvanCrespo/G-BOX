@@ -35,7 +35,6 @@ export class ViewArticuloPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.value);
     if(this.idSelected == 2) {
       this.isDisabled = true;
       this.isButton = 0;
