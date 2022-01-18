@@ -30,6 +30,10 @@ const routes: Routes = [
     path: 'view-articulo',
     loadChildren: () => import('./pages/modals-pre-requisiciones/view-articulo/view-articulo.module').then( m => m.ViewArticuloPageModule)
   },
+  {
+    path: 'qr-pre-requisicion',
+    loadChildren: () => import('./pages/modals-pre-requisiciones/qr-pre-requisicion/qr-pre-requisicion.module').then( m => m.QrPreRequisicionPageModule)
+  },
 
 
 ];

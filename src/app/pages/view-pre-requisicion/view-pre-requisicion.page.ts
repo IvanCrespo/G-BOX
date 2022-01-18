@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewArticuloPage } from '../modals-pre-requisiciones/view-articulo/view-articulo.page';
+import { QrPreRequisicionPage } from '../modals-pre-requisiciones/qr-pre-requisicion/qr-pre-requisicion.page';
 import {
   ModalController,
   ToastController
@@ -99,6 +100,14 @@ export class ViewPreRequisicionPage implements OnInit {
         producto_index.s_orden_mantenimiento = this.datos.data.s_orden_mantenimiento;
         console.log(producto_index);
       }
+    });
+    return await modal.present();
+  }
+
+  async qr() {
+    const modal = await this.modalController.create({
+      component: QrPreRequisicionPage,
+      componentProps: { folio: this.s_folio }
     });
     return await modal.present();
   }
