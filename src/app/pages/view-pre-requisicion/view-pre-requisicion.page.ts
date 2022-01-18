@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ViewArticuloPage } from '../modals-pre-requisiciones/view-articulo/view-articulo.page';
 import {
-  ModalController
+  ModalController,
+  ToastController
 } from '@ionic/angular';
 
 @Component({
@@ -26,6 +27,7 @@ export class ViewPreRequisicionPage implements OnInit {
   s_folio: string;
   s_empresa: string;
   estatus: any;
+  id_estatus_pre_requisicion: any;
   usuario_solicitante: any;
   d_fecha_estimada_entrega: any;
   s_nota_pre_requisicion: any;
@@ -39,7 +41,8 @@ export class ViewPreRequisicionPage implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private modalController: ModalController
+    private modalController: ModalController,
+    public toastCtrl: ToastController
   ) {
     /* Data de click View */
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -63,6 +66,7 @@ export class ViewPreRequisicionPage implements OnInit {
         else if (this.view.registro.id_estatus_pre_requisicion == 5) {
           this.estatus = 'En espera';
         }
+        this.id_estatus_pre_requisicion = this.view.registro.id_estatus_pre_requisicion;
         this.usuario_solicitante = this.view.registro.usuario_solicitante.s_nombre + ' ' +
           this.view.registro.usuario_solicitante.s_paterno + ' ' + this.view.registro.usuario_solicitante.s_materno;
         this.d_fecha_estimada_entrega = this.view.registro.d_fecha;
@@ -98,5 +102,23 @@ export class ViewPreRequisicionPage implements OnInit {
     });
     return await modal.present();
   }
+
+  /* edit() {
+    if (this.id_estatus_pre_requisicion == 1) {
+      this.isDisabled = false;
+      this.presentToast('Modo Editable');
+    }
+    else if (this.id_estatus_pre_requisicion == 2 || this.id_estatus_pre_requisicion == 3 || this.id_estatus_pre_requisicion == 4 || this.id_estatus_pre_requisicion == 5 ) {
+      this.presentToast('La pre-requisición debe estar en Pendiente');
+    }
+  } */
+
+  /* async presentToast(mensaje) {
+    const toast = await this.toastCtrl.create({
+      message: mensaje,
+      duration: 2500,
+    });
+    await toast.present();
+  } */
 
 }

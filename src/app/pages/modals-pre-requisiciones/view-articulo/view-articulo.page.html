@@ -16,18 +16,32 @@
   </div>
   <div class="middle-section ion-padding">
     <div class="container_add">
-      <ion-button class="btn_newArt" (click)="save()">
+      <ion-button class="btn_newArt" (click)="save()" *ngIf="isDisabled == false">
         Guardar
         <ion-icon name="bookmark"></ion-icon>
       </ion-button>
+      <!-- Btn solo funcional para view-pre-requisicion -->
+      <!-- <ion-button class="btn_newArt" (click)="edit()" *ngIf="isDisabled == true">
+        Editar
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button> -->
+      <!-- -------------------------------------------- -->
     </div>
-    <div class="seccion_photo">
+    <div class="seccion_photo" *ngIf="isButton == 1"> 
       <ion-avatar (click)="selectImage()">
         <img src="assets/img/Icono_foto.png" width="50%" *ngIf="!previewPhoto || previewPhoto == '' || previewPhoto == undefined || previewPhoto == 'http://hostaria.sytes.net:1318/api_gbox/'; else photo">
         <ng-template #photo>
             <img [src]="previewPhoto" />
         </ng-template>
         <p class="text_photo">Añadir Imagen</p>
+      </ion-avatar>
+    </div>
+    <div class="seccion_photo" *ngIf="isButton == 0"> 
+      <ion-avatar>
+        <img src="assets/img/Icono_foto.png" width="50%" *ngIf="!previewPhoto || previewPhoto == '' || previewPhoto == undefined || previewPhoto == 'http://hostaria.sytes.net:1318/api_gbox/'; else photo">
+        <ng-template #photo>
+            <img [src]="previewPhoto" />
+        </ng-template>
       </ion-avatar>
     </div>
     <ion-card class="ion-no-margin">
@@ -37,7 +51,7 @@
               <ion-col size="12">
                 <ion-item>
                   <ion-label position="stacked">Cantidad</ion-label>
-                  <ion-input min='1' type="number" name="s_cantidad" [(ngModel)]="n_cantidad"></ion-input>
+                  <ion-input min='1' type="number" name="s_cantidad" [(ngModel)]="n_cantidad" disabled="{{isDisabled}}"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -45,7 +59,7 @@
               <ion-col size="12">
                 <ion-item>
                   <ion-label position="stacked">Nombre del Articulo</ion-label>
-                  <ion-input type="text" name="s_descripcion_producto" [(ngModel)]="s_descripcion_producto"></ion-input>
+                  <ion-input type="text" name="s_descripcion_producto" [(ngModel)]="s_descripcion_producto" disabled="{{isDisabled}}"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -53,7 +67,7 @@
               <ion-col size="12">
                 <ion-item>
                   <ion-label position="stacked">Orden de Mantenimiento</ion-label>
-                  <ion-input type="text" name="s_orden_mantenimiento" [(ngModel)]="s_orden_mantenimiento"></ion-input>
+                  <ion-input type="text" name="s_orden_mantenimiento" [(ngModel)]="s_orden_mantenimiento" disabled="{{isDisabled}}"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>

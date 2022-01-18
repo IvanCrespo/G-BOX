@@ -14,9 +14,18 @@
   </div>
   <div class="middle-section ion-padding">
     <div class="container_add">
-      <ion-button class="btn_edit">
-        Editar
+      <!-- (click)="save()" -->
+      <!-- <ion-button class="btn_edit" (click)="save()" *ngIf="isDisabled == false">
+        Guardar
         <ion-icon name="bookmark"></ion-icon>
+      </ion-button>
+      <ion-button class="btn_edit" (click)="edit()" *ngIf="isDisabled == true">
+        Editar
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-button> -->
+      <ion-button class="btn_qr">
+        Ver QR
+        <ion-icon name="qr-code-outline"></ion-icon>
       </ion-button>
     </div>
     <ion-title class="seccion_title">Datos Pre-requisición</ion-title>
@@ -66,7 +75,8 @@
               <ion-col>
                 <ion-item>
                   <ion-datetime max="2024" min="2021" placeholder="Fecha de entrega" displayFormat="YYYY-MM-DD"
-                    name="d_fecha_estimada_entrega" [(ngModel)]="d_fecha_estimada_entrega" disabled="{{isDisabled}}"></ion-datetime>
+                    name="d_fecha_estimada_entrega" [(ngModel)]="d_fecha_estimada_entrega" disabled="{{isDisabled}}">
+                  </ion-datetime>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -138,7 +148,8 @@
     <div class="container_notas">
       <ion-item>
         <ion-label position="stacked">Notas</ion-label>
-        <ion-input type="text" [(ngModel)]="s_nota_pre_requisicion" name="s_nota_pre_requisicion" disabled="{{isDisabled}}">
+        <ion-input type="text" [(ngModel)]="s_nota_pre_requisicion" name="s_nota_pre_requisicion"
+          disabled="{{isDisabled}}">
         </ion-input>
       </ion-item>
     </div>

@@ -22,6 +22,10 @@ export class ViewArticuloPage implements OnInit {
   s_orden_mantenimiento: string;
   datos: any = {};
 
+  /* Disable */
+  isDisabled: boolean = false;
+  isButton: number = 0;
+
   constructor(
     private navParams: NavParams,
     private modalCtrl: ModalController,
@@ -31,7 +35,11 @@ export class ViewArticuloPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.idSelected);
+    console.log(this.value);
+    if(this.idSelected == 2) {
+      this.isDisabled = true;
+      this.isButton = 0;
+    }
     this.n_cantidad = this.value.n_cantidad;
     this.s_descripcion_producto = this.value.s_descripcion_producto;
     this.previewPhoto = this.value.s_foto;
@@ -105,6 +113,17 @@ export class ViewArticuloPage implements OnInit {
       this.presentToast("Articulo Editado");
     }
   }
+
+  /* edit() {
+    if (this.status == 1) {
+      this.isDisabled = false;
+      this.presentToast('Modo Editable');
+      this.isButton = 1;
+    }
+    else if (this.status == 2 || this.status == 3 || this.status == 4 || this.status == 5 ) {
+      this.presentToast('La pre-requisición debe estar en Pendiente');
+    }
+  } */
 
   async presentToast(mensaje) {
     const toast = await this.toastCtrl.create({
