@@ -24,6 +24,7 @@
     "@awesome-cordova-plugins/geolocation": "^5.37.3",
     "@ionic-native/core": "^5.36.0",
     "@ionic/angular": "^5.5.2",
+    "@techiediaries/ngx-qrcode": "^9.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"

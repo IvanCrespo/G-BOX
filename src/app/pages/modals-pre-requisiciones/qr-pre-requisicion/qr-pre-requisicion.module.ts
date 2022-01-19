@@ -7,10 +7,12 @@ import { IonicModule } from '@ionic/angular';
 import { QrPreRequisicionPageRoutingModule } from './qr-pre-requisicion-routing.module';
 
 import { QrPreRequisicionPage } from './qr-pre-requisicion.page';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
   imports: [
     CommonModule,
+    NgxQRCodeModule,
     FormsModule,
     IonicModule,
     QrPreRequisicionPageRoutingModule

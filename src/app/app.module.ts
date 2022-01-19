@@ -14,8 +14,7 @@ import { NuevoUsuarioComponent } from './components/nuevo-usuario/nuevo-usuario.
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
   declarations: [
@@ -26,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
   entryComponents: [],
   imports: [
     BrowserModule, 
+    NgxQRCodeModule,
     IonicModule.forRoot(), 
     AppRoutingModule,
     FormsModule,

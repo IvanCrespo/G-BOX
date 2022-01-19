@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @Component({
   selector: 'app-qr-pre-requisicion',
@@ -9,13 +10,13 @@ import { ModalController, NavParams } from '@ionic/angular';
 export class QrPreRequisicionPage implements OnInit {
 
   // Data QR Page --> View-Pre-requisicion
-  public folio = this.navParams.get('folio');
+  public qrFolio = this.navParams.get('folio');
 
   constructor(
     private modalCtrl: ModalController,
     private navParams: NavParams
   ) {
-    console.log(this.folio);
+    console.log(this.qrFolio);
    }
 
   ngOnInit() {
