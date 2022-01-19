@@ -17,8 +17,22 @@
   <div class="middle-section ion-padding">
     <ion-card class="ion-no-margin">
       <ion-card-content>
-        <ngx-qrcode [value]="qrFolio">
+        <ngx-qrcode [value]="qrFolio" [width]=500>
         </ngx-qrcode>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <p class="lbl_form">Folio Pre-requisición</p>
+              <p class="text_info">{{ qrFolio }}</p>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <p class="lbl_form">Fecha de Pre-requisición</p>
+              <p class="text_info">{{ fecha }}</p>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card-content>
     </ion-card>
   </div>

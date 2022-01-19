@@ -63,6 +63,25 @@ ion-content {
         --background: #fff;
         --color: rgb(0, 0, 0);
         border-radius: 10px;
-        border: 1px solid #4b4b4b;
+        border: 2px solid #206760;
+
+        ion-grid {
+            margin-top: -20px;
+
+            .lbl_form {
+                font-style: oblique;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 4px;
+            }
+
+            .text_info {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 4px;
+                font-size: 16px;
+                font-weight: 700;
+            }
+        }
     }
 }

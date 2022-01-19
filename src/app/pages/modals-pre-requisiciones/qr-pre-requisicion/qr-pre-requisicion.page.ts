@@ -11,12 +11,14 @@ export class QrPreRequisicionPage implements OnInit {
 
   // Data QR Page --> View-Pre-requisicion
   public qrFolio = this.navParams.get('folio');
+  public fecha = this.navParams.get('fecha');
 
   constructor(
     private modalCtrl: ModalController,
     private navParams: NavParams
   ) {
-    console.log(this.qrFolio);
+    this.qrFolio;
+    this.fecha;
    }
 
   ngOnInit() {

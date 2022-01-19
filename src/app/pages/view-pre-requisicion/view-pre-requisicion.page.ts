@@ -107,7 +107,7 @@ export class ViewPreRequisicionPage implements OnInit {
   async qr() {
     const modal = await this.modalController.create({
       component: QrPreRequisicionPage,
-      componentProps: { folio: this.s_folio }
+      componentProps: { folio: this.s_folio, fecha: this.d_fecha_estimada_entrega }
     });
     return await modal.present();
   }
