@@ -31,4 +31,14 @@ export class InventariosService {
     return this.http.get(conexion.url + url, options);
   }
 
+  AllById(s_token: string, url: string, id: number) {
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Licencia': conexion.licencia,
+      'Token': s_token
+    });
+    let options = { headers: headers };
+    return this.http.get(conexion.url + url + "/" + id, options);
+  }
+
 }
