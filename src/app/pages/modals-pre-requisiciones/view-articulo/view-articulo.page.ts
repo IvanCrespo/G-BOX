@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, ActionSheetController, NavParams } from '@ionic/angular';
 /* Plugins */
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+import { InventariosService } from 'src/app/services/inventarios.service';
 
 @Component({
   selector: 'app-view-articulo',
@@ -9,6 +10,9 @@ import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
   styleUrls: ['./view-articulo.page.scss'],
 })
 export class ViewArticuloPage implements OnInit {
+
+  /* URL Services */
+  private urlunidadmedida = 'unidades_medidas';
 
   // Data de articulo Page --> Pre-requisicion
   public value = this.navParams.get('producto');
@@ -21,18 +25,26 @@ export class ViewArticuloPage implements OnInit {
   s_descripcion_producto: string;
   s_orden_mantenimiento: string;
   datos: any = {};
+  id_unidad_medida: number;
+  unidad_medida: any;
 
   /* Disable */
   isDisabled: boolean = false;
   isButton: number = 0;
+
+  /* Data LocalStorage */
+  token: any;
 
   constructor(
     private navParams: NavParams,
     private modalCtrl: ModalController,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
-    public toastCtrl: ToastController
-  ) { }
+    public toastCtrl: ToastController,
+    private inventarioServ: InventariosService
+  ) {
+    this.token = localStorage.getItem('s_token');
+   }
 
   ngOnInit() {
     if(this.idSelected == 2) {
@@ -48,6 +60,14 @@ export class ViewArticuloPage implements OnInit {
     this.previewPhoto = this.value.s_foto;
     this.s_foto = this.value.s_foto;
     this.s_orden_mantenimiento = this.value.s_orden_mantenimiento;
+    this.id_unidad_medida = this.value.id_unidad_medida;
+    this.verificarUnidadMedida();
+  }
+
+  verificarUnidadMedida() {
+    this.inventarioServ.AllById(this.token, this.urlunidadmedida, this.id_unidad_medida).subscribe((data:any)=> {
+      this.unidad_medida = data.data.unidad_medida.s_nombre;
+    });
   }
 
   closeModal(data: any) {
