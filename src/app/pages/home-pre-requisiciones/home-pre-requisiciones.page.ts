@@ -12,6 +12,7 @@ import { InventariosService } from 'src/app/services/inventarios.service';
   styleUrls: ['./home-pre-requisiciones.page.scss'],
 })
 export class HomePreRequisicionesPage implements OnInit {
+
   /* URL Services */
   private url = 'pre_requisicion';
 
@@ -22,6 +23,7 @@ export class HomePreRequisicionesPage implements OnInit {
   pre_requisiciones: any = [];
   id_estatus_pre_requisicion: any;
   status: any;
+  pre_requisicionesReverse: any = [];
 
   constructor(
     private navCtrl: NavController,
@@ -45,7 +47,9 @@ export class HomePreRequisicionesPage implements OnInit {
       duration: 2000,
     });
     this.inventarioServ.GetAll(this.token, this.url).subscribe((data: any) => {
-      this.pre_requisiciones = data.data.pre_requisicion;
+      this.pre_requisicionesReverse = data.data.pre_requisicion;
+      this.pre_requisicionesReverse.reverse();
+      this.pre_requisiciones = this.pre_requisicionesReverse;
       if (data.status == 'fail') {
         this.presentAlert(data.title, data.message);
         loading.dismiss();
