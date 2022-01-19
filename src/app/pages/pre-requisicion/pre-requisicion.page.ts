@@ -26,6 +26,7 @@ export class PreRequisicionPage implements OnInit {
 
   /* URL Services */
   private url = 'pre_requisicion';
+  private urlprioridad = 'prioridades';
 
   /* Data LocalStorage */
   token: any;
@@ -46,6 +47,10 @@ export class PreRequisicionPage implements OnInit {
   datos: any = {};
   productos: any = [];
   producto: any = [];
+  n_prioridad: any;
+
+  /* Prioridades */
+  prioridades: any;
 
   constructor(
     private modalController: ModalController,
@@ -68,9 +73,20 @@ export class PreRequisicionPage implements OnInit {
     this.token = localStorage.getItem('s_token');
     this.usuario_solicitante = localStorage.getItem('usuario');
     this.getAddData();
+    this.ionViewWillEnter();
   }
 
   ngOnInit() { }
+
+  ionViewWillEnter(){
+    this.cargarPrioridades();
+   }
+
+  async cargarPrioridades() {
+    this.inventarioServ.GetAll(this.token, this.urlprioridad).subscribe((data: any) => {
+      this.prioridades = data.data.prioridades;
+    });
+  }
 
   getAddData() {
     let estatus_actual: any = 1;
@@ -129,7 +145,7 @@ export class PreRequisicionPage implements OnInit {
         d_fecha_estimada_entrega: dateFormat,
         latitud: this.lat,
         longitud: this.lon,
-        n_prioridad: '1',
+        n_prioridad: this.n_prioridad,
         b_es_movil: '1',
         b_activo: '1',
         productos: this.productos,

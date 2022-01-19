@@ -25,39 +25,47 @@
       <ion-avatar (click)="selectImage()">
         <img src="assets/img/Icono_foto.png" width="50%" *ngIf="!previewPhoto; else photo">
         <ng-template #photo>
-            <img [src]="previewPhoto" />
+          <img [src]="previewPhoto" />
         </ng-template>
         <p class="text_photo">Añadir Imagen</p>
       </ion-avatar>
     </div>
     <ion-card class="ion-no-margin">
       <ion-card-content>
-          <ion-grid>
-            <ion-row>
-              <ion-col size="12">
-                <ion-item>
-                  <ion-label position="stacked">Cantidad</ion-label>
-                  <ion-input min='1' type="number" name="s_cantidad" [(ngModel)]="n_cantidad"></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12">
-                <ion-item>
-                  <ion-label position="stacked">Nombre del Articulo</ion-label>
-                  <ion-input type="text" name="s_descripcion_producto" [(ngModel)]="s_descripcion_producto"></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12">
-                <ion-item>
-                  <ion-label position="stacked">Orden de Mantenimiento</ion-label>
-                  <ion-input type="text" name="s_orden_mantenimiento" [(ngModel)]="s_orden_mantenimiento"></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="stacked">Cantidad</ion-label>
+                <ion-input min='1' type="number" name="s_cantidad" [(ngModel)]="n_cantidad"></ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <ion-item>
+                <ion-label position="stacked">Unid. de Medida</ion-label>
+                <ion-select [(ngModel)]="id_unidad_medida"> 
+                  <ion-select-option *ngFor="let unidad of unidades" [value]="unidad.id_unidad_medida">{{unidad.s_nombre}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="stacked">Nombre del Articulo</ion-label>
+                <ion-input type="text" name="s_descripcion_producto" [(ngModel)]="s_descripcion_producto"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="stacked">Orden de Mantenimiento</ion-label>
+                <ion-input type="text" name="s_orden_mantenimiento" [(ngModel)]="s_orden_mantenimiento"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-card-content>
     </ion-card>
   </div>

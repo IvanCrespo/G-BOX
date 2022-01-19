@@ -70,6 +70,19 @@
                 </ion-item>
               </ion-col>
             </ion-row>
+            <ion-row>
+              <ion-col size="2" class="container_icon">
+                <ion-icon name="stats-chart-outline"></ion-icon>
+              </ion-col>
+              <ion-col>
+                <ion-item>
+                  <ion-select [(ngModel)]="n_prioridad" [ngModelOptions]="{standalone: true}" placeholder="Prioridad">
+                    <ion-select-option *ngFor="let prioridad of prioridades" [value]="prioridad.id_prioridad">
+                      {{prioridad.s_prioridad}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
           </ion-grid>
         </form>
       </ion-card-content>
@@ -107,7 +120,6 @@
                     <ng-template #photo>
                       <ion-card-content>
                         <img src="{{ producto.s_foto }}" style="width: 100%; height: 100%;" />
-                        <!-- <ion-img style="width: 100%; height: 100%;" src="/assets/img/logo_gbox.png"></ion-img> -->
                       </ion-card-content>
                     </ng-template>
                   </ion-card>

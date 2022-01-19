@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, ActionSheetController } from '@ionic/angular';
 /* Plugins */
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
+import { InventariosService } from 'src/app/services/inventarios.service';
 
 
 @Component({
@@ -11,21 +12,45 @@ import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 })
 export class NuevoArticuloPage implements OnInit {
 
+  /* URL Services */
+  private url = 'unidades_medidas';
+
+  /* Data LocalStorage */
+  token: any;
+
   n_cantidad: number;
   s_descripcion_producto: string;
   s_orden_mantenimiento: string;
   s_foto: string = null;
   datos: any = {};
   previewPhoto: string;
+  id_unidad_medida: any;
+
+  /* Unidades de Medida */
+  unidades: any;
 
   constructor(
     private modalCtrl: ModalController,
     private camera: Camera,
     public toastCtrl: ToastController,
-    public actionSheetCtrl: ActionSheetController
-  ) { }
+    public actionSheetCtrl: ActionSheetController,
+    private inventarioServ: InventariosService
+  ) {
+    this.token = localStorage.getItem('s_token');
+    this.ionViewWillEnter();
+   }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
+    this.cargarUnidades();
+   }
+
+  async cargarUnidades() {
+    this.inventarioServ.GetAll(this.token, this.url).subscribe((data: any) => {
+      this.unidades = data.data.unidad_medida;
+    });
   }
 
   closeModal(data: any) {
@@ -53,7 +78,10 @@ export class NuevoArticuloPage implements OnInit {
   }
 
   async save() {
-    if (this.n_cantidad == null || this.n_cantidad == undefined) {
+    if (this.id_unidad_medida == null || this.id_unidad_medida == undefined) {
+      this.presentToast("Campo Unid. de Medida no debe estar vacio");
+    }
+    else if (this.n_cantidad == null || this.n_cantidad == undefined) {
       this.presentToast("Campo Cantidad no debe estar vacio");
     }
     else if (this.s_descripcion_producto == null || this.s_descripcion_producto == undefined) {
@@ -64,6 +92,7 @@ export class NuevoArticuloPage implements OnInit {
         this.s_orden_mantenimiento = "N/A";
       }
       let data = {
+        id_unidad_medida: this.id_unidad_medida,
         n_cantidad: this.n_cantidad,
         s_descripcion_producto: this.s_descripcion_producto,
         s_foto: this.s_foto,
