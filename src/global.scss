@@ -38,3 +38,57 @@ ion-item {
 .modal-wrapper, .inner-scroll {
   background: transparent !important;
 }
+
+
+
+
+ion-alert {
+  //background color
+  .alert-wrapper.sc-ion-alert-md {
+    --background: #fff;
+    color: #262626;
+  }
+
+  // Header Text
+  .alert-title.sc-ion-alert-md {
+    font-size: 18px;
+    font-weight: 600;
+    color: #206760;
+    text-align: center;
+  }
+
+  // wrap the text
+  .alert-radio-label.sc-ion-alert-md {
+    color: #262626;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  // checkbox border color
+  [aria-checked="true"].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md {
+    border-color: #684e7f;
+  }
+
+  // checkbox or radio button color
+  .alert-radio-inner.sc-ion-alert-md {
+    background-color: #684e7f !important;
+  }
+
+  // Height of text
+  .alert-tappable.sc-ion-alert-md {
+    height: 36px !important;
+  }
+
+  // Checked text color
+  [aria-checked="true"].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md {
+    color: #206760;
+  }
+
+  // Button color
+  .alert-button-inner.sc-ion-alert-md {
+    color: #262626;
+    font-weight: 600;
+    font-size: 15px;
+  }
+}
+

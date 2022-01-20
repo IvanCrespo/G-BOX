@@ -43,7 +43,7 @@
             <ion-col size="6">
               <ion-item>
                 <ion-label position="stacked">Unid. de Medida</ion-label>
-                <ion-select [(ngModel)]="id_unidad_medida"> 
+                <ion-select [(ngModel)]="id_unidad_medida" cancelText="Cancelar" okText="Aceptar"> 
                   <ion-select-option *ngFor="let unidad of unidades" [value]="unidad.id_unidad_medida">{{unidad.s_nombre}}</ion-select-option>
                 </ion-select>
               </ion-item>

@@ -76,7 +76,7 @@
               </ion-col>
               <ion-col>
                 <ion-item>
-                  <ion-select [(ngModel)]="n_prioridad" [ngModelOptions]="{standalone: true}" placeholder="Prioridad">
+                  <ion-select [(ngModel)]="n_prioridad" [ngModelOptions]="{standalone: true}" placeholder="Prioridad" cancelText="Cancelar" okText="Aceptar">
                     <ion-select-option *ngFor="let prioridad of prioridades" [value]="prioridad.id_prioridad">
                       {{prioridad.s_prioridad}}</ion-select-option>
                   </ion-select>
