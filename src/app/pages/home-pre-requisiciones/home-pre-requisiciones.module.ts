@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { HomePreRequisicionesPageRoutingModule } from './home-pre-requisiciones-routing.module';
 
 import { HomePreRequisicionesPage } from './home-pre-requisiciones.page';
+	
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePreRequisicionesPageRoutingModule
+    HomePreRequisicionesPageRoutingModule,
+    NgxPaginationModule
   ],
   declarations: [HomePreRequisicionesPage]
 })

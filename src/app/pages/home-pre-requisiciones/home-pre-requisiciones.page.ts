@@ -13,6 +13,9 @@ import { InventariosService } from 'src/app/services/inventarios.service';
 })
 export class HomePreRequisicionesPage implements OnInit {
 
+  /* Pagination */
+  page: number = 1;
+
   /* URL Services */
   private url = 'pre_requisicion';
 

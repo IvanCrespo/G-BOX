@@ -41,7 +41,7 @@ ion-item {
 
 
 
-
+/* ---------------------------------------------- ION-SELECT --------------------------------------------------------- */
 ion-alert {
   //background color
   .alert-wrapper.sc-ion-alert-md {
@@ -91,4 +91,71 @@ ion-alert {
     font-size: 15px;
   }
 }
+/* ------------------------------------------------------------------------------------------------------- */
 
+/* ---------------------------------------------- NGX-PAGINATION --------------------------------------------------------- */
+.ngx-pagination {
+  margin-bottom: 1rem !important;
+  line-height: 20px !important;
+  font-size: 12px !important;
+  padding-inline-start: 0px;
+  display: flex;
+  justify-content: center;
+}
+
+.ngx-pagination li {
+  display: inline-block !important;
+}
+
+.ngx-pagination a,
+.ngx-pagination button {
+  color: #ffffff !important;
+  display: block !important;
+  background-color: #206760 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 9% !important;
+}
+
+.ngx-pagination a:hover,
+.ngx-pagination button:hover {
+  background: #684e7f !important;
+}
+
+.ngx-pagination .current {
+  background: #684e7f !important;
+  color: #fefefe !important;
+  cursor: default !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 9% !important;
+}
+
+.ngx-pagination .disabled {
+  color: #206760 !important;
+  cursor: default !important;
+}
+
+.ngx-pagination .disabled:hover {
+  background: transparent !important;
+}
+
+.ngx-pagination a,
+.ngx-pagination button {
+  cursor: pointer !important;
+}
+
+.ngx-pagination .pagination-previous a::before,
+.ngx-pagination .pagination-previous.disabled::before {
+  display: inline-block !important;
+  margin-right: 0rem !important;
+}
+
+.ngx-pagination .pagination-next a::after,
+.ngx-pagination .pagination-next.disabled::after {
+  display: inline-block !important;
+  margin-left: 0rem !important;
+}
+
+.ngx-pagination .small-screen {
+  display: none !important;
+}
+/* ------------------------------------------------------------------------------------------------------- */
