@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import {
+  NavController,
+  LoadingController,
+  AlertController,
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +11,41 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+
+  activePageTitle = 'Pre-requisiciones';
+
+  Pages = [
+    /* {
+      title: 'Dashboard',
+      url: '',
+      icon: 'albums'
+    }, */
+    {
+      title: 'Pre-requisiciones',
+      url: '/home-pre-requisiciones',
+      icon: 'cube-outline',
+    },
+    {
+      title: 'Salidas',
+      url: '',
+      icon: 'paper-plane-outline',
+    }  
+  ];
+
+  constructor(
+    private navCtrl: NavController,
+    public loadingCtrl: LoadingController
+  ) {}
+
+  async logout(){
+    localStorage.clear();
+    this.navCtrl.navigateRoot("/login");
+    const loading = await this.loadingCtrl.create({
+      spinner: "bubbles",
+      duration: 2000,
+      message: 'Cerrando sesión...',
+      translucent: true,
+    });
+    return await loading.present();
+  }
 }

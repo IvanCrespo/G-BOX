@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, NavController } from '@ionic/angular';
 import { LoginService } from 'src/app/services/login.service';
 import { LoadingController } from '@ionic/angular';
+import { MenuController } from '@ionic/angular';
 
 /**
  * Components
@@ -25,6 +26,7 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController,
     private loginService: LoginService,
     private loadingCtrl: LoadingController,
+    public menuCtrl: MenuController
   ) {
     this.user = '';
     this.password = '';
@@ -85,5 +87,15 @@ export class LoginPage implements OnInit {
 
   newUser() {
     this.showModal(NuevoUsuarioComponent);
+  }
+
+  ionViewDidEnter() {
+    // El menú de la raíz izquierda debe estar deshabilitado en esta página
+    this.menuCtrl.enable(false);
+  }
+
+  ionViewWillLeave() {
+    // Habilita el menú raíz izquierdo al salir de esta página
+    this.menuCtrl.enable(true);
   }
 }

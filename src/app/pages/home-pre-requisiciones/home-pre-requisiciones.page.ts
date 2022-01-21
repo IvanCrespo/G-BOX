@@ -73,12 +73,7 @@ export class HomePreRequisicionesPage implements OnInit {
     this.navCtrl.navigateForward(['/pre-requisicion']);
   }
 
-  async logout(){
-    /* localStorage.setItem("id_usuario", "0");
-    localStorage.setItem("s_token", "0");
-    localStorage.setItem("usuario", "-");
-    localStorage.setItem("empresa", "-");
-    localStorage.setItem("$sesion","0"); */
+  /* async logout(){
     localStorage.clear();
     this.navCtrl.navigateRoot("/login");
     const loading = await this.loadingCtrl.create({
@@ -88,7 +83,7 @@ export class HomePreRequisicionesPage implements OnInit {
       translucent: true,
     });
     return await loading.present();
-  }
+  } */
 
   view(registro){
     let selected = { state: { registro: registro } };
