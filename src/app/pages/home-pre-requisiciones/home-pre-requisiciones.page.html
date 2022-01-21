@@ -25,7 +25,8 @@
         </ion-fab-button>
       </ion-fab>
     </div>
-    <div class="container_card" *ngFor="let pre_requisicion of pre_requisiciones | paginate: { itemsPerPage: 5, currentPage: page }">
+    <div class="container_card"
+      *ngFor="let pre_requisicion of pre_requisiciones | paginate: { itemsPerPage: 5, currentPage: page }">
       <div class="seccion_icon">
         <ion-icon style="background-color: #ffc40c;" name="timer-outline"
           *ngIf="pre_requisicion.id_estatus_pre_requisicion == 1"></ion-icon>
@@ -83,7 +84,7 @@
         </ion-card-content>
       </ion-card>
     </div>
-    <pagination-controls (pageChange)="page = $event" previousLabel="Anterior"
-    nextLabel="Siguiente"></pagination-controls>
+    <pagination-controls (pageChange)="page = $event" previousLabel="Ant." nextLabel="Sig." maxSize="3" autoHide="true"
+      responsive="true"></pagination-controls>
   </div>
 </ion-content>
