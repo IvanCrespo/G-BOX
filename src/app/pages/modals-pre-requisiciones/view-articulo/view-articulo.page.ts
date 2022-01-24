@@ -27,7 +27,6 @@ export class ViewArticuloPage implements OnInit {
   datos: any = {};
   id_unidad_medida: number;
   unidad_medida: any;
-  errorNegativo: boolean = false;
 
   /* Disable */
   isDisabled: boolean = false;
@@ -132,7 +131,7 @@ export class ViewArticuloPage implements OnInit {
     else if (this.n_cantidad == null || this.n_cantidad == undefined) {
       this.presentToast("Campo Cantidad no debe estar vacio");
     }
-    else if (this.errorNegativo == true) {
+    else if (this.n_cantidad <= 0) {
       this.presentToast("Campo Cantidad tiene numeros negativos");
     }
     else if (this.s_descripcion_producto == null || this.s_descripcion_producto == undefined) {
@@ -155,16 +154,19 @@ export class ViewArticuloPage implements OnInit {
     }
   }
 
-  checkStrenght(n_cantidad) {
-    if (n_cantidad <= 0) {
-      this.presentToast("Campo Cantidad no acepta numeros negativos");
-      this.errorNegativo = true;
-    }
-    else {
-      this.errorNegativo = false;
+  checkRealTime(n_cantidad) {
+    if (n_cantidad != null) {
+      if (n_cantidad <= 0) {
+        this.presentToast("Campo Cantidad no acepta numeros negativos");
+      }
+      else if (n_cantidad == undefined) {
+        return false;
+      }
+      else if (n_cantidad > 0) {
+        return false;
+      }
     }
   }
-
 
   /* edit() {
     if (this.status == 1) {

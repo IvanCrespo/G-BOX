@@ -3,6 +3,7 @@ import { ModalController, ToastController, ActionSheetController } from '@ionic/
 /* Plugins */
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { InventariosService } from 'src/app/services/inventarios.service';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 
 @Component({
@@ -25,7 +26,7 @@ export class NuevoArticuloPage implements OnInit {
   datos: any = {};
   previewPhoto: string;
   id_unidad_medida: any;
-  errorNegativo: boolean = false;
+
 
   /* Unidades de Medida */
   unidades: any;
@@ -85,7 +86,7 @@ export class NuevoArticuloPage implements OnInit {
     else if (this.n_cantidad == null || this.n_cantidad == undefined) {
       this.presentToast("Campo Cantidad no debe estar vacio");
     }
-    else if (this.errorNegativo == true) {
+    else if (this.n_cantidad <= 0) {
       this.presentToast("Campo Cantidad tiene numeros negativos");
     }
     else if (this.s_descripcion_producto == null || this.s_descripcion_producto == undefined) {
@@ -109,13 +110,17 @@ export class NuevoArticuloPage implements OnInit {
     }
   }
 
-  checkStrenght(n_cantidad) {
-    if (n_cantidad <= 0) {
-      this.presentToast("Campo Cantidad no acepta numeros negativos");
-      this.errorNegativo = true;
-    }
-    else {
-      this.errorNegativo = false;
+  checkRealTime(n_cantidad) {
+    if (n_cantidad != null) {
+      if (n_cantidad <= 0) {
+        this.presentToast("Campo Cantidad no acepta numeros negativos");
+      }
+      else if (n_cantidad == undefined) {
+        return false;
+      }
+      else if (n_cantidad > 0) {
+        return false;
+      }
     }
   }
 

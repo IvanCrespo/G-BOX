@@ -156,11 +156,10 @@ export class PreRequisicionPage implements OnInit {
         b_activo: '1',
         productos: this.productos,
       };
-      console.log(this.datos);
       const loading = await this.loadingCtrl.create({
-        message: 'Espere un momento...',
-        duration: 2000,
+        message: 'Espere un momento...'
       });
+      await loading.present();
       this.inventarioServ
         .Post(this.token, this.url, this.datos)
         .subscribe((data: any) => {
@@ -174,7 +173,6 @@ export class PreRequisicionPage implements OnInit {
             loading.dismiss();
           }
         });
-      loading.present();
     }
   }
 
