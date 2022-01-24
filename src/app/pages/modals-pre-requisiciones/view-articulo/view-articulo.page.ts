@@ -35,6 +35,9 @@ export class ViewArticuloPage implements OnInit {
   /* Data LocalStorage */
   token: any;
 
+  /* Unidades de Medida */
+  unidades: any;
+
   constructor(
     private navParams: NavParams,
     private modalCtrl: ModalController,
@@ -44,14 +47,15 @@ export class ViewArticuloPage implements OnInit {
     private inventarioServ: InventariosService
   ) {
     this.token = localStorage.getItem('s_token');
-   }
+    this.ionViewWillEnter();
+  }
 
   ngOnInit() {
-    if(this.idSelected == 2) {
+    if (this.idSelected == 2) {
       this.isDisabled = true;
       this.isButton = 0;
     }
-    else if(this.idSelected == 1) {
+    else if (this.idSelected == 1) {
       this.isDisabled = false;
       this.isButton = 1;
     }
@@ -60,13 +64,16 @@ export class ViewArticuloPage implements OnInit {
     this.previewPhoto = this.value.s_foto;
     this.s_foto = this.value.s_foto;
     this.s_orden_mantenimiento = this.value.s_orden_mantenimiento;
-    this.id_unidad_medida = this.value.id_unidad_medida;
-    this.verificarUnidadMedida();
   }
 
-  verificarUnidadMedida() {
-    this.inventarioServ.AllById(this.token, this.urlunidadmedida, this.id_unidad_medida).subscribe((data:any)=> {
-      this.unidad_medida = data.data.unidad_medida.s_nombre;
+  ionViewWillEnter() {
+    this.cargarUnidades();
+  }
+
+  async cargarUnidades() {
+    this.inventarioServ.GetAll(this.token, this.urlunidadmedida).subscribe((data: any) => {
+      this.unidades = data.data.unidad_medida;
+      this.id_unidad_medida = this.value.id_unidad_medida;
     });
   }
 
@@ -118,19 +125,26 @@ export class ViewArticuloPage implements OnInit {
   }
 
   async save() {
-    let data = {
-      n_cantidad: this.n_cantidad,
-      s_descripcion_producto: this.s_descripcion_producto,
-      s_foto: this.s_foto,
-      s_orden_mantenimiento: this.s_orden_mantenimiento
-    };
-    if (data.n_cantidad == null || data.s_descripcion_producto == null || data.n_cantidad == undefined || data.s_descripcion_producto == undefined) {
-      this.presentToast("Campos Cantidad y Descripción Productos no deben estar vacios");
+    if (this.id_unidad_medida == null || this.id_unidad_medida == undefined) {
+      this.presentToast("Campo Unid. de Medida no debe estar vacio");
+    }
+    else if (this.n_cantidad == null || this.n_cantidad == undefined) {
+      this.presentToast("Campo Cantidad no debe estar vacio");
+    }
+    else if (this.s_descripcion_producto == null || this.s_descripcion_producto == undefined) {
+      this.presentToast("Campo Nombre del Articulo no debe estar vacio");
     }
     else {
-      if (data.s_orden_mantenimiento == "" || data.s_orden_mantenimiento == undefined || data.s_orden_mantenimiento == null) {
-        data.s_orden_mantenimiento = "N/A";
+      if (this.s_orden_mantenimiento == "" || this.s_orden_mantenimiento == undefined || this.s_orden_mantenimiento == null) {
+        this.s_orden_mantenimiento = "N/A";
       }
+      let data = {
+        id_unidad_medida: this.id_unidad_medida,
+        n_cantidad: this.n_cantidad,
+        s_descripcion_producto: this.s_descripcion_producto,
+        s_foto: this.s_foto,
+        s_orden_mantenimiento: this.s_orden_mantenimiento
+      };
       this.datos = data;
       this.closeModal(this.datos);
       this.presentToast("Articulo Editado");

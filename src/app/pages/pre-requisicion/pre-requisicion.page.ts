@@ -3,6 +3,7 @@ import {
   ModalController,
   ToastController,
   NavController,
+  LoadingController
 } from '@ionic/angular';
 import { NuevoArticuloPage } from '../modals-pre-requisiciones/nuevo-articulo/nuevo-articulo.page';
 import { InventariosService } from 'src/app/services/inventarios.service';
@@ -48,6 +49,7 @@ export class PreRequisicionPage implements OnInit {
   productos: any = [];
   producto: any = [];
   n_prioridad: any;
+  id_unidad_medida: any;
 
   /* Prioridades */
   prioridades: any;
@@ -57,7 +59,8 @@ export class PreRequisicionPage implements OnInit {
     public toastCtrl: ToastController,
     private geolocation: Geolocation,
     private inventarioServ: InventariosService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    public loadingCtrl: LoadingController
   ) {
     var d = new Date();
     this.d_fecha = d.getFullYear() + '-' + ('00' + (d.getMonth() + 1)).slice(-2) + '-' + ('00' + d.getDate()).slice(-2);
@@ -78,9 +81,9 @@ export class PreRequisicionPage implements OnInit {
 
   ngOnInit() { }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.cargarPrioridades();
-   }
+  }
 
   async cargarPrioridades() {
     this.inventarioServ.GetAll(this.token, this.urlprioridad).subscribe((data: any) => {
@@ -126,9 +129,12 @@ export class PreRequisicionPage implements OnInit {
     });
   }
 
-  save() {
+  async save() {
     if (this.d_fecha_estimada_entrega == '' || this.d_fecha_estimada_entrega == undefined) {
       this.presentToast('Campo Fecha de Entrega vacio');
+    }
+    else if (this.n_prioridad == '' || this.n_prioridad == undefined) {
+      this.presentToast('Campo Prioridad vacio');
     }
     else if (this.s_nota_pre_requisicion == '' || this.s_nota_pre_requisicion == undefined) {
       this.presentToast('Campo Notas vacio');
@@ -151,17 +157,24 @@ export class PreRequisicionPage implements OnInit {
         productos: this.productos,
       };
       console.log(this.datos);
+      const loading = await this.loadingCtrl.create({
+        message: 'Espere un momento...',
+        duration: 2000,
+      });
       this.inventarioServ
         .Post(this.token, this.url, this.datos)
         .subscribe((data: any) => {
           console.log(data);
           if (data.status == 'fail') {
             this.presentToast('Error al ingresar Pre-requisición');
+            loading.dismiss();
           } else if (data.status == 'success') {
             this.presentToast('Pre-requisición exitosa');
             this.navCtrl.navigateRoot('/home-pre-requisiciones');
+            loading.dismiss();
           }
         });
+      loading.present();
     }
   }
 
@@ -183,11 +196,13 @@ export class PreRequisicionPage implements OnInit {
       } else {
         let update_producto = {
           n_cantidad: 0,
+          id_unidad_medida: 0,
           s_descripcion_producto: "",
           s_orden_mantenimiento: "",
           s_foto: ""
         };
         update_producto.n_cantidad = this.datos.data.n_cantidad;
+        update_producto.id_unidad_medida = this.datos.data.id_unidad_medida;
         update_producto.s_descripcion_producto = this.datos.data.s_descripcion_producto;
         update_producto.s_orden_mantenimiento = this.datos.data.s_orden_mantenimiento;
         update_producto.s_foto = this.datos.data.s_foto;

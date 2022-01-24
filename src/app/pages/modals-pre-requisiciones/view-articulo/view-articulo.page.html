@@ -55,9 +55,15 @@
                 </ion-item>
               </ion-col>
               <ion-col size="6">
-                <ion-item>
+                <!-- <ion-item>
                   <ion-label position="stacked">Unid. de Medida</ion-label>
                   <ion-input type="text" name="unidad_medida" [(ngModel)]="unidad_medida" disabled="{{isDisabled}}"></ion-input>
+                </ion-item> -->
+                <ion-item>
+                  <ion-label position="stacked">Unid. de Medida</ion-label>
+                  <ion-select [(ngModel)]="id_unidad_medida" name="id_unidad_medida" cancelText="Cancelar" okText="Aceptar" disabled="{{isDisabled}}"> 
+                    <ion-select-option  *ngFor="let unidad of unidades" [value]="unidad.id_unidad_medida">{{unidad.s_nombre}}</ion-select-option>
+                  </ion-select>
                 </ion-item>
               </ion-col>
             </ion-row>
