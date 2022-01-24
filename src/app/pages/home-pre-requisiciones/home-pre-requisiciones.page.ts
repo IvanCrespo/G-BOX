@@ -73,18 +73,6 @@ export class HomePreRequisicionesPage implements OnInit {
     this.navCtrl.navigateForward(['/pre-requisicion']);
   }
 
-  /* async logout(){
-    localStorage.clear();
-    this.navCtrl.navigateRoot("/login");
-    const loading = await this.loadingCtrl.create({
-      spinner: "bubbles",
-      duration: 2000,
-      message: 'Cerrando sesión...',
-      translucent: true,
-    });
-    return await loading.present();
-  } */
-
   view(registro){
     let selected = { state: { registro: registro } };
     this.navCtrl.navigateForward(["/view-pre-requisicion"], selected);
