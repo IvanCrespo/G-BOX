@@ -51,14 +51,10 @@
               <ion-col size="6">
                 <ion-item>
                   <ion-label position="stacked">Cantidad</ion-label>
-                  <ion-input min='1' type="number" name="n_cantidad" [(ngModel)]="n_cantidad" disabled="{{isDisabled}}"></ion-input>
+                  <ion-input min='1' type="number" name="n_cantidad" [(ngModel)]="n_cantidad" disabled="{{isDisabled}}" (keyup)=checkStrenght(n_cantidad)></ion-input>
                 </ion-item>
               </ion-col>
               <ion-col size="6">
-                <!-- <ion-item>
-                  <ion-label position="stacked">Unid. de Medida</ion-label>
-                  <ion-input type="text" name="unidad_medida" [(ngModel)]="unidad_medida" disabled="{{isDisabled}}"></ion-input>
-                </ion-item> -->
                 <ion-item>
                   <ion-label position="stacked">Unid. de Medida</ion-label>
                   <ion-select [(ngModel)]="id_unidad_medida" name="id_unidad_medida" cancelText="Cancelar" okText="Aceptar" disabled="{{isDisabled}}"> 

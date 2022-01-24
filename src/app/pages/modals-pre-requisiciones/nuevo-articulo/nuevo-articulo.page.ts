@@ -25,6 +25,7 @@ export class NuevoArticuloPage implements OnInit {
   datos: any = {};
   previewPhoto: string;
   id_unidad_medida: any;
+  errorNegativo: boolean = false;
 
   /* Unidades de Medida */
   unidades: any;
@@ -84,6 +85,9 @@ export class NuevoArticuloPage implements OnInit {
     else if (this.n_cantidad == null || this.n_cantidad == undefined) {
       this.presentToast("Campo Cantidad no debe estar vacio");
     }
+    else if (this.errorNegativo == true) {
+      this.presentToast("Campo Cantidad tiene numeros negativos");
+    }
     else if (this.s_descripcion_producto == null || this.s_descripcion_producto == undefined) {
       this.presentToast("Campo Nombre del Articulo no debe estar vacio");
     }
@@ -102,6 +106,16 @@ export class NuevoArticuloPage implements OnInit {
       this.datos = data;
       this.closeModal(this.datos);
       this.presentToast("Articulo Agregado");
+    }
+  }
+
+  checkStrenght(n_cantidad) {
+    if (n_cantidad <= 0) {
+      this.presentToast("Campo Cantidad no acepta numeros negativos");
+      this.errorNegativo = true;
+    }
+    else {
+      this.errorNegativo = false;
     }
   }
 
