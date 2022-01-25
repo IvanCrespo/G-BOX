@@ -1,9 +1,19 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>nuevo-producto</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content [fullscreen]="true">
+  <div class="top-section ion-padding">
+    <div class="container_buttons">
+      <ion-buttons class="custom_btnmenu" slot="start">
+        <ion-button (click)="closeModal()">
+          <ion-icon class="custom_icon" name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <div class="seccion_logo">
+        <img class="logo" src="/assets/img/logo_gbox.png" />
+      </div>
+    </div>
+    <div class="container_title">
+      <ion-title class="seccion_title">Articulo de Salida</ion-title>
+    </div>
+  </div>
+  <div class="middle-section ion-padding">
+  </div>
 </ion-content>
