@@ -42,6 +42,10 @@ const routes: Routes = [
     path: 'nueva-salida',
     loadChildren: () => import('./pages/salidas/nueva-salida/nueva-salida.module').then( m => m.NuevaSalidaPageModule)
   },
+  {
+    path: 'nuevo-producto',
+    loadChildren: () => import('./pages/salidas/modals-salidas/nuevo-producto/nuevo-producto.module').then( m => m.NuevoProductoPageModule)
+  },
 
 
 ];
