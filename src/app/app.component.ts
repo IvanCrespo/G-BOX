@@ -29,11 +29,6 @@ export class AppComponent {
       title: 'Salidas',
       url: '',
       icon: 'paper-plane-outline',
-    },
-    {
-      title: 'Salir',
-      url: '',
-      icon: 'log-out-outline',
     }
   ];
 
@@ -42,7 +37,7 @@ export class AppComponent {
     public loadingCtrl: LoadingController
   ) { }
 
-/*   async logout() {
+  async logout() {
     localStorage.clear();
     this.navCtrl.navigateRoot("/login");
     const loading = await this.loadingCtrl.create({
@@ -52,20 +47,20 @@ export class AppComponent {
       translucent: true,
     });
     return await loading.present();
-  } */
-
-  async openPage(pages) {
-    if (pages.title == 'Salir') {
-      localStorage.clear();
-      this.navCtrl.navigateRoot("/login");
-      const loading = await this.loadingCtrl.create({
-        spinner: "bubbles",
-        duration: 2000,
-        message: 'Cerrando sesión...',
-        translucent: true,
-      });
-      return await loading.present();
-    }
   }
+
+  /*  async openPage(pages) {
+     if (pages.title == 'Salir') {
+       localStorage.clear();
+       this.navCtrl.navigateRoot("/login");
+       const loading = await this.loadingCtrl.create({
+         spinner: "bubbles",
+         duration: 2000,
+         message: 'Cerrando sesión...',
+         translucent: true,
+       });
+       return await loading.present();
+     }
+   } */
 
 }
