@@ -34,6 +34,14 @@ const routes: Routes = [
     path: 'qr-pre-requisicion',
     loadChildren: () => import('./pages/modals-pre-requisiciones/qr-pre-requisicion/qr-pre-requisicion.module').then( m => m.QrPreRequisicionPageModule)
   },
+  {
+    path: 'home-salidas',
+    loadChildren: () => import('./pages/salidas/home-salidas/home-salidas.module').then( m => m.HomeSalidasPageModule)
+  },
+  {
+    path: 'nueva-salida',
+    loadChildren: () => import('./pages/salidas/nueva-salida/nueva-salida.module').then( m => m.NuevaSalidaPageModule)
+  },
 
 
 ];

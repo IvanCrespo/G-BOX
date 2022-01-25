@@ -1,0 +1,139 @@
+ion-content {
+    --background: rgb(220, 220, 220);
+    background: rgb(220, 220, 220);
+}
+
+.top-section {
+    max-height: 35% !important;
+    --max-height: 35% !important;
+    height: 32% !important;
+    --height: 32% !important;
+    --background-image: url("/assets/img/splash_movil.png");
+    background-image: url("/assets/img/splash_movil.png");
+    background-size: cover;
+    padding-bottom: 30px;
+    background-repeat: no-repeat;
+    position: relative;
+
+    .container_buttons {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 15px;
+
+        .custom_btnmenu {
+            color: #684e7f;
+        }
+        .seccion_logo {
+            display: flex;
+            left: 0;
+            bottom: 0;
+
+            .logo {
+                height: 52px !important;
+                --height: 52px !important;
+                opacity: 0.6;
+            }
+        }
+    }
+
+    .container_title {
+        display: flex;
+        justify-content: center;
+        padding-top: 100px;
+
+        .seccion_title {
+            position: absolute;
+            font-size: 24px;
+            color: #fff;
+        }
+    }
+}
+
+.ion-padding {
+    padding-inline-start: 10px;
+    padding-inline-end: 10px;
+}
+
+.middle-section {
+    display: flex;
+    flex-direction: column;
+
+    ion-card {
+        --background: #fff;
+        --color: rgb(0, 0, 0);
+        border-radius: 10px;
+        border: 2px solid #206760;
+        width: auto;
+        height: 380px;
+
+        .container_add {
+            display: flex;
+            justify-content: flex-end;
+
+            .btn_scanner {
+                --background: #684e7f;
+                text-transform: none;
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+        }
+
+        ion-grid {
+            margin-top: 70px;
+
+            ion-col {
+                padding-bottom: 14px;
+
+                ion-item {
+                    --background: rgb(255, 255, 255);
+                    color: #4b4b4b;
+                    --highlight-color-focused: none;
+
+                    ion-label {
+                        font-size: 17px;
+                        font-style: oblique;
+                        margin-bottom: 2px !important;
+                        display: flex;
+                        justify-content: flex-start;
+                    }
+
+                    ion-input {
+                        font-size: 14px;
+                        font-weight: 600;
+                        text-align: center;
+                    }
+
+                    .button-native {
+                        padding-inline-start: 0px;
+                        padding-inline-end: 0px;
+                    }
+
+                    .btn_buscar {
+                        margin-top: 25px;
+                        --background: transparent;
+                        text-transform: none;
+                        --box-shadow: none;
+                        padding: 0;
+
+                        ion-icon {
+                            color: #684e7f;
+                            font-size: 28px;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .card-content-md {
+        padding-inline-start: 8px;
+        padding-inline-end: 8px;
+    }
+
+    ion-button[slot="end"] {
+        margin-inline-start: 2px;
+    }
+}

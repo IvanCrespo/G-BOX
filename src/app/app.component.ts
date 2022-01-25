@@ -27,7 +27,7 @@ export class AppComponent {
     },
     {
       title: 'Salidas',
-      url: '',
+      url: '/home-salidas',
       icon: 'paper-plane-outline',
     }
   ];
@@ -48,19 +48,4 @@ export class AppComponent {
     });
     return await loading.present();
   }
-
-  /*  async openPage(pages) {
-     if (pages.title == 'Salir') {
-       localStorage.clear();
-       this.navCtrl.navigateRoot("/login");
-       const loading = await this.loadingCtrl.create({
-         spinner: "bubbles",
-         duration: 2000,
-         message: 'Cerrando sesión...',
-         translucent: true,
-       });
-       return await loading.present();
-     }
-   } */
-
 }
