@@ -8,22 +8,21 @@
           <img src="https://crsseguridad.live/app_crs/systemcrs/uploads/hola1.jpg" alt="">
           <ion-label>
             <h2>Eduardo Cruz Herrera</h2>
-            <!-- <p>Tipo de Usuario</p> -->
           </ion-label>
         </div>
         <ion-list id="inbox-list" lines="none" class="menu-items">
-          <ion-menu-toggle auto-hide="false" *ngFor="let pages of Pages; let i = index">
-            <ion-item (click)="activeIndex = i" routerDirection="root" [routerLink]="[pages.url]" lines="none"
+          <ion-menu-toggle auto-hide="false" *ngFor="let page of pages; let i = index">
+            <ion-item (click)="activeIndex = i" routerDirection="root" [routerLink]="[page.url]" lines="none"
               detail="false" [class.selected]="activeIndex == i">
-              <ion-icon slot="start" [md]="pages.icon"></ion-icon>
-              <ion-label>{{ pages.title }}</ion-label>
+              <ion-icon slot="start" [md]="page.icon"></ion-icon>
+              <ion-label>{{ page.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
-          <ion-buttons class="custom_btnmenu" slot="start">
+          <!-- <ion-buttons class="custom_btnmenu" slot="start">
             <a href="#" (click)="logout()" class="btn_logout">
               <ion-icon name="log-out-outline"></ion-icon>
             </a>
-          </ion-buttons>
+          </ion-buttons> -->
         </ion-list>
       </ion-content>
     </ion-menu>
