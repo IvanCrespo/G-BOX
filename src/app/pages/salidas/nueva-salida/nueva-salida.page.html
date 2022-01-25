@@ -1,9 +1,140 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>nueva-salida</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content [fullscreen]="true">
+  <div class="top-section ion-padding">
+    <div class="container_buttons">
+      <ion-buttons class="custom_btnmenu" slot="start">
+        <ion-back-button text="" defaultHref="home-salidas"></ion-back-button>
+      </ion-buttons>
+      <div class="seccion_logo">
+        <img class="logo" src="/assets/img/logo_gbox.png" />
+      </div>
+    </div>
+    <div class="container_title">
+      <ion-title class="seccion_title">Nueva Salida</ion-title>
+    </div>
+  </div>
+  <div class="middle-section ion-padding">
+    <div class="container_add">
+      <ion-button class="btn_newArt" (click)="save()">
+        Confirmar salida
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <ion-title class="seccion_title">Datos Pre-requisición</ion-title>
+    <ion-card class="ion-no-margin">
+      <ion-card-content>
+        <form>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4">
+                <p class="lbl_form">Folio</p>
+                <ion-item lines="none">
+                  <ion-input class="bg_primary" [(ngModel)]="s_folio" name="s_folio">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="4">
+                <p class="lbl_form">Empresa</p>
+                <ion-item lines="none">
+                  <ion-input class="bg_secondary" [(ngModel)]="s_empresa" name="s_empresa">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="4">
+                <p class="lbl_form">Estatus</p>
+                <ion-item lines="none">
+                  <ion-input class="bg_primary" [(ngModel)]="estatus" name="estatus">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <p class="lbl_form">Persona Solicitante</p>
+                <ion-item lines="none">
+                  <ion-input class="bg_primary" [(ngModel)]="s_folio" name="s_folio">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <p class="lbl_form">Fecha de Entrega:</p>
+                <ion-item lines="none">
+                  <ion-input class="bg_secondary" [(ngModel)]="s_empresa" name="s_empresa">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <!-- Seccion Artículos Requeridos -->
+  <div class="articulos-section ion-padding">
+    <ion-title class="seccion_title">Articulos Requeridos</ion-title>
+    <ion-card class="ion-no-margin">
+      <ion-card-content>
+        <ion-card>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col size="10">
+                  <p class="text_articulo">Lector de códigos de barras</p>
+                </ion-col>
+                <ion-col size="2">
+                  <p class="text_cantidad">10</p>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <!-- Seccion Artículos Salida -->
+  <div class="artSalida-section ion-padding">
+    <ion-title class="seccion_title">Articulos Salida</ion-title>
+    <ion-card class="ion-no-margin">
+      <ion-card-content>
+        <!-- Btn antes de Ingresar 1er articulo -->
+        <div class="container_add_center">
+          <ion-button class="btn_newArt">
+            Añadir Producto
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+        <!-- Btn despues de Ingresar 1er articulo -->
+        <div class="container_add">
+          <ion-button class="btn_newArt">
+            Añadir Producto
+            <ion-icon name="add-circle-outline"></ion-icon>
+          </ion-button>
+        </div>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="10">
+              <ion-card>
+                <ion-card-content>
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col size="8">
+                        <p class="text_articulo">Lector códigos de barras</p>
+                      </ion-col>
+                      <ion-col size="4">
+                        <p class="text_cantidad">10 Pz</p>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </ion-card-content>
+              </ion-card>
+            </ion-col>
+            <ion-col size="2">
+              <ion-button class="btn_delete" align-self-center>
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

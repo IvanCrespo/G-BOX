@@ -16,7 +16,7 @@
     <ion-card class="ion-no-margin">
       <ion-card-content>
         <div class="container_add">
-          <ion-button class="btn_scanner" (click)="scanner()">
+          <ion-button class="btn_scanner" (click)="scanBarcode()">
             Escanear código
             <ion-icon name="qr-code-outline"></ion-icon>
           </ion-button>
@@ -25,8 +25,8 @@
           <ion-row>
             <ion-col size="12">
               <ion-item>
-                <ion-label position="stacked">Ingresa Folio de Requisición</ion-label>
-                <ion-input type="text" name="salida" [(ngModel)]="salida"></ion-input>
+                <ion-label position="stacked">Ingresa Folio de Pre-requisición</ion-label>
+                <ion-input type="text" name="textQR" [(ngModel)]="textQR"></ion-input>
                 <ion-button class="btn_buscar" (click)="search()" slot="end" align-self-center>
                   <ion-icon name="search-outline"></ion-icon>
                 </ion-button>

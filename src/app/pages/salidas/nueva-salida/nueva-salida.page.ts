@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NuevaSalidaPage implements OnInit {
 
+  /* Datos de Formulario */
+  s_folio: string = '------';
+  s_empresa: string = 'Cajinsa';
+  estatus: any = 'Pendiente';
+
   constructor() { }
 
   ngOnInit() {

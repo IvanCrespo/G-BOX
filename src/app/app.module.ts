@@ -15,7 +15,8 @@ import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { BarcodeScanner } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     NgxPaginationModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    Camera, Geolocation],
+    Camera, Geolocation, BarcodeScanner],
   bootstrap: [
     AppComponent
   ],
