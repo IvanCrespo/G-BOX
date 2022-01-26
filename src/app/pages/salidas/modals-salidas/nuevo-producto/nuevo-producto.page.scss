@@ -58,4 +58,81 @@ ion-content {
 .middle-section {
     display: flex;
     flex-direction: column;
+
+    ion-card {
+        --background: #fff;
+        --color: rgb(0, 0, 0);
+        border-radius: 10px;
+        border: 2px solid #206760;
+        width: auto;
+        height: 380px;
+
+        .container_add {
+            display: flex;
+            justify-content: flex-end;
+
+            .btn_scanner {
+                --background: #684e7f;
+                text-transform: none;
+                font-size: 12px;
+                margin-bottom: 12px;
+            }
+        }
+
+        ion-grid {
+            margin-top: 70px;
+
+            ion-col {
+                padding-bottom: 14px;
+
+                ion-item {
+                    --background: rgb(255, 255, 255);
+                    color: #4b4b4b;
+                    --highlight-color-focused: none;
+
+                    ion-label {
+                        font-size: 17px;
+                        font-style: oblique;
+                        margin-bottom: 2px !important;
+                        display: flex;
+                        justify-content: flex-start;
+                    }
+
+                    ion-input {
+                        font-size: 16px;
+                        font-weight: 600;
+                        text-align: center;
+                    }
+
+                    .button-native {
+                        padding-inline-start: 0px;
+                        padding-inline-end: 0px;
+                    }
+
+                    .btn_buscar {
+                        margin-top: 25px;
+                        --background: transparent;
+                        text-transform: none;
+                        --box-shadow: none;
+                        padding: 0;
+
+                        ion-icon {
+                            color: #684e7f;
+                            font-size: 28px;
+                            font-weight: 700;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .card-content-md {
+        padding-inline-start: 8px;
+        padding-inline-end: 8px;
+    }
+
+    ion-button[slot="end"] {
+        margin-inline-start: 2px;
+    }
 }

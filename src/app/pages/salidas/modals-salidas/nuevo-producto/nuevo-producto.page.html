@@ -15,5 +15,28 @@
     </div>
   </div>
   <div class="middle-section ion-padding">
+    <ion-card class="ion-no-margin">
+      <ion-card-content>
+        <div class="container_add">
+          <ion-button class="btn_scanner" (click)="scanBarcode()">
+            Escanear código
+            <ion-icon name="qr-code-outline"></ion-icon>
+          </ion-button>
+        </div>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <ion-item>
+                <ion-label position="stacked">Código de Artículo</ion-label>
+                <ion-input type="text" name="textQR" [(ngModel)]="textQR"></ion-input>
+                <ion-button class="btn_buscar" (click)="search()" slot="end" align-self-center>
+                  <ion-icon name="search-outline"></ion-icon>
+                </ion-button>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
