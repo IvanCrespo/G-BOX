@@ -95,6 +95,7 @@ export class HomeSalidasPage implements OnInit {
         return false;
       }
       else {
+        this.textQR = '';
         let data = res.data.pre_requisicion;
         this.presentToast(`Folio aceptado`, res.status, 3000);
         this.modalNuevaSalida(data);

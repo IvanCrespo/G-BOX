@@ -22,29 +22,36 @@ export class NuevaSalidaPage implements OnInit {
   usuario_solicitante: any;
   d_fecha_estimada_entrega: any;
   datos: any = {};
+  productos: any = [];
 
   /* Disabled */
   isReadonly: boolean = true;
 
   constructor(
-    private modalController: ModalController,
+    private modalCtrl: ModalController,
     private navParams: NavParams
   ) {
-    console.log(this.value);
     this.s_folio = this.value.s_folio;
     this.s_empresa = this.value.empresa.s_empresa;
     this.estatus = this.value.estatus_pre_requisicion.s_estatus;
     this.usuario_solicitante = this.value.usuario_solicitante.s_nombre + ' ' + this.value.usuario_solicitante.s_paterno + ' ' + this.value.usuario_solicitante.s_materno;
     this.d_fecha_estimada_entrega = this.value.d_fecha_estimada_entrega;
+    this.productos = this.value.pre_requisiciones_productos;
+    console.log(this.productos);
    }
 
   ngOnInit() {
   }
 
+  closeModal() {
+    this.modalCtrl.dismiss();
+  }
+
+
   /* Modal para abrir Nuevo Producto */
   async add() {
     /* this.showModal(NuevoArticuloComponent); */
-    let modal = await this.modalController.create({
+    let modal = await this.modalCtrl.create({
       component: NuevoProductoPage,
     });
     modal.onDidDismiss().then((data: any) => {
