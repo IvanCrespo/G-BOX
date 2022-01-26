@@ -28,8 +28,8 @@
             <ion-col size="12">
               <ion-item>
                 <ion-label position="stacked">Código de Artículo</ion-label>
-                <ion-input type="text" name="textQR" [(ngModel)]="textQR"></ion-input>
-                <ion-button class="btn_buscar" (click)="search()" slot="end" align-self-center>
+                <ion-input style="text-transform: uppercase;" type="text" name="textQR" [(ngModel)]="textQR" (ngModelChange)="checkRealTime($event)"></ion-input>
+                <ion-button class="btn_buscar" slot="end" align-self-center>
                   <ion-icon name="search-outline"></ion-icon>
                 </ion-button>
               </ion-item>

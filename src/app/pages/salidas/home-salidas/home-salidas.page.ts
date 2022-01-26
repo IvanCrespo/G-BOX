@@ -14,9 +14,12 @@ export class HomeSalidasPage implements OnInit {
   /* URL Services */
   private url = 'salidas';
 
+  /* Scanner */
   scannedData: any;
   formatoData: any;
   textQR: any;
+
+  /* Datos */
   timer: any;
 
   /* Data LocalStorage */
@@ -26,7 +29,7 @@ export class HomeSalidasPage implements OnInit {
     private scanner: BarcodeScanner,
     private navCtrl: NavController,
     private inventarioServ: InventariosService,
-    private modalController: ModalController,
+    private modalCtrl: ModalController,
     private toastCtrl: ToastController,
     public loadingCtrl: LoadingController
   ) {
@@ -62,7 +65,6 @@ export class HomeSalidasPage implements OnInit {
     if (this.timer) clearTimeout(this.timer);
     let self = this;
     this.timer = setTimeout(function () {
-      console.log(folio_prerequisicion);
       self.inventarioServ.GetAll(self.token, self.url).subscribe(
         (res: any) => {
           if (res.status == "fail") {
@@ -81,7 +83,6 @@ export class HomeSalidasPage implements OnInit {
 
   async buscarPrerequisicion(folio: string) {
     this.inventarioServ.GetAll(this.token, `pre_requisicion?s_folio=${folio}`).subscribe((res: any) => {
-      console.log(res);
       if (!this.isNotErrorApiResponse(res)) {
         this.presentToast(res.message, "danger", 3000);
         return false;
@@ -95,9 +96,9 @@ export class HomeSalidasPage implements OnInit {
         return false;
       }
       else {
+        this.presentToast(`Folio aceptado`, res.status, 3000);
         this.textQR = '';
         let data = res.data.pre_requisicion;
-        this.presentToast(`Folio aceptado`, res.status, 3000);
         this.modalNuevaSalida(data);
       }
     })
@@ -105,7 +106,7 @@ export class HomeSalidasPage implements OnInit {
 
   async modalNuevaSalida(data: any) {
     let prerequisicion = data;
-    const modal = await this.modalController.create({
+    const modal = await this.modalCtrl.create({
       component: NuevaSalidaPage,
       componentProps: { prerequisicion: prerequisicion }
     });

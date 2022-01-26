@@ -1,7 +1,7 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import {
-  ModalController,  NavParams
+  ModalController, NavParams
 } from '@ionic/angular';
 import { NuevoProductoPage } from '../modals-salidas/nuevo-producto/nuevo-producto.page';
 
@@ -12,8 +12,8 @@ import { NuevoProductoPage } from '../modals-salidas/nuevo-producto/nuevo-produc
 })
 export class NuevaSalidaPage implements OnInit {
 
-    // Data de Pre-requisicion --> Home Salidas
-    public value = this.navParams.get('prerequisicion');
+  // Data de Pre-requisicion --> Home Salidas
+  public value = this.navParams.get('prerequisicion');
 
   /* Datos de Formulario */
   s_folio: string;
@@ -23,9 +23,11 @@ export class NuevaSalidaPage implements OnInit {
   d_fecha_estimada_entrega: any;
   datos: any = {};
   productos: any = [];
+  artSalidas: any = [];
 
   /* Disabled */
   isReadonly: boolean = true;
+  btnArtSalida: boolean = false;
 
   constructor(
     private modalCtrl: ModalController,
@@ -37,8 +39,7 @@ export class NuevaSalidaPage implements OnInit {
     this.usuario_solicitante = this.value.usuario_solicitante.s_nombre + ' ' + this.value.usuario_solicitante.s_paterno + ' ' + this.value.usuario_solicitante.s_materno;
     this.d_fecha_estimada_entrega = this.value.d_fecha_estimada_entrega;
     this.productos = this.value.pre_requisiciones_productos;
-    console.log(this.productos);
-   }
+  }
 
   ngOnInit() {
   }
@@ -50,7 +51,6 @@ export class NuevaSalidaPage implements OnInit {
 
   /* Modal para abrir Nuevo Producto */
   async add() {
-    /* this.showModal(NuevoArticuloComponent); */
     let modal = await this.modalCtrl.create({
       component: NuevoProductoPage,
     });

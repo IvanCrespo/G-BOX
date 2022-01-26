@@ -98,21 +98,21 @@
     <ion-card class="ion-no-margin">
       <ion-card-content>
         <!-- Btn antes de Ingresar 1er articulo -->
-        <div class="container_add_center">
+        <div class="container_add_center"  *ngIf="btnArtSalida == false">
           <ion-button class="btn_newArt" (click)="add()">
             Añadir Producto
             <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
         </div>
         <!-- Btn despues de Ingresar 1er articulo -->
-        <div class="container_add">
+        <div class="container_add" *ngIf="btnArtSalida == true">
           <ion-button class="btn_newArt" (click)="add()">
             Añadir Producto
             <ion-icon name="add-circle-outline"></ion-icon>
           </ion-button>
         </div>
         <ion-grid>
-          <ion-row>
+          <ion-row *ngFor="let artSalida of artSalidas; index as i">
             <ion-col size="10">
               <ion-card>
                 <ion-card-content>
