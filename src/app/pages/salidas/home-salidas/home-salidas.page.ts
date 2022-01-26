@@ -95,7 +95,6 @@ export class HomeSalidasPage implements OnInit {
         return false;
       }
       else {
-        console.log('Entra a modal');
         let data = res.data.pre_requisicion;
         this.presentToast(`Folio aceptado`, res.status, 3000);
         this.modalNuevaSalida(data);

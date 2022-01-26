@@ -28,21 +28,21 @@
               <ion-col size="4">
                 <p class="lbl_form">Folio</p>
                 <ion-item lines="none">
-                  <ion-input class="bg_primary" [(ngModel)]="s_folio" name="s_folio">
+                  <ion-input class="bg_primary" [(ngModel)]="s_folio" name="s_folio" readonly="{{isReadonly}}">
                   </ion-input>
                 </ion-item>
               </ion-col>
               <ion-col size="4">
                 <p class="lbl_form">Empresa</p>
                 <ion-item lines="none">
-                  <ion-input class="bg_secondary" [(ngModel)]="s_empresa" name="s_empresa">
+                  <ion-input class="bg_secondary" [(ngModel)]="s_empresa" name="s_empresa" readonly="{{isReadonly}}">
                   </ion-input>
                 </ion-item>
               </ion-col>
               <ion-col size="4">
                 <p class="lbl_form">Estatus</p>
                 <ion-item lines="none">
-                  <ion-input class="bg_primary" [(ngModel)]="estatus" name="estatus">
+                  <ion-input class="bg_primary" [(ngModel)]="estatus" name="estatus" readonly="{{isReadonly}}">
                   </ion-input>
                 </ion-item>
               </ion-col>
@@ -51,14 +51,14 @@
               <ion-col size="6">
                 <p class="lbl_form">Persona Solicitante</p>
                 <ion-item lines="none">
-                  <ion-input class="bg_primary" [(ngModel)]="s_folio" name="s_folio">
+                  <ion-input [(ngModel)]="usuario_solicitante" name="usuario_solicitante" readonly="{{isReadonly}}">
                   </ion-input>
                 </ion-item>
               </ion-col>
               <ion-col size="6">
                 <p class="lbl_form">Fecha de Entrega:</p>
                 <ion-item lines="none">
-                  <ion-input class="bg_secondary" [(ngModel)]="s_empresa" name="s_empresa">
+                  <ion-input [(ngModel)]="d_fecha_estimada_entrega" name="d_fecha_estimada_entrega" readonly="{{isReadonly}}">
                   </ion-input>
                 </ion-item>
               </ion-col>
