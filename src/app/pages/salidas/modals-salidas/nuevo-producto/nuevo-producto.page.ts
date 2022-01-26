@@ -18,6 +18,7 @@ export class NuevoProductoPage implements OnInit {
   /* Datos */
   timer: any;
   timerSalida: any;
+  articulo: any = {};
 
   /* Data LocalStorage */
   token: any;
@@ -76,15 +77,17 @@ export class NuevoProductoPage implements OnInit {
             self.presentToast(res.message, res.status, 3000);
             self.textQR = '';
             const data = res.data.productos[0];
-            let articulo = {
+            console.log(data);
+            self.articulo = {
               "id_producto": data.id_producto,
               "s_codigo_producto": data.s_codigo_producto,
               "s_producto": data.s_producto,
               "n_cantidad_producto_empresa": data.producto_empresa[0].n_cantidad_producto_empresa,
               "s_unidad_medida": data.unidad_medida.s_nombre,
-              "n_stock_final": 0
+              "n_stock_final": 0,
+              "s_foto": data.s_foto
             };
-            console.log(articulo);
+            console.log(self.articulo);
           }
         },
         (err: any) => {

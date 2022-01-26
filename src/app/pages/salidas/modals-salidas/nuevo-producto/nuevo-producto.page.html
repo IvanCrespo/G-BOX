@@ -28,7 +28,8 @@
             <ion-col size="12">
               <ion-item>
                 <ion-label position="stacked">Código de Artículo</ion-label>
-                <ion-input style="text-transform: uppercase;" type="text" name="textQR" [(ngModel)]="textQR" (ngModelChange)="checkRealTime($event)"></ion-input>
+                <ion-input style="text-transform: uppercase;" type="text" name="textQR" [(ngModel)]="textQR"
+                  (ngModelChange)="checkRealTime($event)"></ion-input>
                 <ion-button class="btn_buscar" slot="end" align-self-center>
                   <ion-icon name="search-outline"></ion-icon>
                 </ion-button>
@@ -36,6 +37,16 @@
             </ion-col>
           </ion-row>
         </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Seccion Artículos Salida -->
+  <div class="viewProducto-section ion-padding" *ngFor="let art of articulo; index as i">
+    <ion-card class="ion-no-margin">
+      <ion-card-content>
+        <!-- <ion-img [src]="art.s_foto" style="height: 100px;"></ion-img> -->
+        <p>{{ art.s_unidad_medida }}</p>
       </ion-card-content>
     </ion-card>
   </div>
