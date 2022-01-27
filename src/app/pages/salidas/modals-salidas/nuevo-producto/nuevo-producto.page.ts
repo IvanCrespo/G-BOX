@@ -23,8 +23,9 @@ export class NuevoProductoPage implements OnInit {
   s_producto: string;
   n_cantidad_producto_empresa: number;
   s_unidad_medida: any;
-  n_stock_final: number;
+  n_stock_final: number = 0;
   s_foto: any;
+  n_cantidad_salida: number;
 
   /* Data LocalStorage */
   token: any;
@@ -101,6 +102,28 @@ export class NuevoProductoPage implements OnInit {
         }
       )
     }, 1000);
+  }
+
+  checkNumber(n_cantidad_salida) {
+    console.log(n_cantidad_salida);
+    if (n_cantidad_salida != null) {
+      if (n_cantidad_salida <= 0) {
+        this.presentToast("Campo Cantidad no acepta numeros negativos", "warning", 3000);
+        this.n_stock_final = 0;
+      }
+      else if (n_cantidad_salida == undefined) {
+        this.n_stock_final = 0;
+        return false;
+      }
+      else if (n_cantidad_salida > 0) {
+        this.n_stock_final = n_cantidad_salida;
+        if(n_cantidad_salida > this.n_cantidad_producto_empresa){
+          this.presentToast(`La cantidad ingresada de ${this.s_producto} no puede ser mayor al stock existente`, "warning", 3000);
+        }
+        return false;
+      }
+    }
+    else this.n_stock_final = 0;
   }
 
   closeModal(data: any) {
