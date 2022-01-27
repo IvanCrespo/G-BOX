@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
-import { NavController, ModalController, ToastController, LoadingController } from '@ionic/angular';
+import { NavController, ModalController, ToastController } from '@ionic/angular';
 import { InventariosService } from 'src/app/services/inventarios.service';
 import { NuevaSalidaPage } from '../nueva-salida/nueva-salida.page';
 
@@ -30,8 +30,7 @@ export class HomeSalidasPage implements OnInit {
     private navCtrl: NavController,
     private inventarioServ: InventariosService,
     private modalCtrl: ModalController,
-    private toastCtrl: ToastController,
-    public loadingCtrl: LoadingController
+    private toastCtrl: ToastController
   ) {
     this.token = localStorage.getItem('s_token');
   }
@@ -84,19 +83,19 @@ export class HomeSalidasPage implements OnInit {
   async buscarPrerequisicion(folio: string) {
     this.inventarioServ.GetAll(this.token, `pre_requisicion?s_folio=${folio}`).subscribe((res: any) => {
       if (!this.isNotErrorApiResponse(res)) {
-        this.presentToast(res.message, "danger", 3000);
+        this.presentToast(res.message, "danger", 2500);
         return false;
       }
       else if (res.data.pre_requisicion.length > 1) {
-        this.presentToast(`Ingrese un folio de pre-requisicion`, "warning", 3000);
+        this.presentToast(`Ingrese un folio de pre-requisicion`, "warning", 2500);
         return false;
       }
       else if (res.data.pre_requisicion.id_estatus_pre_requisicion != 2) {
-        this.presentToast(`Pre-requisición no autorizada, Autorice la Pre-requisición para poder continuar`, "warning", 3000);
+        this.presentToast(`Pre-requisición no autorizada, Autorice la Pre-requisición para poder continuar`, "warning", 2500);
         return false;
       }
       else {
-        this.presentToast(`Folio aceptado`, res.status, 3000);
+        this.presentToast(`Folio aceptado`, res.status, 2500);
         this.textQR = '';
         let data = res.data.pre_requisicion;
         this.modalNuevaSalida(data);

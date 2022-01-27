@@ -149,6 +149,11 @@ ion-content {
         border-radius: 10px;
         border: 2px solid #cccccc;
         z-index: 99;
+
+        ion-img {
+            width: 100% !important;
+            height: auto !important;
+        }
     }
 
     .second-card {

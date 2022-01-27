@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController } from '@ionic/angular';
+import { ModalController, ToastController, LoadingController } from '@ionic/angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { InventariosService } from 'src/app/services/inventarios.service';
 
@@ -37,7 +37,8 @@ export class NuevoProductoPage implements OnInit {
     private modalCtrl: ModalController,
     private scanner: BarcodeScanner,
     private inventarioServ: InventariosService,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    public loadingCtrl: LoadingController
   ) {
     this.token = localStorage.getItem('s_token');
   }
@@ -68,23 +69,28 @@ export class NuevoProductoPage implements OnInit {
   }
 
   async checkRealTime(producto) {
+    const loading = await this.loadingCtrl.create({
+      message: 'Espere un momento...',
+      duration: 1000,
+    });
     if (this.timerSalida) clearTimeout(this.timerSalida);
     let self = this;
     this.timerSalida = setTimeout(function () {
       self.inventarioServ.GetAll(self.token, `buscar_producto?s_codigo_producto=${producto}`).subscribe(
         (res: any) => {
           if (!self.isNotErrorApiResponse(res)) {
-            self.presentToast(res.message, "danger", 3000);
+            self.presentToast(res.message, "danger", 2500);
             self.activated = false;
             return false;
           }
           else if (res.data.productos.length == 0) {
-            self.presentToast(`El codigo del producto no se encontro`, "warning", 3000);
+            self.presentToast(`El codigo del producto no se encontro`, "warning", 2500);
             self.activated = false;
+            loading.present();
             return false;
           }
           else {
-            self.presentToast(res.message, res.status, 3000);
+            self.presentToast(res.message, res.status, 2500);
             self.textQR = '';
             const data = res.data;
             console.log(data);
@@ -93,9 +99,10 @@ export class NuevoProductoPage implements OnInit {
             self.s_codigo_producto = data.productos[0].s_codigo_producto;
             self.s_unidad_medida = data.productos[0].unidad_medida.s_nombre;
             self.n_cantidad_producto_empresa = data.productos[0].producto_empresa[0].n_cantidad_producto_empresa;
-            self.s_foto = data.productos[0].s_foto;
+            self.s_foto = 'http://hostaria.sytes.net:1318/api_gbox/'+ data.productos[0].s_foto;
             console.log(self.id_producto, self.s_producto, self.s_codigo_producto, self.s_unidad_medida, self.n_cantidad_producto_empresa, self.s_foto);
             self.activated = true;
+            loading.present();
           }
         },
         (err: any) => {
@@ -103,13 +110,14 @@ export class NuevoProductoPage implements OnInit {
         }
       )
     }, 1000);
+    loading.dismiss();
   }
 
   checkNumber(n_cantidad_salida) {
     console.log(n_cantidad_salida);
     if (n_cantidad_salida != null) {
       if (n_cantidad_salida <= 0) {
-        this.presentToast("Campo Cantidad no acepta numeros negativos", "warning", 3000);
+        this.presentToast("Campo Cantidad no acepta numeros negativos", "warning", 2500);
         this.n_stock_final = 0;
       }
       else if (n_cantidad_salida == undefined) {
@@ -119,7 +127,7 @@ export class NuevoProductoPage implements OnInit {
       else if (n_cantidad_salida > 0) {
         this.n_stock_final = n_cantidad_salida;
         if(n_cantidad_salida > this.n_cantidad_producto_empresa){
-          this.presentToast(`La cantidad ingresada de ${this.s_producto} no puede ser mayor al stock existente`, "warning", 3000);
+          this.presentToast(`La cantidad ingresada de ${this.s_producto} no puede ser mayor al stock existente`, "warning", 2500);
         }
         return false;
       }
