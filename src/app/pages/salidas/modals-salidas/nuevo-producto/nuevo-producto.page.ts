@@ -30,6 +30,9 @@ export class NuevoProductoPage implements OnInit {
   /* Data LocalStorage */
   token: any;
 
+  /* Disable */
+  activated: boolean = false;
+
   constructor(
     private modalCtrl: ModalController,
     private scanner: BarcodeScanner,
@@ -68,15 +71,16 @@ export class NuevoProductoPage implements OnInit {
     if (this.timerSalida) clearTimeout(this.timerSalida);
     let self = this;
     this.timerSalida = setTimeout(function () {
-      console.log(producto);
       self.inventarioServ.GetAll(self.token, `buscar_producto?s_codigo_producto=${producto}`).subscribe(
         (res: any) => {
           if (!self.isNotErrorApiResponse(res)) {
             self.presentToast(res.message, "danger", 3000);
+            self.activated = false;
             return false;
           }
           else if (res.data.productos.length == 0) {
             self.presentToast(`El codigo del producto no se encontro`, "warning", 3000);
+            self.activated = false;
             return false;
           }
           else {
@@ -91,10 +95,7 @@ export class NuevoProductoPage implements OnInit {
             self.n_cantidad_producto_empresa = data.productos[0].producto_empresa[0].n_cantidad_producto_empresa;
             self.s_foto = data.productos[0].s_foto;
             console.log(self.id_producto, self.s_producto, self.s_codigo_producto, self.s_unidad_medida, self.n_cantidad_producto_empresa, self.s_foto);
-            /* self.articulo = {
-              "n_stock_final": 0,
-              "s_foto": data.s_foto
-            }; */
+            self.activated = true;
           }
         },
         (err: any) => {
