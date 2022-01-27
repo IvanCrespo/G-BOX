@@ -18,6 +18,13 @@ export class NuevoProductoPage implements OnInit {
   /* Datos */
   timer: any;
   timerSalida: any;
+  id_producto: number;
+  s_codigo_producto: any;
+  s_producto: string;
+  n_cantidad_producto_empresa: number;
+  s_unidad_medida: any;
+  n_stock_final: number;
+  s_foto: any;
 
   /* Data LocalStorage */
   token: any;
@@ -63,7 +70,6 @@ export class NuevoProductoPage implements OnInit {
       console.log(producto);
       self.inventarioServ.GetAll(self.token, `buscar_producto?s_codigo_producto=${producto}`).subscribe(
         (res: any) => {
-          console.log(res);
           if (!self.isNotErrorApiResponse(res)) {
             self.presentToast(res.message, "danger", 3000);
             return false;
@@ -77,12 +83,14 @@ export class NuevoProductoPage implements OnInit {
             self.textQR = '';
             const data = res.data;
             console.log(data);
+            self.id_producto = data.productos[0].id_producto;
+            self.s_producto = data.productos[0].s_producto;
+            self.s_codigo_producto = data.productos[0].s_codigo_producto;
+            self.s_unidad_medida = data.productos[0].unidad_medida.s_nombre;
+            self.n_cantidad_producto_empresa = data.productos[0].producto_empresa[0].n_cantidad_producto_empresa;
+            self.s_foto = data.productos[0].s_foto;
+            console.log(self.id_producto, self.s_producto, self.s_codigo_producto, self.s_unidad_medida, self.n_cantidad_producto_empresa, self.s_foto);
             /* self.articulo = {
-              "id_producto": data.id_producto,
-              "s_codigo_producto": data.s_codigo_producto,
-              "s_producto": data.s_producto,
-              "n_cantidad_producto_empresa": data.producto_empresa[0].n_cantidad_producto_empresa,
-              "s_unidad_medida": data.unidad_medida.s_nombre,
               "n_stock_final": 0,
               "s_foto": data.s_foto
             }; */

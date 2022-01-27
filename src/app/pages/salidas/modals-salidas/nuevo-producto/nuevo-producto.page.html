@@ -40,11 +40,72 @@
       </ion-card-content>
     </ion-card>
   </div>
-
   <!-- Seccion Artículos Salida -->
   <div class="viewProducto-section ion-padding">
-    <ion-card class="ion-no-margin">
+    <ion-card class="primary-card ion-no-margin">
       <ion-card-content>
+        <div class="center">
+          <ion-img src="/assets/img/logo_gbox.png" class="ion-align-self-end"></ion-img>
+        </div>
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="second-card ion-no-margin">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="5">
+              <ion-label class="lbl_form">ARTÍCULO</ion-label>
+            </ion-col>
+            <ion-col size="7">
+              <ion-label class="lbl_info">{{s_producto}}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <ion-label class="lbl_form">CÓDIGO:</ion-label>
+            </ion-col>
+            <ion-col size="7">
+              <ion-label class="lbl_info">{{s_codigo_producto}}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <ion-label class="lbl_form">UNIDAD:</ion-label>
+            </ion-col>
+            <ion-col size="7">
+              <ion-label class="lbl_info">{{s_unidad_medida}}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <ion-label class="lbl_form">STOCK INICIAL:</ion-label>
+            </ion-col>
+            <ion-col size="7">
+              <ion-label class="lbl_info">{{n_cantidad_producto_empresa}}</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <ion-label class="lbl_form">STOCK FINAL</ion-label>
+            </ion-col>
+            <ion-col size="7">
+              <ion-label class="lbl_info">1</ion-label>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="5">
+              <ion-label class="lbl_form">UNIDADES DE SALIDA</ion-label>
+            </ion-col>
+            <ion-col size="7">
+              <ion-input value="custom" type="number"></ion-input>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div class="container_add">
+          <ion-button class="btn_newArt">
+            Confirmar
+          </ion-button>
+        </div>
       </ion-card-content>
     </ion-card>
   </div>

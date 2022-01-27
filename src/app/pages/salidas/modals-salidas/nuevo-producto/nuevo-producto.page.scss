@@ -136,3 +136,64 @@ ion-content {
         margin-inline-start: 2px;
     }
 }
+
+.viewProducto-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .primary-card {
+        width: 80% !important;
+        margin: 0 !important;
+        border-radius: 10px;
+        border: 2px solid #cccccc;
+        z-index: 99;
+    }
+
+    .second-card {
+        margin: -100px 0px 10px 0px !important;
+        padding-top: 90px;
+        border-radius: 10px;
+        border: 2px solid #cccccc;
+        --background: #ad8ec7;
+
+        ion-label {
+            color: #fff;
+        }
+
+        .lbl_form {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .lbl_info {
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        ion-input {
+            --background: #cccccc;
+            border-radius: 10px;
+            text-align: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .container_add .btn_newArt {
+            --background: #684e7f;
+            text-transform: none;
+            font-size: 16px;
+            margin-top: 26px;
+        }
+
+        /* .card-content-md {
+            padding-inline-start: 4px;
+            padding-inline-end: 4px;
+        } */
+    }
+}
