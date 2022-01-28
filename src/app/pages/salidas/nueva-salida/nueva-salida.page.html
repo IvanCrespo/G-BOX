@@ -22,10 +22,10 @@
       </ion-button>
     </div>
     <ion-title class="seccion_title">Datos Pre-requisición</ion-title>
-    <ion-card class="ion-no-margin" *ngIf="activatePre_requisicion == true">
+    <ion-card class="ion-no-margin">
       <ion-card-content>
         <form>
-          <ion-grid>
+          <ion-grid *ngIf="activatePre_requisicion == true">
             <ion-row>
               <ion-col size="4">
                 <p class="lbl_form">Folio</p>
@@ -58,10 +58,53 @@
                 </ion-item>
               </ion-col>
               <ion-col size="6">
-                <p class="lbl_form">Fecha de Entrega:</p>
+                <p class="lbl_form">Fecha de Entrega</p>
                 <ion-item lines="none">
                   <ion-input [(ngModel)]="d_fecha_estimada_entrega" name="d_fecha_estimada_entrega" readonly="{{isReadonly}}">
                   </ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid *ngIf="activatePre_requisicion == false">
+            <ion-row>
+              <ion-col size="6">
+                <p class="lbl_form">Empresa</p>
+                <ion-item lines="none">
+                  <ion-input class="bg_secondary" [(ngModel)]="s_empresa" name="s_empresa" readonly="{{isReadonly}}">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <p class="lbl_form">Fecha/Hora Salida</p>
+                <ion-item lines="none">
+                  <ion-input class="bg_primary" [(ngModel)]="fechaHoy" name="fechaHoy" readonly="{{isReadonly}}">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="6">
+                <p class="lbl_form">Persona que entrega</p>
+                <ion-item lines="none">
+                  <ion-input [(ngModel)]="usuario" name="usuario" readonly="{{isReadonly}}">
+                  </ion-input>
+                </ion-item>
+              </ion-col>
+              <ion-col size="6">
+                <p class="lbl_form">Persona que recibe</p>
+                <ion-item>
+                  <ion-select [(ngModel)]="id_unidad_medida" cancelText="Cancelar" okText="Aceptar"> 
+                    <ion-select-option *ngFor="let unidad of unidades" [value]="unidad.id_unidad_medida">{{unidad.s_nombre}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="12">
+                <p class="lbl_form">Nota</p>
+                <ion-item>
+                  <ion-input type="text" name="s_nota" [(ngModel)]="s_nota"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>

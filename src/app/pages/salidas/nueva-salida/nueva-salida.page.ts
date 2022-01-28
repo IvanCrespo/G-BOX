@@ -43,6 +43,11 @@ export class NuevaSalidaPage implements OnInit {
   lat: number;
   lon: number;
 
+  /* Sin Pre-requisicion */
+  fechaHoy: any;
+  usuario: any;
+  s_nota: any;
+
   /* Disabled */
   isReadonly: boolean = true;
   btnArtSalida: boolean = false;
@@ -57,6 +62,17 @@ export class NuevaSalidaPage implements OnInit {
     private navCtrl: NavController,
     private geolocation: Geolocation
   ) {
+    this.getGeolocation();
+    var d = new Date();
+    this.d_fecha = d.getFullYear() + '-' + ('00' + (d.getMonth() + 1)).slice(-2) + '-' + ('00' + d.getDate()).slice(-2);
+    this.t_hora =
+      ('00' + d.getHours()).slice(-2) +
+      ':' +
+      ('00' + d.getMinutes()).slice(-2) +
+      ':' +
+      ('00' + d.getSeconds()).slice(-2);
+
+    this.token = localStorage.getItem('s_token');
     if (this.value) {
       console.log("Entra", this.value);
       this.id_pre_requisicion = this.value.id_pre_requisicion;
@@ -71,19 +87,11 @@ export class NuevaSalidaPage implements OnInit {
     }
     else if(this.valueSin){
       console.log("Sin Pre-requisición");
+      this.s_empresa = this.valueSin.empresa;
       this.activatePre_requisicion = false;
+      this.fechaHoy = this.d_fecha + ' - ' + this.t_hora;
+      this.usuario = this.valueSin.usuario;
     }
-    this.getGeolocation();
-    var d = new Date();
-    this.d_fecha = d.getFullYear() + '-' + ('00' + (d.getMonth() + 1)).slice(-2) + '-' + ('00' + d.getDate()).slice(-2);
-    this.t_hora =
-      ('00' + d.getHours()).slice(-2) +
-      ':' +
-      ('00' + d.getMinutes()).slice(-2) +
-      ':' +
-      ('00' + d.getSeconds()).slice(-2);
-
-    this.token = localStorage.getItem('s_token');
     /* this.cargaRegistros(); */
   }
 
