@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
-import { NavController, ModalController, ToastController } from '@ionic/angular';
+import { NavController, ModalController, ToastController, AlertController } from '@ionic/angular';
 import { InventariosService } from 'src/app/services/inventarios.service';
 import { NuevaSalidaPage } from '../nueva-salida/nueva-salida.page';
 
@@ -10,6 +10,9 @@ import { NuevaSalidaPage } from '../nueva-salida/nueva-salida.page';
   styleUrls: ['./home-salidas.page.scss'],
 })
 export class HomeSalidasPage implements OnInit {
+
+  /* Checked */
+  isCheckSalida: boolean = true;
 
   /* URL Services */
   private url = 'salidas';
@@ -25,14 +28,23 @@ export class HomeSalidasPage implements OnInit {
   /* Data LocalStorage */
   token: any;
 
+  /* Datos Sin Pre-requisicion */
+  id_usuario: any;
+  empresa: any;
+  usuario: string;
+
   constructor(
     private scanner: BarcodeScanner,
     private navCtrl: NavController,
     private inventarioServ: InventariosService,
     private modalCtrl: ModalController,
-    private toastCtrl: ToastController
+    private toastCtrl: ToastController,
+    public alertCtrl: AlertController
   ) {
     this.token = localStorage.getItem('s_token');
+    this.id_usuario = localStorage.getItem('id_usuario');
+    this.usuario = localStorage.getItem('usuario');
+    this.empresa = localStorage.getItem('empresa');
   }
 
   ngOnInit() {
@@ -111,6 +123,60 @@ export class HomeSalidasPage implements OnInit {
       componentProps: { prerequisicion: prerequisicion }
     });
     return await modal.present();
+  }
+
+  /* Modal Sin Pre-requisición */
+  async modalNuevaSalidaSinPrerequisicion(data: any) {
+    let sinprerequisicion = data;
+    console.log(sinprerequisicion);
+    const modal = await this.modalCtrl.create({
+      component: NuevaSalidaPage,
+      componentProps: { sinprerequisicion: sinprerequisicion }
+    });
+    return await modal.present();
+  }
+
+  /* Checked */
+  async onChangeCheckSalida(evento: Event) {
+    if (!evento) {
+      const alert = await this.alertCtrl.create({
+        header: 'Confirmar Salida',
+        message: 'Desea generar una Nueva Salida sin Pre-requisición?',
+        cssClass: 'alertSalida',
+        buttons: [
+          {
+            text: 'Cancelar',
+            handler: () => {
+              alert.dismiss(false);
+              return false;
+            }
+          },
+          {
+            text: 'Aceptar',
+            handler: () => {
+              alert.dismiss(true);
+              return false;
+            }
+          }
+        ]
+      });
+      await alert.present();
+      await alert.onDidDismiss().then((data) => {
+        let sin_pre = data.data;
+        if (sin_pre == true) {
+          let data = {
+            id_usuario: this.id_usuario,
+            empresa: this.empresa,
+            usuario: this.usuario,
+            sin_prerequisicion: sin_pre
+          }
+          this.modalNuevaSalidaSinPrerequisicion(data);
+        }
+        else if(sin_pre == false) {
+          this.isCheckSalida = true;
+        }
+      })
+    }
   }
 
   /* Errores APIS Status */

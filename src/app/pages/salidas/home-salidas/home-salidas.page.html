@@ -26,12 +26,25 @@
             <ion-col size="12">
               <ion-item>
                 <ion-label position="stacked">Ingresa Folio de Pre-requisición</ion-label>
-                <ion-input style="text-transform: uppercase;" class="uppercase" type="text" name="textQR" [(ngModel)]="textQR" (ngModelChange)="checkRealTime($event)"></ion-input>
+                <ion-input style="text-transform: uppercase;" class="uppercase" type="text" name="textQR"
+                  [(ngModel)]="textQR" (ngModelChange)="checkRealTime($event)"></ion-input>
                 <div class="container_buscar" slot="end" align-self-center>
                   <ion-icon name="search-outline"></ion-icon>
                   <!-- (click)="buscarPrerequisicion(textQR)" -->
                 </div>
               </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div class="radio-list">
+                <label class="radio mt-4" for="radio__toggle1">
+                  <input class="radio__toggle" id="radio__toggle1" type="checkbox" [(ngModel)]="isCheckSalida" (ngModelChange)="onChangeCheckSalida($event)">
+                  <span class="radio__span">
+                    {{ isCheckSalida ? 'Con Folio de Pre-requisición' : 'Sin Folio de Pre-requisición' }}
+                  </span>
+                </label>
+              </div>
             </ion-col>
           </ion-row>
         </ion-grid>

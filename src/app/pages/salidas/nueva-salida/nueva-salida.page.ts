@@ -19,6 +19,7 @@ export class NuevaSalidaPage implements OnInit {
 
   // Data de Pre-requisicion --> Home Salidas
   public value = this.navParams.get('prerequisicion');
+  public valueSin = this.navParams.get('sinprerequisicion');
 
   /* URL Services */
   private url = 'salidas';
@@ -45,6 +46,7 @@ export class NuevaSalidaPage implements OnInit {
   /* Disabled */
   isReadonly: boolean = true;
   btnArtSalida: boolean = false;
+  activatePre_requisicion: boolean;
 
   constructor(
     private modalCtrl: ModalController,
@@ -55,15 +57,22 @@ export class NuevaSalidaPage implements OnInit {
     private navCtrl: NavController,
     private geolocation: Geolocation
   ) {
-    console.log(this.value);
-    this.id_pre_requisicion = this.value.id_pre_requisicion;
-    this.id_usuario_solicitante = this.value.id_usuario_solicitante
-    this.s_folio = this.value.s_folio;
-    this.s_empresa = this.value.empresa.s_empresa;
-    this.estatus = this.value.estatus_pre_requisicion.s_estatus;
-    this.usuario_solicitante = this.value.usuario_solicitante.s_nombre + ' ' + this.value.usuario_solicitante.s_paterno + ' ' + this.value.usuario_solicitante.s_materno;
-    this.d_fecha_estimada_entrega = this.value.d_fecha_estimada_entrega;
-    this.productos = this.value.pre_requisiciones_productos;
+    if (this.value) {
+      console.log("Entra", this.value);
+      this.id_pre_requisicion = this.value.id_pre_requisicion;
+      this.id_usuario_solicitante = this.value.id_usuario_solicitante
+      this.s_folio = this.value.s_folio;
+      this.s_empresa = this.value.empresa.s_empresa;
+      this.estatus = this.value.estatus_pre_requisicion.s_estatus;
+      this.usuario_solicitante = this.value.usuario_solicitante.s_nombre + ' ' + this.value.usuario_solicitante.s_paterno + ' ' + this.value.usuario_solicitante.s_materno;
+      this.d_fecha_estimada_entrega = this.value.d_fecha_estimada_entrega;
+      this.productos = this.value.pre_requisiciones_productos;
+      this.activatePre_requisicion == true;
+    }
+    else if(this.valueSin){
+      console.log("Sin Pre-requisición");
+      this.activatePre_requisicion == false;
+    }
     this.getGeolocation();
     var d = new Date();
     this.d_fecha = d.getFullYear() + '-' + ('00' + (d.getMonth() + 1)).slice(-2) + '-' + ('00' + d.getDate()).slice(-2);
@@ -75,7 +84,7 @@ export class NuevaSalidaPage implements OnInit {
       ('00' + d.getSeconds()).slice(-2);
 
     this.token = localStorage.getItem('s_token');
-    this.cargaRegistros();
+    /* this.cargaRegistros(); */
   }
 
   ngOnInit() {
@@ -116,6 +125,7 @@ export class NuevaSalidaPage implements OnInit {
     }
     else {
       this.datos = {
+        id_usuario_recibe: this.id_usuario_solicitante,
         id_usuario_solicita: this.id_usuario_solicitante,
         d_fecha: this.d_fecha,
         t_hora: this.t_hora,
