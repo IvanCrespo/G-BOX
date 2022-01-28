@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, ToastController, LoadingController } from '@ionic/angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { InventariosService } from 'src/app/services/inventarios.service';
-
 @Component({
   selector: 'app-nuevo-producto',
   templateUrl: './nuevo-producto.page.html',
@@ -26,6 +25,7 @@ export class NuevoProductoPage implements OnInit {
   n_stock_final: number = 0;
   s_foto: any;
   n_cantidad_salida: number;
+  datos: any = {};
 
   /* Data LocalStorage */
   token: any;
@@ -99,7 +99,8 @@ export class NuevoProductoPage implements OnInit {
             self.s_codigo_producto = data.productos[0].s_codigo_producto;
             self.s_unidad_medida = data.productos[0].unidad_medida.s_nombre;
             self.n_cantidad_producto_empresa = data.productos[0].producto_empresa[0].n_cantidad_producto_empresa;
-            self.s_foto = 'http://hostaria.sytes.net:1318/api_gbox/'+ data.productos[0].s_foto;
+            self.s_foto = 'http://hostaria.sytes.net:1318/api_gbox/' + data.productos[0].s_foto;
+            self.n_stock_final = self.n_cantidad_producto_empresa;
             console.log(self.id_producto, self.s_producto, self.s_codigo_producto, self.s_unidad_medida, self.n_cantidad_producto_empresa, self.s_foto);
             self.activated = true;
             loading.present();
@@ -114,25 +115,49 @@ export class NuevoProductoPage implements OnInit {
   }
 
   checkNumber(n_cantidad_salida) {
-    console.log(n_cantidad_salida);
     if (n_cantidad_salida != null) {
       if (n_cantidad_salida <= 0) {
-        this.presentToast("Campo Cantidad no acepta numeros negativos", "warning", 2500);
-        this.n_stock_final = 0;
+        this.presentToast("Campo Unidades de Salida no acepta numeros negativos", "warning", 2500);
+        this.n_stock_final = this.n_cantidad_producto_empresa;
       }
       else if (n_cantidad_salida == undefined) {
-        this.n_stock_final = 0;
+        this.n_stock_final = this.n_cantidad_producto_empresa;
         return false;
       }
       else if (n_cantidad_salida > 0) {
-        this.n_stock_final = n_cantidad_salida;
-        if(n_cantidad_salida > this.n_cantidad_producto_empresa){
+        this.n_stock_final = this.n_cantidad_producto_empresa - n_cantidad_salida;
+        if (n_cantidad_salida > this.n_cantidad_producto_empresa) {
+          this.n_stock_final = this.n_cantidad_producto_empresa;
           this.presentToast(`La cantidad ingresada de ${this.s_producto} no puede ser mayor al stock existente`, "warning", 2500);
         }
         return false;
       }
     }
-    else this.n_stock_final = 0;
+    else this.n_stock_final = this.n_cantidad_producto_empresa;
+  }
+
+  async save() {
+    if (this.n_cantidad_salida == null || this.n_cantidad_salida == undefined) {
+      this.presentToast(`Campo Unidades de Salida no debe estar vacio`, "warning", 2500);
+    }
+    else if (this.n_cantidad_salida <= 0) {
+      this.presentToast(`Campo Unidades de Salida no acepta numeros negativos`, "warning", 2500);
+    }
+    else if (this.n_cantidad_salida > this.n_cantidad_producto_empresa) {
+      this.presentToast(`La cantidad ingresada de ${this.s_producto} no puede ser mayor al stock existente`, "warning", 2500);
+    }
+    else {
+      let data = {
+        id_producto: this.id_producto,
+        n_cantidad: this.n_cantidad_salida,
+        n_cantidad_anterior: this.n_cantidad_producto_empresa,
+        n_cantidad_nueva: this.n_stock_final
+      };
+      this.datos = data;
+      console.log(this.datos);
+      this.closeModal(this.datos);
+      this.presentToast(`Articulo Agregado`, "success", 2500);
+    }
   }
 
   closeModal(data: any) {

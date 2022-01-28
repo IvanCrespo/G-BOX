@@ -64,7 +64,8 @@ export class HomeSalidasPage implements OnInit {
     if (this.timer) clearTimeout(this.timer);
     let self = this;
     this.timer = setTimeout(function () {
-      self.inventarioServ.GetAll(self.token, self.url).subscribe(
+      self.buscarPrerequisicion(folio_prerequisicion);
+      /* self.inventarioServ.GetAll(self.token, self.url).subscribe(
         (res: any) => {
           if (res.status == "fail") {
             return false;
@@ -76,7 +77,7 @@ export class HomeSalidasPage implements OnInit {
         (err: any) => {
           console.log('Error', err.message);
         }
-      )
+      ) */
     }, 1000);
   }
 
