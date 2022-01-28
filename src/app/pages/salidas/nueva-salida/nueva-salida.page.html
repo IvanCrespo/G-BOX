@@ -22,7 +22,7 @@
       </ion-button>
     </div>
     <ion-title class="seccion_title">Datos Pre-requisición</ion-title>
-    <ion-card class="ion-no-margin">
+    <ion-card class="ion-no-margin" *ngIf="activatePre_requisicion == true">
       <ion-card-content>
         <form>
           <ion-grid>
@@ -71,7 +71,7 @@
     </ion-card>
   </div>
   <!-- Seccion Artículos Requeridos -->
-  <div class="articulos-section ion-padding">
+  <div class="articulos-section ion-padding" *ngIf="activatePre_requisicion == true">
     <ion-title class="seccion_title">Articulos Requeridos</ion-title>
     <ion-card class="ion-no-margin">
       <ion-card-content>

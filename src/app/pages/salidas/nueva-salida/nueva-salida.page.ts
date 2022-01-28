@@ -67,11 +67,11 @@ export class NuevaSalidaPage implements OnInit {
       this.usuario_solicitante = this.value.usuario_solicitante.s_nombre + ' ' + this.value.usuario_solicitante.s_paterno + ' ' + this.value.usuario_solicitante.s_materno;
       this.d_fecha_estimada_entrega = this.value.d_fecha_estimada_entrega;
       this.productos = this.value.pre_requisiciones_productos;
-      this.activatePre_requisicion == true;
+      this.activatePre_requisicion = true;
     }
     else if(this.valueSin){
       console.log("Sin Pre-requisición");
-      this.activatePre_requisicion == false;
+      this.activatePre_requisicion = false;
     }
     this.getGeolocation();
     var d = new Date();
