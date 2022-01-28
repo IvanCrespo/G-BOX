@@ -27,9 +27,10 @@
               <ion-item>
                 <ion-label position="stacked">Ingresa Folio de Pre-requisición</ion-label>
                 <ion-input style="text-transform: uppercase;" class="uppercase" type="text" name="textQR" [(ngModel)]="textQR" (ngModelChange)="checkRealTime($event)"></ion-input>
-                <ion-button class="btn_buscar" (click)="buscarPrerequisicion(textQR)" slot="end" align-self-center>
+                <div class="container_buscar" slot="end" align-self-center>
                   <ion-icon name="search-outline"></ion-icon>
-                </ion-button>
+                  <!-- (click)="buscarPrerequisicion(textQR)" -->
+                </div>
               </ion-item>
             </ion-col>
           </ion-row>
