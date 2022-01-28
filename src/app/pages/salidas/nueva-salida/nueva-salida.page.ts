@@ -1,4 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import {
   ModalController, NavParams
@@ -48,7 +47,6 @@ export class NuevaSalidaPage implements OnInit {
     this.modalCtrl.dismiss();
   }
 
-
   /* Modal para abrir Nuevo Producto */
   async add() {
     let modal = await this.modalCtrl.create({
@@ -56,9 +54,30 @@ export class NuevaSalidaPage implements OnInit {
     });
     modal.onDidDismiss().then((data: any) => {
       this.datos = data;
-      console.log(this.datos);
+      if (this.datos.data == undefined) {
+        if (this.artSalidas.length == 0) {
+          this.btnArtSalida = false;
+        } else {
+          this.btnArtSalida = true;
+        }
+        this.datos = {};
+      } else {
+        this.btnArtSalida = true;
+        this.artSalidas.push(this.datos.data);
+        console.log(this.artSalidas);
+      }
     });
     return await modal.present();
   }
+
+  deleteProducto(id: number) {
+    this.artSalidas.splice(id, 1);
+    console.log(this.artSalidas);
+    if(this.artSalidas.length == 0) {
+      this.btnArtSalida = false;
+    }
+    else this.btnArtSalida = true;
+  }
+
 
 }

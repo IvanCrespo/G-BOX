@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="middle-section ion-padding">
-    <div class="container_add">
+    <div class="container_add" *ngIf="btnArtSalida == true">
       <ion-button class="btn_newArt" (click)="save()">
         Confirmar salida
         <ion-icon name="exit-outline"></ion-icon>
@@ -119,10 +119,10 @@
                   <ion-grid>
                     <ion-row>
                       <ion-col size="8">
-                        <p class="text_articulo">Lector códigos de barras</p>
+                        <p class="text_articulo">{{ artSalida.s_producto }}</p>
                       </ion-col>
                       <ion-col size="4">
-                        <p class="text_cantidad">10 Pz</p>
+                        <p class="text_cantidad">{{ artSalida.s_unidad_medida }}</p>
                       </ion-col>
                     </ion-row>
                   </ion-grid>
@@ -130,7 +130,7 @@
               </ion-card>
             </ion-col>
             <ion-col size="2">
-              <ion-button class="btn_delete" align-self-center>
+              <ion-button class="btn_delete" align-self-center (click)="deleteProducto(i)">
                 <ion-icon name="trash-outline"></ion-icon>
               </ion-button>
             </ion-col>

@@ -93,7 +93,6 @@ export class NuevoProductoPage implements OnInit {
             self.presentToast(res.message, res.status, 2500);
             self.textQR = '';
             const data = res.data;
-            console.log(data);
             self.id_producto = data.productos[0].id_producto;
             self.s_producto = data.productos[0].s_producto;
             self.s_codigo_producto = data.productos[0].s_codigo_producto;
@@ -101,7 +100,6 @@ export class NuevoProductoPage implements OnInit {
             self.n_cantidad_producto_empresa = data.productos[0].producto_empresa[0].n_cantidad_producto_empresa;
             self.s_foto = 'http://hostaria.sytes.net:1318/api_gbox/' + data.productos[0].s_foto;
             self.n_stock_final = self.n_cantidad_producto_empresa;
-            console.log(self.id_producto, self.s_producto, self.s_codigo_producto, self.s_unidad_medida, self.n_cantidad_producto_empresa, self.s_foto);
             self.activated = true;
             loading.present();
           }
@@ -151,10 +149,11 @@ export class NuevoProductoPage implements OnInit {
         id_producto: this.id_producto,
         n_cantidad: this.n_cantidad_salida,
         n_cantidad_anterior: this.n_cantidad_producto_empresa,
-        n_cantidad_nueva: this.n_stock_final
+        n_cantidad_nueva: this.n_stock_final,
+        s_unidad_medida: this.s_unidad_medida,
+        s_producto: this.s_producto
       };
       this.datos = data;
-      console.log(this.datos);
       this.closeModal(this.datos);
       this.presentToast(`Articulo Agregado`, "success", 2500);
     }
