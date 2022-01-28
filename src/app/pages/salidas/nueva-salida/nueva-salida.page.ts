@@ -49,8 +49,10 @@ export class NuevaSalidaPage implements OnInit {
 
   /* Modal para abrir Nuevo Producto */
   async add() {
+    let productos = this.artSalidas;
     let modal = await this.modalCtrl.create({
       component: NuevoProductoPage,
+      componentProps: { productos: productos }
     });
     modal.onDidDismiss().then((data: any) => {
       this.datos = data;

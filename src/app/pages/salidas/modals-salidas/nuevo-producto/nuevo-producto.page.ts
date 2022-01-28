@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController, LoadingController } from '@ionic/angular';
+import { ModalController, ToastController, LoadingController, NavParams } from '@ionic/angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { InventariosService } from 'src/app/services/inventarios.service';
 @Component({
@@ -8,6 +8,9 @@ import { InventariosService } from 'src/app/services/inventarios.service';
   styleUrls: ['./nuevo-producto.page.scss'],
 })
 export class NuevoProductoPage implements OnInit {
+
+  // Data de articulos Salida --> Nueva-Salida
+  public value = this.navParams.get('productos');
 
   /* Scanner */
   scannedData: any;
@@ -26,6 +29,7 @@ export class NuevoProductoPage implements OnInit {
   s_foto: any;
   n_cantidad_salida: number;
   datos: any = {};
+  resultado
 
   /* Data LocalStorage */
   token: any;
@@ -38,8 +42,10 @@ export class NuevoProductoPage implements OnInit {
     private scanner: BarcodeScanner,
     private inventarioServ: InventariosService,
     private toastCtrl: ToastController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    private navParams: NavParams
   ) {
+    console.log(this.value);
     this.token = localStorage.getItem('s_token');
   }
 
@@ -76,38 +82,43 @@ export class NuevoProductoPage implements OnInit {
     if (this.timerSalida) clearTimeout(this.timerSalida);
     let self = this;
     this.timerSalida = setTimeout(function () {
-      self.inventarioServ.GetAll(self.token, `buscar_producto?s_codigo_producto=${producto}`).subscribe(
-        (res: any) => {
-          if (!self.isNotErrorApiResponse(res)) {
-            self.presentToast(res.message, "danger", 2500);
-            self.activated = false;
-            return false;
+      if (self.value.find( productos => productos.s_codigo_producto == producto )) {
+        self.presentToast(`El producto con el código ${producto} ya lo tiene agregado en Salidas`, "danger", 2500);
+      }
+      else {
+        self.inventarioServ.GetAll(self.token, `buscar_producto?s_codigo_producto=${producto}`).subscribe(
+          (res: any) => {
+            if (!self.isNotErrorApiResponse(res)) {
+              self.presentToast(res.message, "danger", 2500);
+              self.activated = false;
+              return false;
+            }
+            else if (res.data.productos.length == 0) {
+              self.presentToast(`El codigo del producto no se encontro`, "warning", 2500);
+              self.activated = false;
+              loading.present();
+              return false;
+            }
+            else {
+              self.presentToast(res.message, res.status, 2500);
+              self.textQR = '';
+              const data = res.data;
+              self.id_producto = data.productos[0].id_producto;
+              self.s_producto = data.productos[0].s_producto;
+              self.s_codigo_producto = data.productos[0].s_codigo_producto;
+              self.s_unidad_medida = data.productos[0].unidad_medida.s_nombre;
+              self.n_cantidad_producto_empresa = data.productos[0].producto_empresa[0].n_cantidad_producto_empresa;
+              self.s_foto = 'http://hostaria.sytes.net:1318/api_gbox/' + data.productos[0].s_foto;
+              self.n_stock_final = self.n_cantidad_producto_empresa;
+              self.activated = true;
+              loading.present();
+            }
+          },
+          (err: any) => {
+            console.log('Error', err.message);
           }
-          else if (res.data.productos.length == 0) {
-            self.presentToast(`El codigo del producto no se encontro`, "warning", 2500);
-            self.activated = false;
-            loading.present();
-            return false;
-          }
-          else {
-            self.presentToast(res.message, res.status, 2500);
-            self.textQR = '';
-            const data = res.data;
-            self.id_producto = data.productos[0].id_producto;
-            self.s_producto = data.productos[0].s_producto;
-            self.s_codigo_producto = data.productos[0].s_codigo_producto;
-            self.s_unidad_medida = data.productos[0].unidad_medida.s_nombre;
-            self.n_cantidad_producto_empresa = data.productos[0].producto_empresa[0].n_cantidad_producto_empresa;
-            self.s_foto = 'http://hostaria.sytes.net:1318/api_gbox/' + data.productos[0].s_foto;
-            self.n_stock_final = self.n_cantidad_producto_empresa;
-            self.activated = true;
-            loading.present();
-          }
-        },
-        (err: any) => {
-          console.log('Error', err.message);
-        }
-      )
+        )
+      }
     }, 1000);
     loading.dismiss();
   }
@@ -151,7 +162,8 @@ export class NuevoProductoPage implements OnInit {
         n_cantidad_anterior: this.n_cantidad_producto_empresa,
         n_cantidad_nueva: this.n_stock_final,
         s_unidad_medida: this.s_unidad_medida,
-        s_producto: this.s_producto
+        s_producto: this.s_producto,
+        s_codigo_producto: this.s_codigo_producto
       };
       this.datos = data;
       this.closeModal(this.datos);
