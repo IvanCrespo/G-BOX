@@ -48,11 +48,13 @@ export class NuevaSalidaPage implements OnInit {
   usuario: any;
   s_nota: any;
   personasRecibe: any;
+  id_talento_humano: any;
 
   /* Disabled */
   isReadonly: boolean = true;
   btnArtSalida: boolean = false;
   activatePre_requisicion: boolean;
+  b_pre_requisicion: any;
 
   constructor(
     private modalCtrl: ModalController,
@@ -75,9 +77,10 @@ export class NuevaSalidaPage implements OnInit {
 
     this.token = localStorage.getItem('s_token');
     if (this.value) {
-      console.log("Entra", this.value);
+      console.log("Con Pre-requisición");
+      this.b_pre_requisicion = 0;
       this.id_pre_requisicion = this.value.id_pre_requisicion;
-      this.id_usuario_solicitante = this.value.id_usuario_solicitante
+      this.id_usuario_solicitante = this.value.id_usuario_solicitante;
       this.s_folio = this.value.s_folio;
       this.s_empresa = this.value.empresa.s_empresa;
       this.estatus = this.value.estatus_pre_requisicion.s_estatus;
@@ -86,14 +89,16 @@ export class NuevaSalidaPage implements OnInit {
       this.productos = this.value.pre_requisiciones_productos;
       this.activatePre_requisicion = true;
     }
-    else if(this.valueSin){
-      console.log("Sin Pre-requisición");
+    else if (this.valueSin) {
+      console.log("Sin Pre-requisición", this.valueSin);
+      this.b_pre_requisicion = 1;
+      this.id_usuario_solicitante = this.valueSin.id_usuario;
       this.s_empresa = this.valueSin.empresa;
       this.activatePre_requisicion = false;
       this.fechaHoy = this.d_fecha + ' - ' + this.t_hora;
       this.usuario = this.valueSin.usuario;
     }
-    /* this.cargaRegistros(); */
+    this.cargaRegistros();
   }
 
   ngOnInit() {
@@ -142,12 +147,12 @@ export class NuevaSalidaPage implements OnInit {
         id_pre_requisicion: this.id_pre_requisicion,
         latitud: this.lat,
         longitud: this.lon,
-        b_pre_requisicion: 0,
+        b_pre_requisicion: this.b_pre_requisicion,
         b_es_movil: 1,
         b_activo: 1,
         productos: this.artSalidas
       };
-      console.log(this.datos);
+      console.log(this.id_pre_requisicion);
       const loading = await this.loadingCtrl.create({
         message: 'Espere un momento...'
       });
@@ -159,6 +164,51 @@ export class NuevaSalidaPage implements OnInit {
             this.presentToast(`Error al ingresar Nueva Salida`, "danger", 2500);
             loading.dismiss();
           } else if (data.status == 'success') {
+            this.presentToast(`Nueva Salida exitosa`, "success", 2500);
+            this.navCtrl.navigateRoot('/home-salidas');
+            loading.dismiss();
+          }
+        });
+    }
+  }
+
+  async saveSinPrerequisicion() {
+    if (this.artSalidas.length == 0) {
+      this.presentToast(`No tiene ningun producto agregado para crear una nueva Salida`, "warning", 2500);
+    }
+    else if (this.id_talento_humano == null || this.id_talento_humano == undefined) {
+      this.presentToast(`Campo Persona que Recibe no debe estar vacio`, "warning", 2500);
+    }
+    else if (this.s_nota == null || this.s_nota == undefined) {
+      this.presentToast(`Campo Nota no debe estar vacio`, "warning", 2500);
+    }
+    else {
+      this.datos = {
+        id_usuario_recibe: this.id_talento_humano,
+        id_usuario_solicita: this.id_usuario_solicitante,
+        d_fecha: this.d_fecha,
+        t_hora: this.t_hora,
+        id_pre_requisicion: this.id_pre_requisicion,
+        latitud: this.lat,
+        longitud: this.lon,
+        b_pre_requisicion: this.b_pre_requisicion,
+        s_nota: this.s_nota,
+        b_es_movil: 1,
+        b_activo: 1,
+        productos: this.artSalidas
+      };
+      const loading = await this.loadingCtrl.create({
+        message: 'Espere un momento...'
+      });
+      await loading.present();
+      this.inventarioServ
+        .Post(this.token, this.url, this.datos)
+        .subscribe((data: any) => {
+          if (data.status == 'fail') {
+            this.presentToast(`Error al ingresar Nueva Salida`, "danger", 2500);
+            loading.dismiss();
+          }
+          else if (data.status == 'success') {
             this.presentToast(`Nueva Salida exitosa`, "success", 2500);
             this.navCtrl.navigateRoot('/home-salidas');
             loading.dismiss();
@@ -196,27 +246,27 @@ export class NuevaSalidaPage implements OnInit {
   }
 
   // catalogos 
-  getUsuarios(){
+  getUsuarios() {
     this.inventarioServ.GetAll(this.token, 'talentos_humanos').subscribe(
-      (res:any) => {
+      (res: any) => {
 
-        if(!this.isNotErrorApiResponse(res)){
+        if (!this.isNotErrorApiResponse(res)) {
           return false;
         }
         this.personasRecibe = res.data.talentos_humanos.data;
-      },(err => console.log(err))
-    ),(err => console.log(err))
+      }, (err => console.log(err))
+    ), (err => console.log(err))
   }
 
-  isNotErrorApiResponse(response:any):boolean{
-		if(response.status == 'empty') return false;
-		if(response.status == 'fail') return false;
-		if(response.status == 'logout'){
+  isNotErrorApiResponse(response: any): boolean {
+    if (response.status == 'empty') return false;
+    if (response.status == 'fail') return false;
+    if (response.status == 'logout') {
       console.log("Logout");
-			return false;
-		}
-		return true;
-	}
+      return false;
+    }
+    return true;
+  }
 
   /* Checar Salidas */
   async cargaRegistros() {

@@ -16,7 +16,13 @@
   </div>
   <div class="middle-section ion-padding">
     <div class="container_add" *ngIf="btnArtSalida == true">
-      <ion-button class="btn_newArt" (click)="save()">
+      <!-- Con Pre-requisición -->
+      <ion-button class="btn_newArt" (click)="save()" *ngIf="activatePre_requisicion == true">
+        Confirmar salida
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-button>
+      <!-- Sin Pre-requisición -->
+      <ion-button class="btn_newArt" (click)="saveSinPrerequisicion()" *ngIf="activatePre_requisicion == false">
         Confirmar salida
         <ion-icon name="exit-outline"></ion-icon>
       </ion-button>
