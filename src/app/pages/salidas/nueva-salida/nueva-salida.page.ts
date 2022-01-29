@@ -47,6 +47,7 @@ export class NuevaSalidaPage implements OnInit {
   fechaHoy: any;
   usuario: any;
   s_nota: any;
+  personasRecibe: any;
 
   /* Disabled */
   isReadonly: boolean = true;
@@ -96,6 +97,7 @@ export class NuevaSalidaPage implements OnInit {
   }
 
   ngOnInit() {
+    this.getUsuarios();
   }
 
   closeModal() {
@@ -153,7 +155,6 @@ export class NuevaSalidaPage implements OnInit {
       this.inventarioServ
         .Post(this.token, this.url, this.datos)
         .subscribe((data: any) => {
-          console.log(data);
           if (data.status == 'fail') {
             this.presentToast(`Error al ingresar Nueva Salida`, "danger", 2500);
             loading.dismiss();
@@ -168,7 +169,6 @@ export class NuevaSalidaPage implements OnInit {
 
   deleteProducto(id: number) {
     this.artSalidas.splice(id, 1);
-    console.log(this.artSalidas);
     if (this.artSalidas.length == 0) {
       this.btnArtSalida = false;
     }
@@ -194,6 +194,29 @@ export class NuevaSalidaPage implements OnInit {
     );
     toast.present();
   }
+
+  // catalogos 
+  getUsuarios(){
+    this.inventarioServ.GetAll(this.token, 'talentos_humanos').subscribe(
+      (res:any) => {
+
+        if(!this.isNotErrorApiResponse(res)){
+          return false;
+        }
+        this.personasRecibe = res.data.talentos_humanos.data;
+      },(err => console.log(err))
+    ),(err => console.log(err))
+  }
+
+  isNotErrorApiResponse(response:any):boolean{
+		if(response.status == 'empty') return false;
+		if(response.status == 'fail') return false;
+		if(response.status == 'logout'){
+      console.log("Logout");
+			return false;
+		}
+		return true;
+	}
 
   /* Checar Salidas */
   async cargaRegistros() {

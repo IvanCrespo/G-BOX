@@ -24,92 +24,94 @@
     <ion-title class="seccion_title">Datos Pre-requisición</ion-title>
     <ion-card class="ion-no-margin">
       <ion-card-content>
-        <form>
-          <ion-grid *ngIf="activatePre_requisicion == true">
-            <ion-row>
-              <ion-col size="4">
-                <p class="lbl_form">Folio</p>
-                <ion-item lines="none">
-                  <ion-input class="bg_primary" [(ngModel)]="s_folio" name="s_folio" readonly="{{isReadonly}}">
-                  </ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col size="4">
-                <p class="lbl_form">Empresa</p>
-                <ion-item lines="none">
-                  <ion-input class="bg_secondary" [(ngModel)]="s_empresa" name="s_empresa" readonly="{{isReadonly}}">
-                  </ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col size="4">
-                <p class="lbl_form">Estatus</p>
-                <ion-item lines="none">
-                  <ion-input class="bg_primary" [(ngModel)]="estatus" name="estatus" readonly="{{isReadonly}}">
-                  </ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="6">
-                <p class="lbl_form">Persona Solicitante</p>
-                <ion-item lines="none">
-                  <ion-input [(ngModel)]="usuario_solicitante" name="usuario_solicitante" readonly="{{isReadonly}}">
-                  </ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col size="6">
-                <p class="lbl_form">Fecha de Entrega</p>
-                <ion-item lines="none">
-                  <ion-input [(ngModel)]="d_fecha_estimada_entrega" name="d_fecha_estimada_entrega" readonly="{{isReadonly}}">
-                  </ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-          <ion-grid *ngIf="activatePre_requisicion == false">
-            <ion-row>
-              <ion-col size="6">
-                <p class="lbl_form">Empresa</p>
-                <ion-item lines="none">
-                  <ion-input class="bg_secondary" [(ngModel)]="s_empresa" name="s_empresa" readonly="{{isReadonly}}">
-                  </ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col size="6">
-                <p class="lbl_form">Fecha/Hora Salida</p>
-                <ion-item lines="none">
-                  <ion-input class="bg_primary" [(ngModel)]="fechaHoy" name="fechaHoy" readonly="{{isReadonly}}">
-                  </ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="6">
-                <p class="lbl_form">Persona que entrega</p>
-                <ion-item lines="none">
-                  <ion-input [(ngModel)]="usuario" name="usuario" readonly="{{isReadonly}}">
-                  </ion-input>
-                </ion-item>
-              </ion-col>
-              <ion-col size="6">
-                <p class="lbl_form">Persona que recibe</p>
-                <ion-item>
-                  <ion-select [(ngModel)]="id_unidad_medida" cancelText="Cancelar" okText="Aceptar"> 
-                    <ion-select-option *ngFor="let unidad of unidades" [value]="unidad.id_unidad_medida">{{unidad.s_nombre}}</ion-select-option>
-                  </ion-select>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col size="12">
-                <p class="lbl_form">Nota</p>
-                <ion-item>
-                  <ion-input type="text" name="s_nota" [(ngModel)]="s_nota"></ion-input>
-                </ion-item>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </form>
+        <ion-grid *ngIf="activatePre_requisicion == true">
+          <ion-row>
+            <ion-col size="4">
+              <p class="lbl_form">Folio</p>
+              <ion-item lines="none">
+                <ion-input class="bg_primary" [(ngModel)]="s_folio" name="s_folio" readonly="{{isReadonly}}">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <p class="lbl_form">Empresa</p>
+              <ion-item lines="none">
+                <ion-input class="bg_secondary" [(ngModel)]="s_empresa" name="s_empresa" readonly="{{isReadonly}}">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="4">
+              <p class="lbl_form">Estatus</p>
+              <ion-item lines="none">
+                <ion-input class="bg_primary" [(ngModel)]="estatus" name="estatus" readonly="{{isReadonly}}">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <p class="lbl_form">Persona Solicitante</p>
+              <ion-item lines="none">
+                <ion-input [(ngModel)]="usuario_solicitante" name="usuario_solicitante" readonly="{{isReadonly}}">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <p class="lbl_form">Fecha de Entrega</p>
+              <ion-item lines="none">
+                <ion-input [(ngModel)]="d_fecha_estimada_entrega" name="d_fecha_estimada_entrega"
+                  readonly="{{isReadonly}}">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid *ngIf="activatePre_requisicion == false">
+          <ion-row>
+            <ion-col size="6">
+              <p class="lbl_form">Empresa</p>
+              <ion-item lines="none">
+                <ion-input class="bg_secondary" [(ngModel)]="s_empresa" name="s_empresa" readonly="{{isReadonly}}">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <p class="lbl_form">Fecha/Hora Salida</p>
+              <ion-item lines="none">
+                <ion-input class="bg_primary" [(ngModel)]="fechaHoy" name="fechaHoy" readonly="{{isReadonly}}">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <p class="lbl_form">Persona que entrega</p>
+              <ion-item lines="none">
+                <ion-input [(ngModel)]="usuario" name="usuario" readonly="{{isReadonly}}">
+                </ion-input>
+              </ion-item>
+            </ion-col>
+            <ion-col size="6">
+              <p class="lbl_form">Persona que recibe</p>
+              <ion-item>
+                <ion-select [(ngModel)]="id_talento_humano" cancelText="Cancelar" okText="Aceptar">
+                  <ion-select-option *ngFor="let personaRecibe of personasRecibe"
+                    [value]="personaRecibe.id_talento_humano">{{personaRecibe.s_nombre}}
+                    {{personaRecibe.s_apellido_paterno}} {{personaRecibe.s_apellido_materno}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <p class="lbl_form">Nota</p>
+              <ion-item>
+                <ion-input type="text" name="s_nota" [(ngModel)]="s_nota"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
       </ion-card-content>
     </ion-card>
   </div>
@@ -141,7 +143,7 @@
     <ion-card class="ion-no-margin">
       <ion-card-content>
         <!-- Btn antes de Ingresar 1er articulo -->
-        <div class="container_add_center"  *ngIf="btnArtSalida == false">
+        <div class="container_add_center" *ngIf="btnArtSalida == false">
           <ion-button class="btn_newArt" (click)="add()">
             Añadir Producto
             <ion-icon name="add-circle-outline"></ion-icon>

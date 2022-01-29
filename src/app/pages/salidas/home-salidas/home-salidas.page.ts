@@ -128,7 +128,6 @@ export class HomeSalidasPage implements OnInit {
   /* Modal Sin Pre-requisición */
   async modalNuevaSalidaSinPrerequisicion(data: any) {
     let sinprerequisicion = data;
-    console.log(sinprerequisicion);
     const modal = await this.modalCtrl.create({
       component: NuevaSalidaPage,
       componentProps: { sinprerequisicion: sinprerequisicion }
@@ -175,6 +174,7 @@ export class HomeSalidasPage implements OnInit {
         else if(sin_pre == false) {
           this.isCheckSalida = true;
         }
+        this.isCheckSalida = true;
       })
     }
   }
