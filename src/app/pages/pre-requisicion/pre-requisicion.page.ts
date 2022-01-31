@@ -87,7 +87,13 @@ export class PreRequisicionPage implements OnInit {
 
   async cargarPrioridades() {
     this.inventarioServ.GetAll(this.token, this.urlprioridad).subscribe((data: any) => {
-      this.prioridades = data.data.prioridades;
+      if (!this.isNotErrorApiResponse(data)) {
+        this.presentToast(data.message, "danger", 2500);
+        return false;
+      }
+      else {
+        this.prioridades = data.data.prioridades;
+      }
     });
   }
 
@@ -131,13 +137,13 @@ export class PreRequisicionPage implements OnInit {
 
   async save() {
     if (this.d_fecha_estimada_entrega == '' || this.d_fecha_estimada_entrega == undefined) {
-      this.presentToast('Campo Fecha de Entrega vacio');
+      this.presentToast(`Campo Fecha de Entrega vacio`, "warning", 2500);
     }
     else if (this.n_prioridad == '' || this.n_prioridad == undefined) {
-      this.presentToast('Campo Prioridad vacio');
+      this.presentToast(`Campo Prioridad vacio`, "warning", 2500);
     }
     else if (this.s_nota_pre_requisicion == '' || this.s_nota_pre_requisicion == undefined) {
-      this.presentToast('Campo Notas vacio');
+      this.presentToast(`Campo Notas vacio`, "warning", 2500);
     }
     else {
       var dateFormat = this.d_fecha_estimada_entrega.split('T')[0];
@@ -164,11 +170,15 @@ export class PreRequisicionPage implements OnInit {
         .Post(this.token, this.url, this.datos)
         .subscribe((data: any) => {
           console.log(data);
-          if (data.status == 'fail') {
-            this.presentToast('Error al ingresar Pre-requisición');
+          if (!this.isNotErrorApiResponse(data)) {
+            this.presentToast(data.message, "danger", 2500);
+            return false;
+          }
+          else if (data.status == 'fail') {
+            this.presentToast(`Error al ingresar Pre-requisición`, "danger", 2500);
             loading.dismiss();
           } else if (data.status == 'success') {
-            this.presentToast('Pre-requisición exitosa');
+            this.presentToast(`Pre-requisición exitosa`, "success", 2500);
             this.navCtrl.navigateRoot('/home-pre-requisiciones');
             loading.dismiss();
           }
@@ -210,11 +220,27 @@ export class PreRequisicionPage implements OnInit {
     return await modal.present();
   }
 
-  async presentToast(mensaje) {
-    const toast = await this.toastCtrl.create({
-      message: mensaje,
-      duration: 2500,
-    });
-    await toast.present();
+  /* Mostrar Mensaje Toast */
+  async presentToast(message: string, color: string, duration: number) {
+    const toast = await this.toastCtrl.create(
+      {
+        message,
+        color,
+        duration
+      }
+    );
+    toast.present();
+  }
+
+  /* Errores APIS Status */
+  isNotErrorApiResponse(response: any): boolean {
+    if (response.status == 'empty') return false;
+    if (response.status == 'fail') return false;
+    if (response.status == 'logout') {
+      localStorage.clear();
+      this.navCtrl.navigateRoot("/login");
+      return false;
+    }
+    return true;
   }
 }
