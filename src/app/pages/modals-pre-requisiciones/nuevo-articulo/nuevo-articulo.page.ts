@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController, ActionSheetController } from '@ionic/angular';
+import { ModalController, ToastController, ActionSheetController, NavController } from '@ionic/angular';
 /* Plugins */
 import { Camera, CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { InventariosService } from 'src/app/services/inventarios.service';
@@ -36,7 +36,8 @@ export class NuevoArticuloPage implements OnInit {
     private camera: Camera,
     public toastCtrl: ToastController,
     public actionSheetCtrl: ActionSheetController,
-    private inventarioServ: InventariosService
+    private inventarioServ: InventariosService,
+    private navCtrl: NavController
   ) {
     this.token = localStorage.getItem('s_token');
     this.ionViewWillEnter();
@@ -51,7 +52,13 @@ export class NuevoArticuloPage implements OnInit {
 
   async cargarUnidades() {
     this.inventarioServ.GetAll(this.token, this.url).subscribe((data: any) => {
-      this.unidades = data.data.unidad_medida;
+      if (!this.isNotErrorApiResponse(data)) {
+        this.presentToast(data.message, "danger", 2500);
+        return false;
+      }
+      else {
+        this.unidades = data.data.unidad_medida;
+      }
     });
   }
 
@@ -81,16 +88,16 @@ export class NuevoArticuloPage implements OnInit {
 
   async save() {
     if (this.id_unidad_medida == null || this.id_unidad_medida == undefined) {
-      this.presentToast("Campo Unid. de Medida no debe estar vacio");
+      this.presentToast(`Campo Unid. de Medida no debe estar vacio`, "warning", 2500);
     }
     else if (this.n_cantidad == null || this.n_cantidad == undefined) {
-      this.presentToast("Campo Cantidad no debe estar vacio");
+      this.presentToast(`Campo Cantidad no debe estar vacio`, "warning", 2500);
     }
     else if (this.n_cantidad <= 0) {
-      this.presentToast("Campo Cantidad tiene numeros negativos");
+      this.presentToast(`Campo Cantidad tiene numeros negativos`, "warning", 2500);
     }
     else if (this.s_descripcion_producto == null || this.s_descripcion_producto == undefined) {
-      this.presentToast("Campo Nombre del Articulo no debe estar vacio");
+      this.presentToast(`Campo Nombre del Articulo no debe estar vacio`, "warning", 2500);
     }
     else {
       if (this.s_orden_mantenimiento == "" || this.s_orden_mantenimiento == undefined || this.s_orden_mantenimiento == null) {
@@ -106,14 +113,14 @@ export class NuevoArticuloPage implements OnInit {
       };
       this.datos = data;
       this.closeModal(this.datos);
-      this.presentToast("Articulo Agregado");
+      this.presentToast(`Artículo Agregado`, "success", 2500);
     }
   }
 
   checkRealTime(n_cantidad) {
     if (n_cantidad != null) {
       if (n_cantidad <= 0) {
-        this.presentToast("Campo Cantidad no acepta numeros negativos");
+        this.presentToast(`Campo Cantidad no acepta numeros negativos`, "warning", 2500);
       }
       else if (n_cantidad == undefined) {
         return false;
@@ -124,12 +131,28 @@ export class NuevoArticuloPage implements OnInit {
     }
   }
 
-  async presentToast(mensaje) {
-    const toast = await this.toastCtrl.create({
-      message: mensaje,
-      duration: 2500
-    });
-    await toast.present();
+  /* Mostrar Mensaje Toast */
+  async presentToast(message: string, color: string, duration: number) {
+    const toast = await this.toastCtrl.create(
+      {
+        message,
+        color,
+        duration
+      }
+    );
+    toast.present();
+  }
+
+  /* Errores APIS Status */
+  isNotErrorApiResponse(response: any): boolean {
+    if (response.status == 'empty') return false;
+    if (response.status == 'fail') return false;
+    if (response.status == 'logout') {
+      localStorage.clear();
+      this.navCtrl.navigateRoot("/login");
+      return false;
+    }
+    return true;
   }
 
   async selectImage() {
