@@ -71,6 +71,7 @@ export class LoginPage implements OnInit {
           localStorage.setItem("s_token", this.data.data.s_token);
           localStorage.setItem("usuario", this.data.data.s_nombre + " " + this.data.data.s_paterno + " " + this.data.data.s_materno);
           localStorage.setItem("empresa", this.data.data.empresa.s_empresa);
+          localStorage.setItem("foto", this.data.data.foto);
           this.navCtrl.navigateRoot("/home-pre-requisiciones");
           loading.dismiss();
           this.presentToast(this.data.message, this.data.status, 3000);

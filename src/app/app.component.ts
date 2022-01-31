@@ -12,6 +12,9 @@ import {
 })
 export class AppComponent {
 
+  usuario: any;
+  foto: string;
+
   activePageTitle = 'Pre-requisiciones';
 
   pages = [
@@ -35,7 +38,10 @@ export class AppComponent {
   constructor(
     private navCtrl: NavController,
     public loadingCtrl: LoadingController
-  ) { }
+  ) {
+    this.usuario = localStorage.getItem('usuario');
+    this.foto = localStorage.getItem('foto');
+   }
 
   async logout() {
     localStorage.clear();
