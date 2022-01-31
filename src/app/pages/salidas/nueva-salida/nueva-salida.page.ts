@@ -305,6 +305,7 @@ export class NuevaSalidaPage implements OnInit {
     ), (err => console.log(err))
   }
 
+  /* Errores APIS Status */
   isNotErrorApiResponse(response: any): boolean {
     if (response.status == 'empty') return false;
     if (response.status == 'fail') return false;

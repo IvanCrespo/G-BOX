@@ -5,7 +5,7 @@ import { QrPreRequisicionPage } from '../modals-pre-requisiciones/qr-pre-requisi
 import { InventariosService } from 'src/app/services/inventarios.service';
 import {
   ModalController,
-  ToastController
+  ToastController, NavController
 } from '@ionic/angular';
 
 @Component({
@@ -49,7 +49,8 @@ export class ViewPreRequisicionPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private modalController: ModalController,
     public toastCtrl: ToastController,
-    private inventarioServ: InventariosService
+    private inventarioServ: InventariosService,
+    private navCtrl: NavController
   ) {
     /* Data de click View */
     this.activatedRoute.queryParams.subscribe((params) => {
@@ -77,14 +78,26 @@ export class ViewPreRequisicionPage implements OnInit {
   }
 
   verificarPrioridad() {
-    this.inventarioServ.AllById(this.token, this.urlprioridad, this.id_prioridad).subscribe((data:any)=> {
-      this.n_prioridad = data.data.prioridad.s_prioridad;
+    this.inventarioServ.AllById(this.token, this.urlprioridad, this.id_prioridad).subscribe((data: any) => {
+      if (!this.isNotErrorApiResponse(data)) {
+        this.presentToast(data.message, "danger", 2500);
+        return false;
+      }
+      else {
+        this.n_prioridad = data.data.prioridad.s_prioridad;
+      }
     });
   }
 
   verificarEstatusPre_requisicion() {
-    this.inventarioServ.AllById(this.token, this.urlestatuspre_requisicion, this.id_estatus_pre_requisicion).subscribe((data:any)=> {
-      this.estatus = data.data.estatus.s_estatus;
+    this.inventarioServ.AllById(this.token, this.urlestatuspre_requisicion, this.id_estatus_pre_requisicion).subscribe((data: any) => {
+      if (!this.isNotErrorApiResponse(data)) {
+        this.presentToast(data.message, "danger", 2500);
+        return false;
+      }
+      else {
+        this.estatus = data.data.estatus.s_estatus;
+      }
     });
   }
 
@@ -118,6 +131,31 @@ export class ViewPreRequisicionPage implements OnInit {
     });
     return await modal.present();
   }
+
+  /* Errores APIS Status */
+  isNotErrorApiResponse(response: any): boolean {
+    if (response.status == 'empty') return false;
+    if (response.status == 'fail') return false;
+    if (response.status == 'logout') {
+      localStorage.clear();
+      this.navCtrl.navigateRoot("/login");
+      return false;
+    }
+    return true;
+  }
+
+  /* Mostrar Mensaje Toast */
+  async presentToast(message: string, color: string, duration: number) {
+    const toast = await this.toastCtrl.create(
+      {
+        message,
+        color,
+        duration
+      }
+    );
+    toast.present();
+  }
+
 
   /* edit() {
     if (this.id_estatus_pre_requisicion == 1) {
