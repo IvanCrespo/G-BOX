@@ -66,7 +66,11 @@ export class LoginPage implements OnInit {
       .subscribe(data => {
         this.data = data;
         console.log(this.data);
-        if (this.data.status == "success") {
+        if (!this.isNotErrorApiResponse(this.data)) {
+          this.presentToast(this.data.message, "danger", 2500);
+          return false;
+        }
+        else if (this.data.status == "success") {
           localStorage.setItem("id_usuario", this.data.data.id_usuario);
           localStorage.setItem("s_token", this.data.data.s_token);
           localStorage.setItem("usuario", this.data.data.s_nombre + " " + this.data.data.s_paterno + " " + this.data.data.s_materno);
@@ -98,5 +102,17 @@ export class LoginPage implements OnInit {
   ionViewWillLeave() {
     // Habilita el menú raíz izquierdo al salir de esta página
     this.menuCtrl.enable(true);
+  }
+
+  /* Errores APIS Status */
+  isNotErrorApiResponse(response: any): boolean {
+    if (response.status == 'empty') return false;
+    if (response.status == 'fail') return false;
+    if (response.status == 'logout') {
+      localStorage.clear();
+      this.navCtrl.navigateRoot("/login");
+      return false;
+    }
+    return true;
   }
 }

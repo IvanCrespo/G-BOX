@@ -295,7 +295,6 @@ export class NuevaSalidaPage implements OnInit {
   getUsuarios() {
     this.inventarioServ.GetAll(this.token, 'talentos_humanos').subscribe(
       (res: any) => {
-
         if (!this.isNotErrorApiResponse(res)) {
           this.presentToast(res.message, "danger", 2500);
           return false;
