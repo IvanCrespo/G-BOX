@@ -9,6 +9,9 @@ import { InventariosService } from 'src/app/services/inventarios.service';
 })
 export class NuevoProductoPage implements OnInit {
 
+  /* URL Services */
+  private url = 'productos';
+
   // Data de articulos Salida --> Nueva-Salida
   public value = this.navParams.get('productos');
   public edit = this.navParams.get('productoSalida');
@@ -58,6 +61,10 @@ export class NuevoProductoPage implements OnInit {
       this.n_cantidad_producto_empresa = this.edit.n_cantidad_anterior;
       this.n_stock_final = this.edit.n_cantidad_nueva;
       this.n_cantidad_salida = this.edit.n_cantidad;
+      this.inventarioServ.AllById(this.token, this.url, this.id_producto).subscribe(
+        (res: any) => {
+          this.s_foto = res.data.producto.s_foto;
+        });
     }
     else {
       this.editable = false;
