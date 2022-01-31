@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, ToastController, LoadingController, NavParams } from '@ionic/angular';
+import { ModalController, ToastController, LoadingController, NavParams, NavController } from '@ionic/angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@awesome-cordova-plugins/barcode-scanner/ngx';
 import { InventariosService } from 'src/app/services/inventarios.service';
+
 @Component({
   selector: 'app-nuevo-producto',
   templateUrl: './nuevo-producto.page.html',
@@ -48,7 +49,8 @@ export class NuevoProductoPage implements OnInit {
     private inventarioServ: InventariosService,
     private toastCtrl: ToastController,
     public loadingCtrl: LoadingController,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private navCtrl: NavController
   ) {
     this.token = localStorage.getItem('s_token');
     console.log(this.edit);
@@ -63,7 +65,13 @@ export class NuevoProductoPage implements OnInit {
       this.n_cantidad_salida = this.edit.n_cantidad;
       this.inventarioServ.AllById(this.token, this.url, this.id_producto).subscribe(
         (res: any) => {
-          this.s_foto = res.data.producto.s_foto;
+          if (!this.isNotErrorApiResponse(res)) {
+            this.presentToast(res.message, "danger", 2500);
+            return false;
+          }
+          else {
+            this.s_foto = res.data.producto.s_foto;
+          }
         });
     }
     else {
@@ -227,6 +235,11 @@ export class NuevoProductoPage implements OnInit {
   isNotErrorApiResponse(response: any): boolean {
     if (response.status == 'empty') return false;
     if (response.status == 'fail') return false;
+    if (response.status == 'logout') {
+      localStorage.clear();
+      this.navCtrl.navigateRoot("/login");
+      return false;
+    }
     return true;
   }
 

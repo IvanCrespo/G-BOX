@@ -78,7 +78,6 @@ export class NuevaSalidaPage implements OnInit {
 
     this.token = localStorage.getItem('s_token');
     if (this.value) {
-      console.log("Con Pre-requisición");
       this.b_pre_requisicion = 0;
       this.id_pre_requisicion = this.value.id_pre_requisicion;
       this.id_usuario_solicitante = this.value.id_usuario_solicitante;
@@ -91,7 +90,6 @@ export class NuevaSalidaPage implements OnInit {
       this.activatePre_requisicion = true;
     }
     else if (this.valueSin) {
-      console.log("Sin Pre-requisición", this.valueSin);
       this.b_pre_requisicion = 1;
       this.id_usuario_solicitante = this.valueSin.id_usuario;
       this.s_empresa = this.valueSin.empresa;
@@ -193,7 +191,6 @@ export class NuevaSalidaPage implements OnInit {
         b_activo: 1,
         productos: this.artSalidas
       };
-      console.log(this.id_pre_requisicion);
       const loading = await this.loadingCtrl.create({
         message: 'Espere un momento...'
       });
@@ -201,7 +198,11 @@ export class NuevaSalidaPage implements OnInit {
       this.inventarioServ
         .Post(this.token, this.url, this.datos)
         .subscribe((data: any) => {
-          if (data.status == 'fail') {
+          if (!this.isNotErrorApiResponse(data)) {
+            this.presentToast(data.message, "danger", 2500);
+            return false;
+          }
+          else if (data.status == 'fail') {
             this.presentToast(`Error al ingresar Nueva Salida`, "danger", 2500);
             loading.dismiss();
           } else if (data.status == 'success') {
@@ -245,7 +246,11 @@ export class NuevaSalidaPage implements OnInit {
       this.inventarioServ
         .Post(this.token, this.url, this.datos)
         .subscribe((data: any) => {
-          if (data.status == 'fail') {
+          if (!this.isNotErrorApiResponse(data)) {
+            this.presentToast(data.message, "danger", 2500);
+            return false;
+          }
+          else if (data.status == 'fail') {
             this.presentToast(`Error al ingresar Nueva Salida`, "danger", 2500);
             loading.dismiss();
           }
@@ -292,6 +297,7 @@ export class NuevaSalidaPage implements OnInit {
       (res: any) => {
 
         if (!this.isNotErrorApiResponse(res)) {
+          this.presentToast(res.message, "danger", 2500);
           return false;
         }
         this.personasRecibe = res.data.talentos_humanos.data;
@@ -303,7 +309,8 @@ export class NuevaSalidaPage implements OnInit {
     if (response.status == 'empty') return false;
     if (response.status == 'fail') return false;
     if (response.status == 'logout') {
-      console.log("Logout");
+      localStorage.clear();
+      this.navCtrl.navigateRoot("/login");
       return false;
     }
     return true;

@@ -171,7 +171,7 @@ export class HomeSalidasPage implements OnInit {
           }
           this.modalNuevaSalidaSinPrerequisicion(data);
         }
-        else if(sin_pre == false) {
+        else if (sin_pre == false) {
           this.isCheckSalida = true;
         }
         this.isCheckSalida = true;
@@ -183,6 +183,11 @@ export class HomeSalidasPage implements OnInit {
   isNotErrorApiResponse(response: any): boolean {
     if (response.status == 'empty') return false;
     if (response.status == 'fail') return false;
+    if (response.status == 'logout') {
+      localStorage.clear();
+      this.navCtrl.navigateRoot("/login");
+      return false;
+    }
     return true;
   }
 
