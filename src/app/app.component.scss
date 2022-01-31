@@ -51,5 +51,23 @@ ion-menu {
             background: transparent;
             --background: transparent;
         }
+
+        .logout {
+            margin: 310px 0px 0px 37px;
+            .custom_btnmenu {
+                font-size: 26px;
+
+                .btn_logout {
+                    display: flex;
+                    align-items: center;
+                    text-decoration: none;
+
+                    span {
+                        font-size: 18px;
+                        color: #fff;
+                    }
+                }
+            }
+        }
     }
 }
