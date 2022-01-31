@@ -165,7 +165,7 @@
         <ion-grid>
           <ion-row *ngFor="let artSalida of artSalidas; index as i">
             <ion-col size="10">
-              <ion-card>
+              <ion-card (click)="modalProducto(i)">
                 <ion-card-content>
                   <ion-grid>
                     <ion-row>

@@ -14,7 +14,7 @@
       <ion-title class="seccion_title">Articulo de Salida</ion-title>
     </div>
   </div>
-  <div class="middle-section ion-padding">
+  <div class="middle-section ion-padding" *ngIf="editable == false">
     <ion-card class="ion-no-margin">
       <ion-card-content>
         <div class="container_add">
@@ -41,7 +41,8 @@
     </ion-card>
   </div>
   <!-- Seccion Artículos Salida -->
-  <div class="viewProducto-section ion-padding" *ngIf="activated == true">
+  <div class="viewProducto-section ion-padding" *ngIf="activated == true || editable == true">
+    <div class="spaceEdit" *ngIf="editable == true"></div>
     <ion-card class="primary-card ion-no-margin">
       <ion-card-content>
         <div class="center">
@@ -102,9 +103,14 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-        <div class="container_add">
+        <div class="container_add" *ngIf="editable == false">
           <ion-button class="btn_newArt" (click)="save()">
             Confirmar
+          </ion-button>
+        </div>
+        <div class="container_add" *ngIf="editable == true">
+          <ion-button class="btn_newArt" (click)="editProducto()">
+            Actualizar
           </ion-button>
         </div>
       </ion-card-content>

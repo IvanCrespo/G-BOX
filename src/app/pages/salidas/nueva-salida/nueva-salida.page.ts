@@ -36,6 +36,7 @@ export class NuevaSalidaPage implements OnInit {
   datos: any = {};
   productos: any = [];
   artSalidas: any = [];
+  salidaEdit: any = [];
   d_fecha: string;
   t_hora: string;
   id_pre_requisicion: number;
@@ -132,6 +133,46 @@ export class NuevaSalidaPage implements OnInit {
       }
     });
     return await modal.present();
+  }
+
+  /* Modal Edit */
+  async modalProducto(index: number) {
+    this.salidaEdit = this.artSalidas[index];
+    const modalEdit = await this.modalCtrl.create({
+      component: NuevoProductoPage,
+      componentProps: { productoSalida: this.salidaEdit, index: 1 }
+    });
+    modalEdit.onDidDismiss().then((data: any) => {
+      this.datos = data.data;
+      console.log(this.datos);
+      if (this.datos == undefined) {
+        if (this.artSalidas.length == 0) {
+          this.btnArtSalida = false;
+        } else {
+          this.btnArtSalida = true;
+        }
+        this.datos = {};
+      } else {
+        let update_producto = {
+          id_producto: 0,
+          n_cantidad: 0,
+          n_cantidad_anterior: 0,
+          n_cantidad_nueva: 0,
+          s_codigo_producto: "",
+          s_producto: "",
+          s_unidad_medida: ""
+        };
+        update_producto.id_producto = this.datos.id_producto;
+        update_producto.n_cantidad = this.datos.n_cantidad;
+        update_producto.n_cantidad_anterior = this.datos.n_cantidad_anterior;
+        update_producto.n_cantidad_nueva = this.datos.n_cantidad_nueva;
+        update_producto.s_codigo_producto = this.datos.s_codigo_producto;
+        update_producto.s_producto = this.datos.s_producto;
+        update_producto.s_unidad_medida = this.datos.s_unidad_medida;
+        this.artSalidas.splice(index, 1, update_producto);
+      }
+    });
+    return await modalEdit.present();
   }
 
   async save() {

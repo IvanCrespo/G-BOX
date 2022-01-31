@@ -11,6 +11,7 @@ export class NuevoProductoPage implements OnInit {
 
   // Data de articulos Salida --> Nueva-Salida
   public value = this.navParams.get('productos');
+  public edit = this.navParams.get('productoSalida');
 
   /* Scanner */
   scannedData: any;
@@ -36,6 +37,7 @@ export class NuevoProductoPage implements OnInit {
 
   /* Disable */
   activated: boolean = false;
+  editable: boolean = false;
 
   constructor(
     private modalCtrl: ModalController,
@@ -45,8 +47,21 @@ export class NuevoProductoPage implements OnInit {
     public loadingCtrl: LoadingController,
     private navParams: NavParams
   ) {
-    console.log(this.value);
     this.token = localStorage.getItem('s_token');
+    console.log(this.edit);
+    if (this.edit != undefined) {
+      this.editable = true;
+      this.id_producto = this.edit.id_producto;
+      this.s_producto = this.edit.s_producto;
+      this.s_codigo_producto = this.edit.s_codigo_producto;
+      this.s_unidad_medida = this.edit.s_unidad_medida;
+      this.n_cantidad_producto_empresa = this.edit.n_cantidad_anterior;
+      this.n_stock_final = this.edit.n_cantidad_nueva;
+      this.n_cantidad_salida = this.edit.n_cantidad;
+    }
+    else {
+      this.editable = false;
+    }
   }
 
   ngOnInit() {
@@ -82,7 +97,7 @@ export class NuevoProductoPage implements OnInit {
     if (this.timerSalida) clearTimeout(this.timerSalida);
     let self = this;
     this.timerSalida = setTimeout(function () {
-      if (self.value.find( productos => productos.s_codigo_producto == producto )) {
+      if (self.value.find(productos => productos.s_codigo_producto == producto)) {
         self.presentToast(`El producto con el código ${producto} ya lo tiene agregado en Salidas`, "danger", 2500);
       }
       else {
@@ -146,6 +161,32 @@ export class NuevoProductoPage implements OnInit {
   }
 
   async save() {
+    if (this.n_cantidad_salida == null || this.n_cantidad_salida == undefined) {
+      this.presentToast(`Campo Unidades de Salida no debe estar vacio`, "warning", 2500);
+    }
+    else if (this.n_cantidad_salida <= 0) {
+      this.presentToast(`Campo Unidades de Salida no acepta numeros negativos`, "warning", 2500);
+    }
+    else if (this.n_cantidad_salida > this.n_cantidad_producto_empresa) {
+      this.presentToast(`La cantidad ingresada de ${this.s_producto} no puede ser mayor al stock existente`, "warning", 2500);
+    }
+    else {
+      let data = {
+        id_producto: this.id_producto,
+        n_cantidad: this.n_cantidad_salida,
+        n_cantidad_anterior: this.n_cantidad_producto_empresa,
+        n_cantidad_nueva: this.n_stock_final,
+        s_unidad_medida: this.s_unidad_medida,
+        s_producto: this.s_producto,
+        s_codigo_producto: this.s_codigo_producto
+      };
+      this.datos = data;
+      this.closeModal(this.datos);
+      this.presentToast(`Articulo Agregado`, "success", 2500);
+    }
+  }
+
+  async editProducto() {
     if (this.n_cantidad_salida == null || this.n_cantidad_salida == undefined) {
       this.presentToast(`Campo Unidades de Salida no debe estar vacio`, "warning", 2500);
     }
