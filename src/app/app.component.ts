@@ -13,7 +13,7 @@ import {
 export class AppComponent {
 
   usuario: any;
-  foto: string;
+  foto: any;
 
   activePageTitle = 'Pre-requisiciones';
 

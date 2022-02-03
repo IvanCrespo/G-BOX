@@ -122,6 +122,13 @@ export class HomeSalidasPage implements OnInit {
       component: NuevaSalidaPage,
       componentProps: { prerequisicion: prerequisicion }
     });
+    modal.onDidDismiss().then((data: any) => {
+      let datos = data;
+      let validation = datos.data;
+      if (validation == undefined || validation == true) {
+        return false;
+      }
+    });
     return await modal.present();
   }
 
@@ -131,6 +138,13 @@ export class HomeSalidasPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: NuevaSalidaPage,
       componentProps: { sinprerequisicion: sinprerequisicion }
+    });
+    modal.onDidDismiss().then((data: any) => {
+      let datos = data;
+      let validation = datos.data;
+      if (validation == undefined || validation == true) {
+        return false;
+      }
     });
     return await modal.present();
   }

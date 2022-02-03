@@ -104,8 +104,8 @@ export class NuevaSalidaPage implements OnInit {
     this.getUsuarios();
   }
 
-  closeModal() {
-    this.modalCtrl.dismiss();
+  closeModal(data: any) {
+    this.modalCtrl.dismiss(data);
   }
 
   /* Modal para abrir Nuevo Producto */
@@ -207,7 +207,8 @@ export class NuevaSalidaPage implements OnInit {
             loading.dismiss();
           } else if (data.status == 'success') {
             this.presentToast(`Nueva Salida exitosa`, "success", 2500);
-            this.navCtrl.navigateRoot('/home-salidas');
+            let success = true;
+            this.closeModal(success);
             loading.dismiss();
           }
         });
@@ -256,7 +257,8 @@ export class NuevaSalidaPage implements OnInit {
           }
           else if (data.status == 'success') {
             this.presentToast(`Nueva Salida exitosa`, "success", 2500);
-            this.navCtrl.navigateRoot('/home-salidas');
+            let success = true;
+            this.closeModal(success);
             loading.dismiss();
           }
         });

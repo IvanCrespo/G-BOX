@@ -25,17 +25,25 @@ ion-menu {
         left: 15px;
         display: flex;
         align-items: center;
-        img {
-            width: 80px;
-            height: 80px;
+
+        .circle {
             border-radius: 50%;
             border: 4px solid #684e7f;
+            width: 80px;
+            height: 80px;
             margin-left: 8px;
             margin-right: 10px;
+            z-index: 99;
+
+            img {
+                border-radius: 50%;
+            }
         }
+
         h2 {
             font-weight: 600;
             color: #684e7f;
+            z-index: 99;
         }
     }
 
