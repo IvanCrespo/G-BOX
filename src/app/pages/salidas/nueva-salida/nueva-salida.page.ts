@@ -104,6 +104,10 @@ export class NuevaSalidaPage implements OnInit {
     this.getUsuarios();
   }
 
+  close() {
+    this.closeModal(undefined);
+  }
+
   closeModal(data: any) {
     this.modalCtrl.dismiss(data);
   }

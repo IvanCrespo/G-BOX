@@ -62,6 +62,10 @@ export class NuevoArticuloPage implements OnInit {
     });
   }
 
+  close() {
+    this.closeModal(undefined);
+  }
+
   closeModal(data: any) {
     /* console.log(data); */
     this.modalCtrl.dismiss(data);

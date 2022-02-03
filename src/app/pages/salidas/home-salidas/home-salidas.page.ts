@@ -124,6 +124,7 @@ export class HomeSalidasPage implements OnInit {
     });
     modal.onDidDismiss().then((data: any) => {
       let datos = data;
+      console.log(datos);
       let validation = datos.data;
       if (validation == undefined || validation == true) {
         return false;
@@ -141,6 +142,7 @@ export class HomeSalidasPage implements OnInit {
     });
     modal.onDidDismiss().then((data: any) => {
       let datos = data;
+      console.log(datos);
       let validation = datos.data;
       if (validation == undefined || validation == true) {
         return false;

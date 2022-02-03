@@ -227,6 +227,10 @@ export class NuevoProductoPage implements OnInit {
     }
   }
 
+  close() {
+    this.closeModal(undefined);
+  }
+
   closeModal(data: any) {
     this.modalCtrl.dismiss(data);
   }

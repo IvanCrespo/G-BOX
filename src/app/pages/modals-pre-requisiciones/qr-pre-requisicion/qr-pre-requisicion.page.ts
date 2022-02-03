@@ -24,8 +24,11 @@ export class QrPreRequisicionPage implements OnInit {
   ngOnInit() {
   }
 
+  close() {
+    this.closeModal(undefined);
+  }
+  
   closeModal(data: any) {
     this.modalCtrl.dismiss(data);
   }
-
 }
