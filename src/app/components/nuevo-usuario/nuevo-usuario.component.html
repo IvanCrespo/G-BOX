@@ -20,7 +20,7 @@
         required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input name="s_materno" type="text" placeholder="Apellido Materno" color="primary" [(ngModel)]="s_apellidoa"
+      <ion-input name="s_materno" type="text" placeholder="Apellido Materno" color="primary" [(ngModel)]="s_materno"
         required></ion-input>
     </ion-item>
     <ion-item>
@@ -31,8 +31,7 @@
     <ion-item>
       <ion-icon slot="start" name="mail-outline"></ion-icon>
       <ion-input name="email" type="email" placeholder="Email" color="primary"
-        pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" [(ngModel)]="email" [readonly]="bandCodigo"
-        required></ion-input>
+        pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" [(ngModel)]="email" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon slot="start" name="key-outline"></ion-icon>
