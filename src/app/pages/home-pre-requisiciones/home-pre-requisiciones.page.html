@@ -79,7 +79,7 @@
         </ion-card-content>
       </ion-card>
     </div>
-    <pagination-controls (pageChange)="page = $event" previousLabel="Ant." nextLabel="Sig." maxSize="3" autoHide="true"
-      responsive="true"></pagination-controls>
+    <pagination-controls (pageChange)="page = $event" previousLabel="Ant." nextLabel="Sig." [maxSize]="3" [autoHide]="true"
+      [responsive]="true"></pagination-controls>
   </div>
 </ion-content>
